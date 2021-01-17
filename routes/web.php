@@ -20,11 +20,15 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::get('/', function () {
-    return view('index');
+    return view('forum');
 });
 Route::get('/forum', function () {
     return view('forum');
 });
 Route::get('/admin', function () {
     return view('Admin.index');
+})->middleware(['role:admin']);
+
+Route::get('/404', function(){
+    return view('layouts.errors.404');
 });

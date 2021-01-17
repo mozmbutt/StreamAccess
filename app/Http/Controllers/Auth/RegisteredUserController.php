@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserInfo;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use SebastianBergmann\Environment\Console;
 
 class RegisteredUserController extends Controller
 {
@@ -19,7 +22,8 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $activeTab = "signup";
+        return view('auth.login',['activeTab' => $activeTab]);
     }
 
     /**
@@ -33,16 +37,25 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
         ]);
-
         Auth::login($user = User::create([
-            'name' => $request->name,
+            'name' => $request->firstname . ' ' . $request->lastname,
+            'username' => $request->username,
+            'role' => $request->role,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]));
+        
+        $userInfo = new UserInfo();
+        $userInfo->user_id = Auth::id();
+        $userInfo->first_name = $request->firstname;
+        $userInfo->last_name = $request->lastname;
+        $userInfo->save();
 
         event(new Registered($user));
 
