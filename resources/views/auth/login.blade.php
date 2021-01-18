@@ -323,6 +323,13 @@
     <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/slick.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
+<script>
+    $(document).ready(function (){
+        $('.doc-input').change(function (){
+            $(this).siblings('i').addClass('text-success');
+        });
+    })
+</script>
 </body>
 
 <!-- Mirrored from gambolthemes.net/workwise-new/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 25 Oct 2020 21:30:56 GMT -->
