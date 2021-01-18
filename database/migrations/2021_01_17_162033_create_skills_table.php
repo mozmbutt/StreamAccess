@@ -29,7 +29,7 @@ class CreateSkillsTable extends Migration
     public function down()
     {
         Schema::table('skills', function (Blueprint $table) {
-            $table->dropForeign('user_info_id');
+            $table->dropForeign(['user_info_id']);
         });
         Schema::dropIfExists('skills');
     }

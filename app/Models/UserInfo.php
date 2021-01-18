@@ -5,6 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int|mixed|string|null user_id
+ * @property mixed first_name
+ * @property mixed last_name
+ */
 class UserInfo extends Model
 {
     use HasFactory;

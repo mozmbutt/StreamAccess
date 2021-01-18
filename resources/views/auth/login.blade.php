@@ -215,30 +215,30 @@
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input class="pt-2 doc-input" id="matric" type="file" required name="matric">
+                                                        <input class="pt-2 doc-input" id="metric" type="file" required name="metric">
                                                         <i class="la la-file-photo-o">
                                                             <span class="doc-icon-color ml-1">
-                                                                matric
+                                                                metric
                                                             </span>
                                                         </i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input class="pt-2 doc-input" id="intermadiate" type="file" required name="intermadiate">
+                                                        <input class="pt-2 doc-input" id="intermediate" type="file" required name="intermediate">
                                                         <i class="la la-file-photo-o">
                                                             <span class="doc-icon-color ml-1">
-                                                                intermadiate
+                                                                intermediate
                                                             </span>
                                                         </i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input class="pt-2 doc-input" id="bacholors" type="file" required name="bacholors">
+                                                        <input class="pt-2 doc-input" id="bachelors" type="file" required name="bachelors">
                                                         <i class="la la-file-photo-o">
                                                             <span class="doc-icon-color ml-1">
-                                                                bacholors
+                                                                bachelors
                                                             </span>
                                                         </i>
                                                     </div>

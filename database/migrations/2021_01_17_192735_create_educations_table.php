@@ -16,9 +16,9 @@ class CreateEducationsTable extends Migration
         Schema::create('educations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_info_id')->constrained();
-            $table->string('matric')->nullable();
-            $table->string('intermadiate')->nullable();
-            $table->string('bacholors')->nullable();
+            $table->string('metric')->nullable();
+            $table->string('intermediate')->nullable();
+            $table->string('bachelors')->nullable();
             $table->string('masters')->nullable();
             $table->string('phd')->nullable();
             $table->timestamps();
@@ -33,7 +33,7 @@ class CreateEducationsTable extends Migration
     public function down()
     {
         Schema::table('educations', function (Blueprint $table) {
-            $table->dropForeign('user_info_id');
+            $table->dropForeign(['user_info_id']);
         });
         Schema::dropIfExists('educations');
     }
