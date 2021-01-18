@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Education extends Model
 {
     use HasFactory;
+    protected $tablename = 'educations';
     public function userInfo(){
         return $this->belongsTo(UserInfo::class);
     }

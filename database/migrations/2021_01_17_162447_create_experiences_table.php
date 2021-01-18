@@ -20,7 +20,6 @@ class CreateExperiencesTable extends Migration
             $table->string('company');
             $table->date('start_date');
             $table->date('end_date');
-            
             $table->timestamps();
         });
     }
@@ -32,7 +31,7 @@ class CreateExperiencesTable extends Migration
      */
     public function down()
     {
-        Schema::table('skills', function (Blueprint $table) {
+        Schema::table('experiences', function (Blueprint $table) {
             $table->dropForeign('user_info_id');
         });
         Schema::dropIfExists('experiences');

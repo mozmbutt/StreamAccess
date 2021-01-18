@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Education;
 use App\Models\User;
 use App\Models\UserInfo;
 use App\Providers\RouteServiceProvider;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use SebastianBergmann\Environment\Console;
 
 class RegisteredUserController extends Controller
@@ -23,7 +25,7 @@ class RegisteredUserController extends Controller
     public function create()
     {
         $activeTab = "signup";
-        return view('auth.login',['activeTab' => $activeTab]);
+        return view('auth.login', ['activeTab' => $activeTab]);
     }
 
     /**
@@ -41,8 +43,17 @@ class RegisteredUserController extends Controller
             'lastname' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|confirmed|min:8',
+            'password' => 'required|string|confirmed|min:8'
         ]);
+        if ($request->role == 'professional') {
+            $request->validate([
+                'matric' => 'mimes:jpeg,png,jpg|required',
+                'intermadiate' => 'mimes:jpeg,png,jpg|required',
+                'bacholors' => 'mimes:jpeg,png,jpg|required',
+                'masters' => 'mimes:jpeg,png,jpg|required',
+                'phd' => 'mimes:jpeg,png,jpg|required'
+            ]);
+        }
         Auth::login($user = User::create([
             'name' => $request->firstname . ' ' . $request->lastname,
             'username' => $request->username,
@@ -50,12 +61,31 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]));
-        
+
         $userInfo = new UserInfo();
         $userInfo->user_id = Auth::id();
         $userInfo->first_name = $request->firstname;
         $userInfo->last_name = $request->lastname;
         $userInfo->save();
+
+        $education = new Education();
+        $education->user_info_id = $userInfo->id;
+        if ($request->hasFile('matric')) {
+            $education->matric = Storage::putFile('public/documents', $request->file('matric'));
+        }
+        if ($request->hasFile('intermadiate')) {
+            $education->intermadiate = Storage::putFile('public/documents', $request->file('intermadiate'));
+        }
+        if ($request->hasFile('bacholors')) {
+            $education->bacholors = Storage::putFile('public/documents', $request->file('bacholors'));
+        }
+        if ($request->hasFile('masters')) {
+            $education->masters = Storage::putFile('public/documents', $request->file('masters'));
+        }
+        if ($request->hasFile('phd')) {
+            $education->phd = Storage::putFile('public/documents', $request->file('phd'));
+        }
+        $education->save();
 
         event(new Registered($user));
 

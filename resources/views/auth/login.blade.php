@@ -107,7 +107,6 @@
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
                                                         <input id="role" type="text" name="role" hidden value="customer">
-                                                        <i class="la la-user"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
@@ -146,18 +145,17 @@
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-12 no-pdd">
+                                                <!-- <div class="col-lg-12 no-pdd">
                                                     <div class="checky-sec st2">
                                                         <div class="fgt-sec">
-                                                            <input type="checkbox" name="cc" id="c2">
-                                                            <label for="c2">
+                                                            <input type="checkbox" name="cc" id="c1">
+                                                            <label for="c1">
                                                                 <span></span>
                                                             </label>
                                                             <small>Yes, I understand and agree to the workwise Terms & Conditions.</small>
                                                         </div>
-                                                        <!--fgt-sec end-->
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="flex items-center justify-end mt-4">
                                                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                                                         {{ __('Already registered?') }}
@@ -171,12 +169,12 @@
                                     </div>
                                     <!--dff-tab end-->
                                     <div class="dff-tab" id="tab-4">
-                                        <form method="POST" action="{{ route('register') }}">
+                                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                                            @csrf
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
                                                         <input id="role" type="text" name="role" hidden value="professional">
-                                                        <i class="la la-user"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
@@ -216,6 +214,56 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input class="pt-2 doc-input" id="matric" type="file" required name="matric">
+                                                        <i class="la la-file-photo-o">
+                                                            <span class="doc-icon-color ml-1">
+                                                                matric
+                                                            </span>
+                                                        </i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input class="pt-2 doc-input" id="intermadiate" type="file" required name="intermadiate">
+                                                        <i class="la la-file-photo-o">
+                                                            <span class="doc-icon-color ml-1">
+                                                                intermadiate
+                                                            </span>
+                                                        </i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input class="pt-2 doc-input" id="bacholors" type="file" required name="bacholors">
+                                                        <i class="la la-file-photo-o">
+                                                            <span class="doc-icon-color ml-1">
+                                                                bacholors
+                                                            </span>
+                                                        </i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input class="pt-2 doc-input" id="masters" type="file" required name="masters">
+                                                        <i class="la la-file-photo-o">
+                                                            <span class="doc-icon-color ml-1">
+                                                                masters
+                                                            </span>
+                                                        </i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input class="pt-2 doc-input" id="phd" type="file" required name="phd">
+                                                        <i class="la la-file-photo-o">
+                                                            <span class="doc-icon-color ml-1">
+                                                                phd
+                                                            </span>
+                                                        </i>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="col-lg-12 no-pdd">
                                                     <div class="checky-sec st2">
                                                         <div class="fgt-sec">
                                                             <input type="checkbox" name="cc" id="c2">
@@ -224,9 +272,8 @@
                                                             </label>
                                                             <small>Yes, I understand and agree to the workwise Terms & Conditions.</small>
                                                         </div>
-                                                        <!--fgt-sec end-->
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="flex items-center justify-end mt-4">
                                                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                                                         {{ __('Already registered?') }}

@@ -6839,3 +6839,16 @@ ul#myTab {
     font-size: 14px;
     color: #666666;
 }
+
+.doc-input{
+	text-indent: 139px;
+	color: #ffffff !important;
+}
+
+.doc-icon-color{
+	color: #b2b2b2 !important;
+	font-size: 14px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+	
+}
