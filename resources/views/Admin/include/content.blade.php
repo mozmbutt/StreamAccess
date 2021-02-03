@@ -33,16 +33,16 @@
                     </div>
                     <div class="card-body pt-0">
                         <div class="row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <div class="avatar-md profile-user-wid mb-4">
                                     <img src="{{ asset('images/dp.png') }}" alt=""
-                                        class="img-thumbnail rounded-circle">
+                                        class="img-thumbnail rounded-circle mt-4">
                                 </div>
-                                <h5 class="font-size-15 text-truncate">Awais</h5>
-                                <p class="text-muted mb-0 text-truncate">Admin</p>
+                                <h5 class="font-size-15 text-truncate">{{Auth::user()->name}}</h5>
+                                <p class="text-muted mb-0 text-truncate">{{Auth::user()->role}}</p>
                             </div>
 
-                            <div class="col-sm-8">
+                            {{-- <div class="col-sm-8">
                                 <div class="pt-4">
                                     <div class="mt-4">
                                         <a href="#"
@@ -50,7 +50,7 @@
                                             Profile <i class="mdi mdi-arrow-right ml-1"></i></a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

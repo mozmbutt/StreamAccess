@@ -33,7 +33,7 @@
                             <div class="cmp-info">
                                 <div class="cm-logo">
                                     <img src="images/test-logo.png" alt="">
-                                    <p>Workwise, is a global freelancing platform and social networking where businesses and independent professionals connect and collaborate remotely</p>
+                                    <p>Stream Access, is a global platform and social networking where businesses and independent professionals connect and collaborate remotely</p>
                                 </div>
                                 <!--cm-logo end-->
                                 <img src="images/cm-main-img.png" alt="">
@@ -145,17 +145,7 @@
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="col-lg-12 no-pdd">
-                                                    <div class="checky-sec st2">
-                                                        <div class="fgt-sec">
-                                                            <input type="checkbox" name="cc" id="c1">
-                                                            <label for="c1">
-                                                                <span></span>
-                                                            </label>
-                                                            <small>Yes, I understand and agree to the workwise Terms & Conditions.</small>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
+                                                
                                                 <div class="flex items-center justify-end mt-4">
                                                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                                                         {{ __('Already registered?') }}
@@ -263,17 +253,7 @@
                                                         </i>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="col-lg-12 no-pdd">
-                                                    <div class="checky-sec st2">
-                                                        <div class="fgt-sec">
-                                                            <input type="checkbox" name="cc" id="c2">
-                                                            <label for="c2">
-                                                                <span></span>
-                                                            </label>
-                                                            <small>Yes, I understand and agree to the workwise Terms & Conditions.</small>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
+                                                
                                                 <div class="flex items-center justify-end mt-4">
                                                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                                                         {{ __('Already registered?') }}
@@ -295,23 +275,7 @@
                 <!--signin-pop end-->
             </div>
             <!--signin-popup end-->
-            <!-- <div class="footy-sec">
-                <div class="container">
-                    <ul>
-                        <li><a href="help-center.html" title="">Help Center</a></li>
-                        <li><a href="about.html" title="">About</a></li>
-                        <li><a href="#" title="">Privacy Policy</a></li>
-                        <li><a href="#" title="">Community Guidelines</a></li>
-                        <li><a href="#" title="">Cookies Policy</a></li>
-                        <li><a href="#" title="">Career</a></li>
-                        <li><a href="forum.html" title="">Forum</a></li>
-                        <li><a href="#" title="">Language</a></li>
-                        <li><a href="#" title="">Copyright Policy</a></li>
-                    </ul>
-                    <p><img src="images/copy-icon.png" alt="">Copyright 2019</p>
-                </div>
-            </div> -->
-            <!--footy-sec end-->
+            
         </div>
         <!--sign-in-page end-->
 
@@ -331,7 +295,4 @@
     })
 </script>
 </body>
-
-<!-- Mirrored from gambolthemes.net/workwise-new/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 25 Oct 2020 21:30:56 GMT -->
-
 </html>

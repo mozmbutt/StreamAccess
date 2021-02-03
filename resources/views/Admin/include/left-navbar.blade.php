@@ -18,13 +18,21 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-user"></i>
-                        <span>Users</span>
+                        <span>View Users</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ url('addUser') }}">Add New</a></li>
                         <li><a href="{{ url('viewAdmin') }}">Admins</a></li>
                         <li><a href="{{ url('viewProfessional') }}">Professionals</a></li>
                         <li><a href="{{ url('viewClient') }}">Clients</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-user"></i>
+                        <span>Manage Users</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ url('addUser') }}">Add New</a></li>
                         <li><a href="{{ url('viewPendingAccounts') }}">Pending Accounts</a></li>
                     </ul>
                 </li>

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PageController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +21,8 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/', function () {
-    return view('forum');
-});
+Route::get('/', [PageController::class , 'return_page']);
+
 Route::get('/forum', function () {
     return view('forum');
 });
