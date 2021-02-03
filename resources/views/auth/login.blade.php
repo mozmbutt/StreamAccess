@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>WorkWise Html Template</title>
+    <title>Stream Access</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -24,9 +24,7 @@
 
 
 <body class="sign-in" oncontextmenu="return false;">
-
     <div class="wrapper">
-
         <div class="sign-in-page">
             <div class="signin-popup">
                 <div class="signin-pop">
@@ -45,10 +43,10 @@
                         <div class="col-lg-6">
                             <div class="login-sec">
                                 <ul class="sign-control">
-                                    <li data-tab="tab-1" class="current"><a href="#" title="">Sign in</a></li>
-                                    <li data-tab="tab-2"><a href="#" title="">Sign up</a></li>
+                                    <li data-tab="tab-1" class="{{!isset($activeTab) ? 'current' : ''}}"><a href="#" title="">Sign in</a></li>
+                                    <li data-tab="tab-2" class="{{isset($activeTab) && $activeTab == 'signup' ? 'current' : ''}}"><a href="#" title="">Sign up</a></li>
                                 </ul>
-                                <div class="sign_in_sec current" id="tab-1">
+                                <div class="sign_in_sec {{!isset($activeTab) ? 'current' : ''}}" id="tab-1">
 
                                     <h3>Sign in</h3>
                                     <!-- Session Status -->
@@ -92,56 +90,72 @@
                                     </form>
                                 </div>
                                 <!--sign_in_sec end-->
-                                <div class="sign_in_sec" id="tab-2">
+                                <div class="sign_in_sec {{isset($activeTab) && $activeTab == 'signup' ? 'current' : ''}}" id="tab-2">
                                     <div class="signup-tab">
                                         <i class="fa fa-long-arrow-left"></i>
                                         <h2>johndoe@example.com</h2>
                                         <ul>
-                                            <li data-tab="tab-3" class="current"><a href="#" title="">User</a></li>
-                                            <li data-tab="tab-4"><a href="#" title="">Company</a></li>
+                                            <li data-tab="tab-3" class="current"><a href="#" title="">Customer</a></li>
+                                            <li data-tab="tab-4"><a href="#" title="">Professional </a></li>
                                         </ul>
                                     </div>
                                     <!--signup-tab end-->
                                     <div class="dff-tab current" id="tab-3">
                                         <form method="POST" action="{{ route('register') }}">
-                                        @csrf
+                                            @csrf
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input id="name" type="text" name="name" required autofocus>
+                                                        <input id="role" type="text" name="role" hidden value="customer">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input id="firstname" type="text" name="firstname" required autofocus placeholder="First Name">
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input id="email" type="email" name="email" required>
+                                                        <input id="lastname" type="text" name="lastname" required autofocus placeholder="Last Name">
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input id="password" type="password" name="password" required autocomplete="new-password">
+                                                        <input id="username" type="text" name="username" required autofocus placeholder="username">
+                                                        <i class="la la-user"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input id="email" type="email" name="email" required placeholder="email">
+                                                        <i class="la la-user"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input id="password" type="password" name="password" required autocomplete="new-password" placeholder="password">
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input id="password_confirmation" type="password" name="password_confirmation" required>
+                                                        <input id="password_confirmation" type="password" name="password_confirmation" required placeholder="confirm password">
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-12 no-pdd">
+                                                <!-- <div class="col-lg-12 no-pdd">
                                                     <div class="checky-sec st2">
                                                         <div class="fgt-sec">
-                                                            <input type="checkbox" name="cc" id="c2">
-                                                            <label for="c2">
+                                                            <input type="checkbox" name="cc" id="c1">
+                                                            <label for="c1">
                                                                 <span></span>
                                                             </label>
                                                             <small>Yes, I understand and agree to the workwise Terms & Conditions.</small>
                                                         </div>
-                                                        <!--fgt-sec end-->
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="flex items-center justify-end mt-4">
                                                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                                                         {{ __('Already registered?') }}
@@ -155,46 +169,118 @@
                                     </div>
                                     <!--dff-tab end-->
                                     <div class="dff-tab" id="tab-4">
-                                        <form>
+                                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                                            @csrf
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="company-name" placeholder="Company Name">
-                                                        <i class="la la-building"></i>
+                                                        <input id="role" type="text" name="role" hidden value="professional">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="country" placeholder="Country">
-                                                        <i class="la la-globe"></i>
+                                                        <input id="firstname" type="text" name="firstname" required autofocus placeholder="First Name">
+                                                        <i class="la la-user"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="password" name="password" placeholder="Password">
+                                                        <input id="lastname" type="text" name="lastname" required autofocus placeholder="Last Name">
+                                                        <i class="la la-user"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input id="username" type="text" name="username" required autofocus placeholder="username">
+                                                        <i class="la la-user"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input id="email" type="email" name="email" required placeholder="email">
+                                                        <i class="la la-user"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input id="password" type="password" name="password" required autocomplete="new-password" placeholder="password">
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="password" name="repeat-password" placeholder="Repeat Password">
+                                                        <input id="password_confirmation" type="password" name="password_confirmation" required placeholder="confirm password">
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input class="pt-2 doc-input" id="metric" type="file" required name="metric">
+                                                        <i class="la la-file-photo-o">
+                                                            <span class="doc-icon-color ml-1">
+                                                                metric
+                                                            </span>
+                                                        </i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input class="pt-2 doc-input" id="intermediate" type="file" required name="intermediate">
+                                                        <i class="la la-file-photo-o">
+                                                            <span class="doc-icon-color ml-1">
+                                                                intermediate
+                                                            </span>
+                                                        </i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input class="pt-2 doc-input" id="bachelors" type="file" required name="bachelors">
+                                                        <i class="la la-file-photo-o">
+                                                            <span class="doc-icon-color ml-1">
+                                                                bachelors
+                                                            </span>
+                                                        </i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input class="pt-2 doc-input" id="masters" type="file" required name="masters">
+                                                        <i class="la la-file-photo-o">
+                                                            <span class="doc-icon-color ml-1">
+                                                                masters
+                                                            </span>
+                                                        </i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input class="pt-2 doc-input" id="phd" type="file" required name="phd">
+                                                        <i class="la la-file-photo-o">
+                                                            <span class="doc-icon-color ml-1">
+                                                                phd
+                                                            </span>
+                                                        </i>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="col-lg-12 no-pdd">
                                                     <div class="checky-sec st2">
                                                         <div class="fgt-sec">
-                                                            <input type="checkbox" name="cc" id="c3">
-                                                            <label for="c3">
+                                                            <input type="checkbox" name="cc" id="c2">
+                                                            <label for="c2">
                                                                 <span></span>
                                                             </label>
                                                             <small>Yes, I understand and agree to the workwise Terms & Conditions.</small>
                                                         </div>
-                                                        <!--fgt-sec end-->
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <button type="submit" value="submit">Get Started</button>
+                                                </div> -->
+                                                <div class="flex items-center justify-end mt-4">
+                                                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                                                        {{ __('Already registered?') }}
+                                                    </a>
+                                                    <div class="col-lg-12 no-pdd">
+                                                        <button type="submit" value="submit">{{ __('Register') }}</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </form>
@@ -237,6 +323,13 @@
     <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/slick.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
+<script>
+    $(document).ready(function (){
+        $('.doc-input').change(function (){
+            $(this).siblings('i').addClass('text-success');
+        });
+    })
+</script>
 </body>
 
 <!-- Mirrored from gambolthemes.net/workwise-new/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 25 Oct 2020 21:30:56 GMT -->

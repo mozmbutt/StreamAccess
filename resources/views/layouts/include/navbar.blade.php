@@ -12,6 +12,7 @@
 				</form>
 			</div>
 			<!--search-bar end-->
+			@if(role("professional") || role("customer") || role("admin"))
 			<nav>
 				<ul>
 					<li>
@@ -195,14 +196,6 @@
 							</div>
 						</li>
 					</ul>
-					<h3>Custom Status</h3>
-					<div class="search_form">
-						<form>
-							<input type="text" name="search">
-							<button type="submit">Ok</button>
-						</form>
-					</div>
-					<!--search_form end-->
 					<h3>Setting</h3>
 					<ul class="us-links">
 						<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
@@ -215,13 +208,24 @@
 						<form method="POST" action="{{ route('logout') }}">
 							@csrf
 							<a href="route('logout')" onclick="event.preventDefault();
-												this.closest('form').submit();">{{ __('Logout') }}</a>
-
+								this.closest('form').submit();">{{ __('Logout') }}</a>
 						</form>
 					</h3>
 				</div>
 				<!--user-account-settingss end-->
 			</div>
+			@else
+			<nav>
+				<div class="row float-right mt-2">
+					<div class="col-lg-5 mx-auto">
+						<a class="btn btn-outline-danger text-white" href="{{url('login')}}" title="">Login</a>
+					</div>
+					<div class="col-lg-7 mx-auto">
+						<a class="btn btn-outline-danger text-white" href="{{url('register')}}" title="">Sign Up</a>
+					</div>
+				</div>
+			</nav>
+			@endif
 		</div>
 		<!--header-data end-->
 	</div>
