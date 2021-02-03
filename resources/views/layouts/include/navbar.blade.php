@@ -45,7 +45,7 @@
 						</ul>
 					</li>
 					<li>
-						<a href="jobs.html" title="">
+						<a href="{{ url('jobs') }}" title="">
 							<span><img src="images/icon5.png" alt=""></span>
 							Jobs
 						</a>

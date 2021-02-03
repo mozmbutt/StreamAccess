@@ -33,6 +33,9 @@ Route::get('/admin', function () {
 Route::get('/404', function(){
     return view('layouts.errors.404');
 });
+Route::get('/jobs', function(){
+    return view('jobs');
+});
 Route::get('/addUser', function () {
     return view('Admin.Create.user');
 });
