@@ -32,7 +32,7 @@ class CreateExperiencesTable extends Migration
     public function down()
     {
         Schema::table('experiences', function (Blueprint $table) {
-            $table->dropForeign('user_info_id');
+            $table->dropForeign(['user_info_id']);
         });
         Schema::dropIfExists('experiences');
     }

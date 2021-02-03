@@ -35,3 +35,24 @@ Route::get('/404', function(){
 Route::get('/jobs', function(){
     return view('jobs');
 });
+Route::get('/addUser', function () {
+    return view('Admin.Create.user');
+});
+Route::get('/addWorker', function () {
+    return view('Admin.Create.worker');
+});
+Route::get('/viewAdmin', function () {
+    return view('Admin.Read.admin');
+});
+Route::get('/viewProfessional', function () {
+    return view('Admin.Read.professional');
+});
+Route::get('/viewClient', function () {
+    return view('Admin.Read.client');
+});
+Route::get('/viewPendingAccounts', function () {
+    return view('Admin.Read.pending');
+});
+Route::get('/viewWorker', function () {
+    return view('Admin.Read.worker');
+});

@@ -47,9 +47,9 @@ class RegisteredUserController extends Controller
         ]);
         if ($request->role == 'professional') {
             $request->validate([
-                'matric' => 'mimes:jpeg,png,jpg|required',
-                'intermadiate' => 'mimes:jpeg,png,jpg|required',
-                'bacholors' => 'mimes:jpeg,png,jpg|required',
+                'metric' => 'mimes:jpeg,png,jpg|required',
+                'intermediate' => 'mimes:jpeg,png,jpg|required',
+                'bachelors' => 'mimes:jpeg,png,jpg|required',
                 'masters' => 'mimes:jpeg,png,jpg|required',
                 'phd' => 'mimes:jpeg,png,jpg|required'
             ]);
@@ -57,7 +57,7 @@ class RegisteredUserController extends Controller
         Auth::login($user = User::create([
             'name' => $request->firstname . ' ' . $request->lastname,
             'username' => $request->username,
-            'role' => $request->role,
+            'role' => 'customer',
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]));
@@ -70,14 +70,14 @@ class RegisteredUserController extends Controller
 
         $education = new Education();
         $education->user_info_id = $userInfo->id;
-        if ($request->hasFile('matric')) {
-            $education->matric = Storage::putFile('public/documents', $request->file('matric'));
+        if ($request->hasFile('metric')) {
+            $education->metric = Storage::putFile('public/documents', $request->file('metric'));
         }
-        if ($request->hasFile('intermadiate')) {
-            $education->intermadiate = Storage::putFile('public/documents', $request->file('intermadiate'));
+        if ($request->hasFile('intermediate')) {
+            $education->intermediate = Storage::putFile('public/documents', $request->file('intermediate'));
         }
-        if ($request->hasFile('bacholors')) {
-            $education->bacholors = Storage::putFile('public/documents', $request->file('bacholors'));
+        if ($request->hasFile('bachelors')) {
+            $education->bachelors = Storage::putFile('public/documents', $request->file('bachelors'));
         }
         if ($request->hasFile('masters')) {
             $education->masters = Storage::putFile('public/documents', $request->file('masters'));

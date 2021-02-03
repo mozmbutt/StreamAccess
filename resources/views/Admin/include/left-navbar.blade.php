@@ -21,11 +21,11 @@
                         <span>Users</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="#">Add New</a></li>
-                        <li><a href="#">Admins</a></li>
-                        <li><a href="#">Professionals</a></li>
-                        <li><a href="#">Clients</a></li>
-                        <li><a href="#">Pending Accounts</a></li>
+                        <li><a href="{{ url('addUser') }}">Add New</a></li>
+                        <li><a href="{{ url('viewAdmin') }}">Admins</a></li>
+                        <li><a href="{{ url('viewProfessional') }}">Professionals</a></li>
+                        <li><a href="{{ url('viewClient') }}">Clients</a></li>
+                        <li><a href="{{ url('viewPendingAccounts') }}">Pending Accounts</a></li>
                     </ul>
                 </li>
 
@@ -36,8 +36,8 @@
                         <span>Local Worker</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="#">Add New</a></li>
-                        <li><a href="#">View All</a></li>
+                        <li><a href="{{ url('addWorker') }}">Add New</a></li>
+                        <li><a href="{{ url('viewWorker') }}">View All</a></li>
                     </ul>
                 </li>
 

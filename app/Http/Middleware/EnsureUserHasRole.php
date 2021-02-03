@@ -2,11 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class EnsureUserHasRole
 {
@@ -19,13 +17,14 @@ class EnsureUserHasRole
      */
     public function handle(Request $request, Closure $next, $role)
     {
-        if (!Auth::check()) 
+        if (!Auth::check())
             return redirect('/404');
 
         $user = Auth::user();
-        
-        if ($user->isAdmin())
+
+        if ($user->isAdmin()) {
             return $next($request);
+        }
 
         // Check if user has the role This check will depend on how your roles are set up
         if (role($role)) {

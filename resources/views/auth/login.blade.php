@@ -215,30 +215,30 @@
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input class="pt-2 doc-input" id="matric" type="file" required name="matric">
+                                                        <input class="pt-2 doc-input" id="metric" type="file" required name="metric">
                                                         <i class="la la-file-photo-o">
                                                             <span class="doc-icon-color ml-1">
-                                                                matric
+                                                                metric
                                                             </span>
                                                         </i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input class="pt-2 doc-input" id="intermadiate" type="file" required name="intermadiate">
+                                                        <input class="pt-2 doc-input" id="intermediate" type="file" required name="intermediate">
                                                         <i class="la la-file-photo-o">
                                                             <span class="doc-icon-color ml-1">
-                                                                intermadiate
+                                                                intermediate
                                                             </span>
                                                         </i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input class="pt-2 doc-input" id="bacholors" type="file" required name="bacholors">
+                                                        <input class="pt-2 doc-input" id="bachelors" type="file" required name="bachelors">
                                                         <i class="la la-file-photo-o">
                                                             <span class="doc-icon-color ml-1">
-                                                                bacholors
+                                                                bachelors
                                                             </span>
                                                         </i>
                                                     </div>
@@ -323,6 +323,13 @@
     <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/slick.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
+<script>
+    $(document).ready(function (){
+        $('.doc-input').change(function (){
+            $(this).siblings('i').addClass('text-success');
+        });
+    })
+</script>
 </body>
 
 <!-- Mirrored from gambolthemes.net/workwise-new/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 25 Oct 2020 21:30:56 GMT -->
