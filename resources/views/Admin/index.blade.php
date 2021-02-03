@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <title>Dashboard | Stream Access - A Click Away</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Stream Access - A Click Away" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
@@ -42,13 +42,11 @@
     <script type="text/javascript" src="{{ asset('js/metisMenu.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/simplebar.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/waves.min.js') }}"></script>
-
+    
     <!-- apexcharts -->
+    <script src="{{ asset('js/app.theme.js') }}"></script>
     <script src="{{ asset('js/dashboard.init.js') }}"></script>
-
     <script src="{{ asset('js/apexcharts.min.js') }}"></script>
-
-    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>
