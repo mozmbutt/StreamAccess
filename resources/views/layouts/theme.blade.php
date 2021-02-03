@@ -18,6 +18,8 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('css/slick-theme.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/responsive.css')}}">
+
+	<link rel="stylesheet" type="text/css" href="{{asset('css/jquery.range.css')}}">
 </head>
 
 <body oncontextmenu="return false;">
@@ -34,6 +36,7 @@
 	<script type="text/javascript" src="{{asset('js/slick.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/scrollbar.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/script.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery.range-min.js')}}"></script>
 </body>
 
 </html>
