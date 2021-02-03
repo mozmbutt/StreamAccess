@@ -42,15 +42,6 @@
                                 <p class="text-muted mb-0 text-truncate">{{Auth::user()->role}}</p>
                             </div>
 
-                            {{-- <div class="col-sm-8">
-                                <div class="pt-4">
-                                    <div class="mt-4">
-                                        <a href="#"
-                                            class="btn btn-primary waves-effect waves-light btn-sm">View
-                                            Profile <i class="mdi mdi-arrow-right ml-1"></i></a>
-                                    </div>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                 </div>

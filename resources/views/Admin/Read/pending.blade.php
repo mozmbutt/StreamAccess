@@ -79,19 +79,20 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @foreach ($infos as $info)
                                                     <tr>
                                                         <td>
                                                             <div class="avatar-xs">
                                                                 <span class="avatar-title rounded-circle">
-                                                                    D
+                                                                    P
                                                                 </span>
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <h5 class="font-size-14 mb-1"><a href="#" class="text-dark">David McHenry</a></h5>
-                                                            <p class="text-muted mb-0">UI/UX Designer</p>
+                                                            <h5 class="font-size-14 mb-1"><a href="#" class="text-dark">{{$info->first_name}}</a></h5>
+                                                            <p class="text-muted mb-0">{{$info->last_name}}</p>
                                                         </td>
-                                                        <td>david@skote.com</td>
+                                                        <td>{{$info->user->email}}</td>
                                                         <td>
                                                             <ul class="list-inline font-size-20 contact-links mb-0">
                                                                 <li class="list-inline-item px-2">
@@ -101,70 +102,17 @@
                                                                     <a href="#" data-toggle="tooltip" data-placement="top" title="Dicline"><i class="bx bx-trash-alt"></i></a>
                                                                 </li>
                                                                 <li class="list-inline-item px-2">
-                                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="View Details"><i class="bx bx-show"></i></a>
+                                                                    <a href="#" data-item="{{$info->education}}" data-toggle="modal" data-target=".exampleModal" data-placement="top" title="View Details"><i class="bx bx-show"></i></a>
+        
                                                                 </li>
+                                                                
                                                             </ul>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="avatar-xs">
-                                                                <span class="avatar-title rounded-circle">
-                                                                    D
-                                                                </span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-size-14 mb-1"><a href="#" class="text-dark">David McHenry</a></h5>
-                                                            <p class="text-muted mb-0">UI/UX Designer</p>
-                                                        </td>
-                                                        <td>david@skote.com</td>
-                                                        <td>
-                                                            <ul class="list-inline font-size-20 contact-links mb-0">
-                                                                <li class="list-inline-item px-2">
-                                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Approve"><i class="bx bx-check-double"></i></a>
-                                                                </li>
-                                                                <li class="list-inline-item px-2">
-                                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Dicline"><i class="bx bx-trash-alt"></i></a>
-                                                                </li>
-                                                                <li class="list-inline-item px-2">
-                                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="View Details"><i class="bx bx-show"></i></a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="avatar-xs">
-                                                                <span class="avatar-title rounded-circle">
-                                                                    D
-                                                                </span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="font-size-14 mb-1"><a href="#" class="text-dark">David McHenry</a></h5>
-                                                            <p class="text-muted mb-0">UI/UX Designer</p>
-                                                        </td>
-                                                        <td>david@skote.com</td>
-                                                        <td>
-                                                            <ul class="list-inline font-size-20 contact-links mb-0">
-                                                                <li class="list-inline-item px-2">
-                                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Approve"><i class="bx bx-check-double"></i></a>
-                                                                </li>
-                                                                <li class="list-inline-item px-2">
-                                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Dicline"><i class="bx bx-trash-alt"></i></a>
-                                                                </li>
-                                                                <li class="list-inline-item px-2">
-                                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="View Details"><i class="bx bx-show"></i></a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-
+                                                    @endforeach
                                                 </tbody>
                                             </table>
-                                        </div>
-                                        
+                                        </div>                                      
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +130,57 @@
 
         </div>
         <!-- END layout-wrapper -->
+<!-- Modal -->
+<div class="modal fade exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{$info->education->id}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-2">User id: <span class="text-primary">4520</span></p>
+                <p class="mb-4">User Name: <span class="text-primary">Neal Matthews</span></p>
 
+                <div class="table-responsive">
+                    <table class="table table-centered table-nowrap">
+                        <thead>
+                            <tr>
+                                <th scope="col">Picture</th>
+                                <th scope="col">Education</th>
+                                <th scope="col">Experience</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">
+                                    <div>
+                                        <img src="{{ asset('images/dp.png') }}" alt="" class="avatar-sm">
+                                    </div>
+                                </th>
+                                <td>
+                                    <div>
+                                        <h5 class="text-truncate font-size-14">MS Computer Sciences
+                                        </h5>
+                                    </div>
+                                </td>
+                                <td>2 Years</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Approve</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
         <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/metisMenu.min.js') }}"></script>

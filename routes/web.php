@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\RequestController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -51,9 +52,8 @@ Route::get('/viewProfessional', function () {
 Route::get('/viewClient', function () {
     return view('Admin.Read.client');
 });
-Route::get('/viewPendingAccounts', function () {
-    return view('Admin.Read.pending');
-});
+Route::get('/viewPendingAccounts', [RequestController::class , 'index']);
+
 Route::get('/viewWorker', function () {
     return view('Admin.Read.worker');
 });
