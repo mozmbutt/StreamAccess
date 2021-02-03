@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Education;
+use App\Models\PendingRequest;
 use App\Models\User;
 use App\Models\UserInfo;
 use App\Providers\RouteServiceProvider;
@@ -36,6 +37,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+
     public function store(Request $request)
     {
         $request->validate([
@@ -68,8 +70,17 @@ class RegisteredUserController extends Controller
         $userInfo->last_name = $request->lastname;
         $userInfo->save();
 
+        if ($request->role == 'professional') {
+            $this->goPro($request);
+        }
+        event(new Registered($user));
+
+        return redirect(RouteServiceProvider::HOME);
+    }
+    public function goPro(Request $request)
+    {
         $education = new Education();
-        $education->user_info_id = $userInfo->id;
+        $education->user_info_id = Auth::id();
         if ($request->hasFile('metric')) {
             $education->metric = Storage::putFile('public/documents', $request->file('metric'));
         }
@@ -87,8 +98,8 @@ class RegisteredUserController extends Controller
         }
         $education->save();
 
-        event(new Registered($user));
-
-        return redirect(RouteServiceProvider::HOME);
+        $pendingRequest = new PendingRequest();
+        $pendingRequest->user_id = Auth::id();
+        $pendingRequest->save();
     }
 }
