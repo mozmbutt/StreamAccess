@@ -82,19 +82,19 @@ class RegisteredUserController extends Controller
         $education = new Education();
         $education->user_info_id = Auth::id();
         if ($request->hasFile('metric')) {
-            $education->metric = Storage::putFile('public/documents', $request->file('metric'));
+            $education->metric = Storage::putFile('documents', $request->file('metric'));
         }
         if ($request->hasFile('intermediate')) {
-            $education->intermediate = Storage::putFile('public/documents', $request->file('intermediate'));
+            $education->intermediate = Storage::putFile('documents', $request->file('intermediate'));
         }
         if ($request->hasFile('bachelors')) {
-            $education->bachelors = Storage::putFile('public/documents', $request->file('bachelors'));
+            $education->bachelors = Storage::putFile('documents', $request->file('bachelors'));
         }
         if ($request->hasFile('masters')) {
-            $education->masters = Storage::putFile('public/documents', $request->file('masters'));
+            $education->masters = Storage::putFile('documents', $request->file('masters'));
         }
         if ($request->hasFile('phd')) {
-            $education->phd = Storage::putFile('public/documents', $request->file('phd'));
+            $education->phd = Storage::putFile('documents', $request->file('phd'));
         }
         $education->save();
 
