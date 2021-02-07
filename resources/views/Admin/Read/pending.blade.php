@@ -274,9 +274,33 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            function clearAllModalImages(modal){
+                let host = window.location.origin;
+                let imgSrc = host + "/images/logo-light-removebg-preview.png";
+                
+                // displaying default logo if not found in database
+
+                modal.find("#matric").attr('src', imgSrc);
+                modal.find("#documentMatric").data('document', imgSrc);
+
+                modal.find("#inter").attr('src', imgSrc);
+                modal.find("#documentIntermediate").data('document', imgSrc);
+
+                modal.find("#bacholors").attr('src', imgSrc);
+                modal.find("#documentBacholors").data('document', imgSrc);
+
+                modal.find("#masters").attr('src', imgSrc);
+                modal.find("#documentMasters").data('document', imgSrc);
+
+                modal.find("#phd").attr('src', imgSrc);
+                modal.find("#documentPhd").data('document', imgSrc);
+
+            }
             $('#requestModal').on('show.bs.modal', function(e) {
+
                 var link = $(e.relatedTarget);
                 let modal = $(this);
+                clearAllModalImages(modal);
                 let id = link.data("id");
                 let name = link.data("name");
                 console.log(link.data("masters"));
