@@ -57,3 +57,6 @@ Route::get('/viewPendingAccounts', [RequestController::class , 'index']);
 Route::get('/viewWorker', function () {
     return view('Admin.Read.worker');
 });
+
+Route::get('/professionalApprove/{id}', [RequestController::class , 'approve']);
+Route::get('/professionalDecline/{id}', [RequestController::class , 'decline']);
