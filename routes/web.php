@@ -23,7 +23,7 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/', [PageController::class , 'return_page']);
+Route::get('/', [PageController::class , 'return_page'])->middleware(['lastUserActivity']);;
 
 Route::get('/forum', function () {
     return view('forum');

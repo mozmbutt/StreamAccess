@@ -169,30 +169,26 @@
 			</div>
 			<!--menu-btn end-->
 			<div class="user-account">
-				<div class="user-info">
-					<img src="images/resources/user.png" alt="">
-					<a href="#" title="">John</a>
+				<div class="user-info d-flex">
+				<img width="30" height="30" src="{{ asset(Auth::user()->userInfo->display_picture ? 'storage/'. Auth::user()->userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}" alt="">
+
+					<a href="#" class="text-truncate" title="">{{Auth::user()->userInfo->first_name}}</a>
 					<i class="la la-sort-down"></i>
 				</div>
 				<div class="user-account-settingss" id="users">
-					<h3>Online Status</h3>
+					<h3>{{Auth::user()->userInfo->first_name. " " . Auth::user()->userInfo->last_name}}</h3>
 					<ul class="on-off-status">
 						<li>
 							<div class="fgt-sec">
-								<input type="radio" name="cc" id="c5">
+								<input type="radio" name="cc" id="c5" checked>
 								<label for="c5">
 									<span></span>
 								</label>
+								@if(Cache::has('user-is-online-' . Auth::user()->id))
 								<small>Online</small>
-							</div>
-						</li>
-						<li>
-							<div class="fgt-sec">
-								<input type="radio" name="cc" id="c6">
-								<label for="c6">
-									<span></span>
-								</label>
+								@else
 								<small>Offline</small>
+								@endif
 							</div>
 						</li>
 					</ul>
@@ -202,7 +198,7 @@
 						<li><a href="#" title="">Privacy</a></li>
 						<li><a href="#" title="">Faqs</a></li>
 						<li><a href="#" title="">Terms & Conditions</a></li>
-						<li><a href="{{ url('admin') }}" title="">Admin</a></li>
+						<!-- <li><a href="{{ url('admin') }}" title="">Admin</a></li> -->
 					</ul>
 					<h3 class="tc">
 						<form method="POST" action="{{ route('logout') }}">

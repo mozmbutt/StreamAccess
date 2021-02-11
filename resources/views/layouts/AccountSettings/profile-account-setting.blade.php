@@ -22,9 +22,28 @@
                         <div class="tab-pane fade show active" id="nav-status" role="tabpanel" aria-labelledby="nav-status-tab">
                             <div class="acc-setting">
                                 <h3>Personal Information</h3>
-                                <form action="{{ url('/saveAccountSetting') }}" method="post">
+                                <form action="{{ url('/saveAccountSetting') }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
+                                    
+                                    <div class="username-dt">
+                                        <div class="usr-pic pull-right mr-5">
+                                            <img src="{{ asset(Auth::user()->userInfo->display_picture ? 'storage/'. Auth::user()->userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="cp-field" style="margin-top: 55px;">
+                                        <!-- <h5>First Name</h5> -->
+                                        
+                                        <div class="cpp-fiel" style="width : 80% ">
+                                            <input class="pt-2 doc-input" id="dp" type="file" name="dp" >
+                                            <i class="la la-file-photo-o">
+                                                <span class="doc-icon-color ml-1">
+                                                    Display Picture
+                                                </span>
+                                            </i>
+                                        </div>
+                                    </div>
+
                                     <div class="cp-field">
                                         <!-- <h5>First Name</h5> -->
                                         <div class="cpp-fiel">
@@ -275,11 +294,11 @@
 </section>
 @endsection
 @section('script')
-<script type="text/javascript">
+<script>
     $(document).ready(function() {
-        $('#datepickertest').datepicker({
-            format: 'yyyy-mm-dd'
+        $('.doc-input').change(function() {
+            $(this).siblings('i').addClass('text-success');
         });
-    });
+    })
 </script>
 @endsection

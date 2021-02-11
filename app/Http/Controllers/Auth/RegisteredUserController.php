@@ -103,17 +103,22 @@ class RegisteredUserController extends Controller
         $pendingRequest->user_id = Auth::id();
         $pendingRequest->save();
     }
-    public function update(Request $request){
-        
+    public function update(Request $request)
+    {
+
         $request->validate([
 
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'phone_no' => 'required|numeric|min:13',
-            'cnic_no' => 'required|numeric|min:13'
-            
+            'cnic_no' => 'required|numeric|min:13',
+            'dp' =>  'mimes:jpeg,png,jpg'
+
         ]);
         $userInfo = UserInfo::find($request->user_id);
+        if ($request->hasFile('dp')) {
+            $userInfo->display_picture = Storage::putFile('documents', $request->file('dp'));
+        }
         $userInfo->first_name = $request->firstname;
         $userInfo->last_name = $request->lastname;
         $userInfo->gender = $request->gender;
@@ -124,16 +129,17 @@ class RegisteredUserController extends Controller
         $userInfo->save();
         return redirect("/profile-account-setting");
     }
-    public function updatePassword(Request $request){
-        
-        $request->validate([ 
+    public function updatePassword(Request $request)
+    {
+
+        $request->validate([
             'current_password' => ['required', new MatchOldPassword],
             'new_password' => ['required'],
             'new_confirm_password' => ['same:new_password'],
         ]);
-        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-   
-       
+        User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
+
+
         return redirect("/profile-account-setting");
     }
 }
