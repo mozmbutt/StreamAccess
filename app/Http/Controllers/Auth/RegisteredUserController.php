@@ -8,6 +8,7 @@ use App\Models\PendingRequest;
 use App\Models\User;
 use App\Models\UserInfo;
 use App\Providers\RouteServiceProvider;
+use App\Rules\MatchOldPassword;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -101,5 +102,38 @@ class RegisteredUserController extends Controller
         $pendingRequest = new PendingRequest();
         $pendingRequest->user_id = Auth::id();
         $pendingRequest->save();
+    }
+    public function update(Request $request){
+        
+        $request->validate([
+
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'phone_no' => 'required|numeric|min:13',
+            'cnic_no' => 'required|numeric|min:13'
+            
+        ]);
+        $userInfo = UserInfo::find($request->user_id);
+        $userInfo->first_name = $request->firstname;
+        $userInfo->last_name = $request->lastname;
+        $userInfo->gender = $request->gender;
+        $userInfo->date_of_birth = $request->dob;
+        $userInfo->phone_no = $request->phone_no;
+        $userInfo->cnic_no = $request->cnic_no;
+        $userInfo->address = $request->address;
+        $userInfo->save();
+        return redirect("/profile-account-setting");
+    }
+    public function updatePassword(Request $request){
+        
+        $request->validate([ 
+            'current_password' => ['required', new MatchOldPassword],
+            'new_password' => ['required'],
+            'new_confirm_password' => ['same:new_password'],
+        ]);
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+   
+       
+        return redirect("/profile-account-setting");
     }
 }

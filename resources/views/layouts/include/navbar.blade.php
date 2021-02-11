@@ -198,7 +198,7 @@
 					</ul>
 					<h3>Setting</h3>
 					<ul class="us-links">
-						<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
+						<li><a href="{{url('profile-account-setting')}}" title="">Account Setting</a></li>
 						<li><a href="#" title="">Privacy</a></li>
 						<li><a href="#" title="">Faqs</a></li>
 						<li><a href="#" title="">Terms & Conditions</a></li>

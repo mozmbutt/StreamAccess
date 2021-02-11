@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RequestController;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +53,9 @@ Route::get('/viewProfessional', function () {
 Route::get('/viewClient', function () {
     return view('Admin.Read.client');
 });
+Route::get('/profile-account-setting', function () {
+    return view('layouts.AccountSettings.profile-account-setting');
+});
 Route::get('/viewPendingAccounts', [RequestController::class , 'index']);
 
 Route::get('/viewWorker', function () {
@@ -60,3 +64,5 @@ Route::get('/viewWorker', function () {
 
 Route::get('/professionalApprove/{id}', [RequestController::class , 'approve']);
 Route::get('/professionalDecline/{id}', [RequestController::class , 'decline']);
+Route::post('/saveAccountSetting', [RegisteredUserController::class , 'update']);
+Route::post('/changePassword', [RegisteredUserController::class , 'updatePassword']);

@@ -7,7 +7,7 @@
                 </div>
                 <!--username-dt end-->
                 <div class="user-specs">
-                    <h3>Moazzam Butt</h3>
+                    <h3>{{Auth::user()->userInfo->first_name}}</h3>
                     <span>Laravel Developer | Fiverr</span>
                 </div>
             </div>
