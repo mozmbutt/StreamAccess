@@ -45,6 +45,7 @@ class RegisteredUserController extends Controller
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users',
+            'profession' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8'
         ]);
@@ -53,8 +54,8 @@ class RegisteredUserController extends Controller
                 'metric' => 'mimes:jpeg,png,jpg|required',
                 'intermediate' => 'mimes:jpeg,png,jpg|required',
                 'bachelors' => 'mimes:jpeg,png,jpg|required',
-                'masters' => 'mimes:jpeg,png,jpg|required',
-                'phd' => 'mimes:jpeg,png,jpg|required'
+                'masters' => 'mimes:jpeg,png,jpg',
+                'phd' => 'mimes:jpeg,png,jpg'
             ]);
         }
         Auth::login($user = User::create([
@@ -69,6 +70,7 @@ class RegisteredUserController extends Controller
         $userInfo->user_id = Auth::id();
         $userInfo->first_name = $request->firstname;
         $userInfo->last_name = $request->lastname;
+        $userInfo->profession = $request->profession;
         $userInfo->save();
 
         if ($request->role == 'professional') {

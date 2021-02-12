@@ -15,6 +15,11 @@ $(window).on("load", function() {
         $(".wrapper").removeClass("overlay");
         return false;
     });
+    $(".post-project>div>form>div>div>ul>li> a").on("click", function(){
+        $(".post-popup.pst-pj").removeClass("active");
+        $(".wrapper").removeClass("overlay");
+        return false;
+    });
 
     //  ============= POST JOB POPUP FUNCTION =========
 

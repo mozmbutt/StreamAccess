@@ -19,8 +19,8 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/responsive.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-datepicker.css')}}">
-
 	<link rel="stylesheet" type="text/css" href="{{asset('css/jquery.range.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('css/select2.min.css')}}">
 </head>
 
 <body oncontextmenu="return false;">
@@ -30,7 +30,7 @@
 		@yield('main-content')
 	</div>
 	<!--theme-layout end-->
-	
+
 	<script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/popper.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
@@ -38,8 +38,10 @@
 	<script type="text/javascript" src="{{asset('js/slick.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/scrollbar.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/script.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/jquery.range-min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/bootstrap-datepicker.js')}}"></script>
+	<script type="text/javascript" src="{{asset('js/jquery.range-min.js')}}"></script>
+	<script type="text/javascript" src="{{asset('js/bootstrap-datepicker.js')}}"></script>
+	<script type="text/javascript" src="{{asset('js/select2.min.js')}}"></script>
+	
 	@yield('script')
 </body>
 

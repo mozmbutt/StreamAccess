@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\RequestController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -66,3 +67,5 @@ Route::get('/professionalApprove/{id}', [RequestController::class , 'approve']);
 Route::get('/professionalDecline/{id}', [RequestController::class , 'decline']);
 Route::post('/saveAccountSetting', [RegisteredUserController::class , 'update']);
 Route::post('/changePassword', [RegisteredUserController::class , 'updatePassword']);
+
+Route::resource('post', PostController::class);

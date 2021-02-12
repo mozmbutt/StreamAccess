@@ -145,7 +145,7 @@
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="flex items-center justify-end mt-4">
                                                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                                                         {{ __('Already registered?') }}
@@ -177,6 +177,21 @@
                                                     <div class="sn-field">
                                                         <input id="lastname" type="text" name="lastname" required autofocus placeholder="Last Name">
                                                         <i class="la la-user"></i>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <select required name="profession" class="form-control">
+                                                            <option>Select Profession</option>
+                                                            <option value="Geek">Geek</option>
+                                                            <option value="Doctor">Doctor</option>
+                                                            <option value="Laywer">Laywer</option>
+                                                            <option value="Islamic Scholor">Islamic Scholor</option>
+                                                            <option value="Engineer">Engineer</option>
+                                                            <option value="Business">Business</option>
+                                                            <option value="Architect">Architect</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
@@ -235,7 +250,7 @@
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input class="pt-2 doc-input" id="masters" type="file" required name="masters">
+                                                        <input class="pt-2 doc-input" id="masters" type="file" name="masters">
                                                         <i class="la la-file-photo-o">
                                                             <span class="doc-icon-color ml-1">
                                                                 masters
@@ -245,7 +260,7 @@
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input class="pt-2 doc-input" id="phd" type="file" required name="phd">
+                                                        <input class="pt-2 doc-input" id="phd" type="file" name="phd">
                                                         <i class="la la-file-photo-o">
                                                             <span class="doc-icon-color ml-1">
                                                                 phd
@@ -253,7 +268,7 @@
                                                         </i>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="flex items-center justify-end mt-4">
                                                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                                                         {{ __('Already registered?') }}
@@ -275,7 +290,7 @@
                 <!--signin-pop end-->
             </div>
             <!--signin-popup end-->
-            
+
         </div>
         <!--sign-in-page end-->
 
@@ -287,12 +302,13 @@
     <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/slick.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
-<script>
-    $(document).ready(function (){
-        $('.doc-input').change(function (){
-            $(this).siblings('i').addClass('text-success');
-        });
-    })
-</script>
+    <script>
+        $(document).ready(function() {
+            $('.doc-input').change(function() {
+                $(this).siblings('i').addClass('text-success');
+            });
+        })
+    </script>
 </body>
+
 </html>

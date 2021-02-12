@@ -8,7 +8,7 @@
                 <!--username-dt end-->
                 <div class="user-specs">
                     <h3>{{Auth::user()->userInfo->first_name}}</h3>
-                    <span>Laravel Developer | Fiverr</span>
+                    <span>{{Auth::user()->userInfo->profession}}</span>
                 </div>
             </div>
             <!--user-profile end-->
