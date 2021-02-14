@@ -5,6 +5,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\WorkerController;
+use App\Models\User;
 use App\Models\Worker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -48,8 +49,9 @@ Route::get('/addUser', function () {
 Route::get('/viewAdmin', function () {
     return view('Admin.Read.admin');
 });
-Route::get('/viewProfessional', function () {
-    return view('Admin.Read.professional');
+Route::get('/professional', function () {
+    $professionals = User::all()->where('role' , 'professional');
+    return view('Admin.Read.professional' , ['professionals' => $professionals]);
 });
 Route::get('/viewClient', function () {
     return view('Admin.Read.client');
@@ -60,6 +62,8 @@ Route::get('/profile-account-setting', function () {
 Route::get('/profile-setting', function () {
     return view('Admin.Update.profile-account-setting');
 });
+Route::get('/professional-profile-setting/{id}', [RegisteredUserController::class , 'pofessionalProfileSetting']);   
+
 Route::get('/viewPendingAccounts', [RequestController::class , 'index']);
 
 Route::get('/professionalApprove/{id}', [RequestController::class , 'approve']);

@@ -130,9 +130,9 @@ class RegisteredUserController extends Controller
         $userInfo->address = $request->address;
         $userInfo->save();
         if(Auth::user()->role == 'admin'){
-            return redirect("/profile-setting");
+            return redirect()->back();
         }else{
-            return redirect("/profile-account-setting"); 
+            return redirect('/profile-account-setting'); 
         }
     }
     public function updatePassword(Request $request)
@@ -145,9 +145,14 @@ class RegisteredUserController extends Controller
         ]);
         User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
         if(Auth::user()->role == 'admin'){
-            return redirect("/profile-setting");
+            return redirect()->back();
         }else{
-            return redirect("/profile-account-setting"); 
+            return redirect('/profile-account-setting'); 
         }
+    }
+
+    public function pofessionalProfileSetting($id){
+        $professional = User::where('id' , $id)->first();
+        return view('Admin.Update.professional-account-setting' , ['professional' => $professional]);
     }
 }

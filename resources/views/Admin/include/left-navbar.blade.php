@@ -22,7 +22,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ url('viewAdmin') }}">Admins</a></li>
-                        <li><a href="{{ url('viewProfessional') }}">Professionals</a></li>
+                        <li><a href="{{ url('professional') }}">Professionals</a></li>
                         <li><a href="{{ url('viewClient') }}">Clients</a></li>
                     </ul>
                 </li>

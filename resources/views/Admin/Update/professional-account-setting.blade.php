@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Admin Profile | Stream Access</title>
+        <title>Profile Setting | Stream Access</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Stream Access - A Click Away" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -17,7 +17,7 @@
         <link href="{{ asset('css/app-dark.min.css') }}" rel="stylesheet" type="text/css" />
     </head>
 
-    
+    {{-- {{dd( $professional )}} --}}
     <body data-sidebar="dark">
 
     <!-- <body data-layout="horizontal" data-topbar="dark"> -->
@@ -62,33 +62,33 @@
                                 <div class="card">
                                     <div class="card-body">
         
-                                        <h4 class="card-title">Admin Persnol Information</h4>
-                                        <p class="card-title-desc">Fill required information below</p>
+                                        <h4 class="card-title">User Persnol Information</h4>
+                                        <p class="card-title-desc">Edit required information below</p>
         
                                         <form action="{{ url('/saveAccountSetting') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
-                                            <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
+                                            <input type="hidden" value="{{$professional->id}}" name="user_id">
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group d-flex">
                                                         <div class="usr-pic rounded mr-5">
-                                                            <img src="{{ asset(Auth::user()->userInfo->display_picture ? 'storage/'. Auth::user()->userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}" alt="" class="form-control" width="30%">
+                                                            <img src="{{ asset($professional->userInfo->display_picture ? 'storage/'. $professional->userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}" alt="" class="form-control" width="30%">
                                                         </div>
                                                         <div class="cpp-fiel" >
                                                                 <div class="form-group">
                                                                     <label for="firstname">First Name</label>
-                                                                    <input type="text" class="form-control" name="firstname" placeholder="First Name" value="{{Auth::user()->userInfo->first_name}}">
+                                                                    <input type="text" class="form-control" name="firstname" placeholder="First Name" value="{{$professional->userInfo->first_name}}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="secondname">Second Name</label>
-                                                                    <input type="text" class="form-control" name="lastname" placeholder="Last Name" value="{{Auth::user()->userInfo->last_name}}">
+                                                                    <input type="text" class="form-control" name="lastname" placeholder="Last Name" value="{{$professional->userInfo->last_name}}">
                                                                 </div> 
                                                             <input class="pt-4 doc-input" id="dp" type="file" name="dp" >
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="phone_no">Phone Number</label>
-                                                        <input id="phone_no" required name="phone_no" type="text" class="form-control" value="{{Auth::user()->userInfo->phone_no}}">
+                                                        <input id="phone_no" required name="phone_no" type="text" class="form-control" value="{{$professional->userInfo->phone_no}}">
                                                     </div>
                                                     
                                                 </div>
@@ -96,24 +96,24 @@
                                                 <div class="col-sm-6">
                                                    <div class="form-group">
                                                         <label for="D.O.B">D.O.B</label>
-                                                        <input type="date" class="date form-control" id="datepickertest2" name="dob" placeholder="yyyy-mm-dd" value="{{Auth::user()->userInfo->date_of_birth}}">
+                                                        <input type="date" class="date form-control" id="datepickertest2" name="dob" placeholder="yyyy-mm-dd" value="{{$professional->userInfo->date_of_birth}}">
                                                     </div>
                                                     
                                                     <div class="form-group">
                                                         <label class="control-label">Gender</label>
                                                         <select name="gender" class="form-control">
-                                                            <option value="Male" {{ Auth::user()->userInfo->gender == "Male"  ? 'selected' : ''}}>Male</option>
-                                                            <option value="Female" {{ Auth::user()->userInfo->gender == "Female"  ? 'selected' : ''}}>Female</option>
-                                                            <option value="Other" {{ Auth::user()->userInfo->gender == "Other"  ? 'selected' : ''}}>Other</option>
+                                                            <option value="Male" {{ $professional->userInfo->gender == "Male"  ? 'selected' : ''}}>Male</option>
+                                                            <option value="Female" {{ $professional->userInfo->gender == "Female"  ? 'selected' : ''}}>Female</option>
+                                                            <option value="Other" {{ $professional->userInfo->gender == "Other"  ? 'selected' : ''}}>Other</option>
                                                         </select>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="address">Address</label>
-                                                        <input type="text" class="form-control"  required placeholder="location..." name="address" value="{{Auth::user()->userInfo->address}}">
+                                                        <input type="text" class="form-control"  required placeholder="location..." name="address" value="{{$professional->userInfo->address}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="cnic_no">CNIC Number</label>
-                                                        <input type="number" class="form-control"  required placeholder="xxxxx-xxxxxxx-x" name="cnic_no" value="{{Auth::user()->userInfo->cnic_no}}">
+                                                        <input type="number" class="form-control"  required placeholder="xxxxx-xxxxxxx-x" name="cnic_no" value="{{$professional->userInfo->cnic_no}}">
                                                     </div>
                                                 </div>
                                             </div>
