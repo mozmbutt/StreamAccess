@@ -44,8 +44,8 @@
                         <span>Local Worker</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ url('addWorker') }}">Add New</a></li>
-                        <li><a href="{{ url('viewWorker') }}">View All</a></li>
+                        <li><a href="{{ route('worker.create')  }}">Add New</a></li>
+                        <li><a href="{{ route('worker.index') }}">View All</a></li>
                     </ul>
                 </li>
 

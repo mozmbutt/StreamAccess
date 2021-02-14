@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\WorkerController;
+use App\Models\Worker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -42,9 +44,7 @@ Route::get('/jobs', function(){
 Route::get('/addUser', function () {
     return view('Admin.Create.user');
 });
-Route::get('/addWorker', function () {
-    return view('Admin.Create.worker');
-});
+
 Route::get('/viewAdmin', function () {
     return view('Admin.Read.admin');
 });
@@ -59,13 +59,11 @@ Route::get('/profile-account-setting', function () {
 });
 Route::get('/viewPendingAccounts', [RequestController::class , 'index']);
 
-Route::get('/viewWorker', function () {
-    return view('Admin.Read.worker');
-});
-
 Route::get('/professionalApprove/{id}', [RequestController::class , 'approve']);
 Route::get('/professionalDecline/{id}', [RequestController::class , 'decline']);
 Route::post('/saveAccountSetting', [RegisteredUserController::class , 'update']);
 Route::post('/changePassword', [RegisteredUserController::class , 'updatePassword']);
 
 Route::resource('post', PostController::class);
+Route::resource('worker', WorkerController::class);
+Route::get('workerDelete/{id}', [WorkerController::class , 'delete']);

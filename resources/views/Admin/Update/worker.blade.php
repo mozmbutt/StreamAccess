@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8" />
         <title>Workers | Stream Access</title>
@@ -42,12 +41,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">Add New Worker</h4>
+                                    <h4 class="mb-0 font-size-18">Update Worker</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Local Woker</a></li>
-                                            <li class="breadcrumb-item active">Add New</li>
+                                            <li class="breadcrumb-item active">Update</li>
                                         </ol>
                                     </div>
 
@@ -62,47 +61,49 @@
                                 <div class="card">
                                     <div class="card-body">
         
-                                        <h4 class="card-title">Basic Information of Worker</h4>
-                                        <p class="card-title-desc">Fill all information below</p>
+                                        <h4 class="card-title">Update Information of Worker</h4>
+                                        <p class="card-title-desc">Fill required information below</p>
         
-                                        <form action="{{ route('worker.store') }}" method="POST">
+                                        <form action="{{ route('worker.update', ['worker'=>$worker->id]) }}" method="POST">
+                                            @method('PUT')
                                             @csrf
+                                            <input type="hidden" value="{{$worker->id}}">
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label for="firstname">First Name</label>
-                                                        <input id="firstname" name="firstname" type="text" required class="form-control">
+                                                        <input id="firstname" name="firstname" type="text" required class="form-control" value="{{$worker->first_name}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="secondname">Second Name</label>
-                                                        <input id="secondname" name="secondname" type="text" class="form-control">
+                                                        <input id="secondname" name="secondname" type="text" class="form-control" value="{{$worker->second_name}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="phone_no">Phone Number</label>
-                                                        <input id="phone_no" required name="phone_no" type="text" class="form-control">
+                                                        <input id="phone_no" required name="phone_no" type="text" class="form-control" value="{{$worker->phone_no}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="cnic_no">CNIC Number</label>
-                                                        <input id="cnic_no" name="cnic_no" type="text" class="form-control">
+                                                        <input id="cnic_no" name="cnic_no" type="text" class="form-control" value="{{$worker->cnic_no}}">
                                                     </div>
                                                 </div>
         
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label for="skill">Skill</label>
-                                                        <input required id="skill" name="skill" type="text" class="form-control">
+                                                        <input required id="skill" name="skill" type="text" class="form-control" value="{{$worker->skill}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Gender</label>
-                                                        <select name="gender" class="form-control select2">
-                                                            <option value="male">Male</option>
-                                                            <option value="female">Female</option>
-                                                            <option value="other">Other</option>
+                                                        <select name="gender" class="form-control select2" >
+                                                            <option value="Male" {{ $worker->gender == "male"  ? 'selected' : ''}}>Male</option>
+                                                            <option value="Male" {{ $worker->gender == "female"  ? 'selected' : ''}}>Female</option>
+                                                            <option value="Male" {{ $worker->gender == "other"  ? 'selected' : ''}}>Other</option>
                                                         </select>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="productdesc">Address</label>
-                                                        <textarea name="address" required class="form-control" id="address" rows="5" placeholder="location of worker you want to add..."></textarea>
+                                                        <textarea name="address" required class="form-control" id="address" rows="5" placeholder="location of worker you want to add...">{{$worker->address}}</textarea>
                                                     </div>
                                                     
                                                 </div>
