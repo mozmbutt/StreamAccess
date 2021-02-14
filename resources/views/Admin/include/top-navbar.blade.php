@@ -224,7 +224,7 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right">
                 <!-- item-->
-                <a class="dropdown-item" href="#"><i class="bx bx-user font-size-16 align-middle mr-1"></i>
+                <a class="dropdown-item" href="{{url('profile-setting')}}"><i class="bx bx-user font-size-16 align-middle mr-1"></i>
                     Profile
                 </a>
                 

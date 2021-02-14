@@ -129,7 +129,11 @@ class RegisteredUserController extends Controller
         $userInfo->cnic_no = $request->cnic_no;
         $userInfo->address = $request->address;
         $userInfo->save();
-        return redirect("/profile-account-setting");
+        if(Auth::user()->role == 'admin'){
+            return redirect("/profile-setting");
+        }else{
+            return redirect("/profile-account-setting"); 
+        }
     }
     public function updatePassword(Request $request)
     {
@@ -140,8 +144,10 @@ class RegisteredUserController extends Controller
             'new_confirm_password' => ['same:new_password'],
         ]);
         User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
-
-
-        return redirect("/profile-account-setting");
+        if(Auth::user()->role == 'admin'){
+            return redirect("/profile-setting");
+        }else{
+            return redirect("/profile-account-setting"); 
+        }
     }
 }

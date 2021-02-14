@@ -57,6 +57,9 @@ Route::get('/viewClient', function () {
 Route::get('/profile-account-setting', function () {
     return view('layouts.AccountSettings.profile-account-setting');
 });
+Route::get('/profile-setting', function () {
+    return view('Admin.Update.profile-account-setting');
+});
 Route::get('/viewPendingAccounts', [RequestController::class , 'index']);
 
 Route::get('/professionalApprove/{id}', [RequestController::class , 'approve']);
