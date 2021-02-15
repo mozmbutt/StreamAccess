@@ -4,6 +4,9 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\WorkerController;
+use App\Models\User;
+use App\Models\Worker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -42,14 +45,13 @@ Route::get('/jobs', function(){
 Route::get('/addUser', function () {
     return view('Admin.Create.user');
 });
-Route::get('/addWorker', function () {
-    return view('Admin.Create.worker');
-});
+
 Route::get('/viewAdmin', function () {
     return view('Admin.Read.admin');
 });
-Route::get('/viewProfessional', function () {
-    return view('Admin.Read.professional');
+Route::get('/professional', function () {
+    $professionals = User::all()->where('role' , 'professional');
+    return view('Admin.Read.professional' , ['professionals' => $professionals]);
 });
 Route::get('/viewClient', function () {
     return view('Admin.Read.client');
@@ -57,11 +59,12 @@ Route::get('/viewClient', function () {
 Route::get('/profile-account-setting', function () {
     return view('layouts.AccountSettings.profile-account-setting');
 });
-Route::get('/viewPendingAccounts', [RequestController::class , 'index']);
-
-Route::get('/viewWorker', function () {
-    return view('Admin.Read.worker');
+Route::get('/profile-setting', function () {
+    return view('Admin.Update.profile-account-setting');
 });
+Route::get('/professional-profile-setting/{id}', [RegisteredUserController::class , 'pofessionalProfileSetting']);   
+
+Route::get('/viewPendingAccounts', [RequestController::class , 'index']);
 
 Route::get('/professionalApprove/{id}', [RequestController::class , 'approve']);
 Route::get('/professionalDecline/{id}', [RequestController::class , 'decline']);
@@ -70,3 +73,6 @@ Route::post('/changePassword', [RegisteredUserController::class , 'updatePasswor
 Route::get('post/destroy/{id}', [PostController::class, 'destroy']);
 
 Route::resource('post', PostController::class,  ['except' => 'show']);
+Route::resource('post', PostController::class);
+Route::resource('worker', WorkerController::class);
+Route::get('workerDelete/{id}', [WorkerController::class , 'delete']);
