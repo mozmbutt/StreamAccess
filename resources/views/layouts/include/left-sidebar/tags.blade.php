@@ -10,8 +10,8 @@
         <li><a href="#" title="">Copyright Policy</a></li>
     </ul>
     <div class="cp-sec">
-        <img src="images/logo2.png" alt="">
-        <p><img src="images/cp.png" alt="">Copyright 2019</p>
+        <img src="/images/logo2.png" alt="">
+        <p><img src="/images/cp.png" alt="">Copyright 2019</p>
     </div>
 </div>
 <!--tags-sec end-->

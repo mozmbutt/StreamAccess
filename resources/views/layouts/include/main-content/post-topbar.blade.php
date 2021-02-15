@@ -66,7 +66,7 @@
         $('.doc-input').change(function() {
             $(this).siblings('i').addClass('text-success');
         });
-
     })
 </script>
+
 @endsection

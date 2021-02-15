@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\PostTag;
 use App\Models\Tag;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -52,12 +53,13 @@ class PostController extends Controller
         foreach ($request->tags as $tag) {
             $postTag = new PostTag();
             $postTag->post_id = $post->id;
-            if (!count(Tag::where('id', $tag)->get())) {
-                //Log::info($tag);
+            //checking if tag exist already
+            if (!Tag::find($tag)) {
+                //creating new tags if not there already
                 $newTag = new Tag();
                 $newTag->name = $tag;
                 $newTag->save();
-                //saving postt tag values
+                //saving post_tag table values
                 $postTag->tag_id = $newTag->id;
             } else {
                 $postTag->tag_id = $tag;
@@ -78,7 +80,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        dd('in show');
     }
 
     /**
@@ -89,7 +91,13 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $postTags = PostTag::select('tag_id')->where('post_id', $post->id)->get();
+        $tags = Tag::find($postTags);
+        
+
+        Log::info($tags);
+
+        return view('layouts.include.edit-post', ['post' => $post, 'tags' => $tags]);
     }
 
     /**
@@ -101,7 +109,31 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->updated_at = Carbon::now();
+        if ($request->hasFile('attachment')) {
+            $post->attachment = Storage::putFile('attachments', $request->file('attachment'));
+        }
+        $post->save();
+        postTag::where('post_id', $post->id)->delete();
+        foreach ($request->tags as $tag) {
+            $postTag = new PostTag();
+            $postTag->post_id = $post->id;
+            //checking if tag exist already
+            if (!Tag::find($tag)) {
+                //creating new tags if not there already
+                $newTag = new Tag();
+                $newTag->name = $tag;
+                $newTag->save();
+                //saving post_tag table values
+                $postTag->tag_id = $newTag->id;
+            } else {
+                $postTag->tag_id = $tag;
+            }
+            $postTag->save();
+        }
+        return redirect('/');
     }
 
     /**
@@ -110,8 +142,11 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($post_id)
     {
-        //
+        PostTag::where('post_id' , $post_id)->delete();
+        Post::find($post_id)->delete();
+        
+        return redirect('/');
     }
 }
