@@ -70,7 +70,9 @@ Route::get('/professionalApprove/{id}', [RequestController::class , 'approve']);
 Route::get('/professionalDecline/{id}', [RequestController::class , 'decline']);
 Route::post('/saveAccountSetting', [RegisteredUserController::class , 'update']);
 Route::post('/changePassword', [RegisteredUserController::class , 'updatePassword']);
+Route::get('post/destroy/{id}', [PostController::class, 'destroy']);
 
+Route::resource('post', PostController::class,  ['except' => 'show']);
 Route::resource('post', PostController::class);
 Route::resource('worker', WorkerController::class);
 Route::get('workerDelete/{id}', [WorkerController::class , 'delete']);

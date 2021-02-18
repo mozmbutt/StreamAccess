@@ -6,7 +6,7 @@
             <!--sd-title end-->
             <div class="suggestions-list">
                 <div class="suggestion-usd">
-                    <img src="images/resources/s1.png" alt="">
+                    <img src="/images/resources/s1.png" alt="">
                     <div class="sgt-text">
                         <h4>Jessica William</h4>
                         <span>Graphic Designer</span>
@@ -14,7 +14,7 @@
                     <span><i class="la la-plus"></i></span>
                 </div>
                 <div class="suggestion-usd">
-                    <img src="images/resources/s2.png" alt="">
+                    <img src="/images/resources/s2.png" alt="">
                     <div class="sgt-text">
                         <h4>John Doe</h4>
                         <span>PHP Developer</span>
@@ -22,7 +22,7 @@
                     <span><i class="la la-plus"></i></span>
                 </div>
                 <div class="suggestion-usd">
-                    <img src="images/resources/s3.png" alt="">
+                    <img src="/images/resources/s3.png" alt="">
                     <div class="sgt-text">
                         <h4>Poonam</h4>
                         <span>Wordpress Developer</span>
@@ -30,7 +30,7 @@
                     <span><i class="la la-plus"></i></span>
                 </div>
                 <div class="suggestion-usd">
-                    <img src="images/resources/s4.png" alt="">
+                    <img src="/images/resources/s4.png" alt="">
                     <div class="sgt-text">
                         <h4>Bill Gates</h4>
                         <span>C & C++ Developer</span>
@@ -38,7 +38,7 @@
                     <span><i class="la la-plus"></i></span>
                 </div>
                 <div class="suggestion-usd">
-                    <img src="images/resources/s5.png" alt="">
+                    <img src="/images/resources/s5.png" alt="">
                     <div class="sgt-text">
                         <h4>Jessica William</h4>
                         <span>Graphic Designer</span>
@@ -46,7 +46,7 @@
                     <span><i class="la la-plus"></i></span>
                 </div>
                 <div class="suggestion-usd">
-                    <img src="images/resources/s6.png" alt="">
+                    <img src="/images/resources/s6.png" alt="">
                     <div class="sgt-text">
                         <h4>John Doe</h4>
                         <span>PHP Developer</span>
