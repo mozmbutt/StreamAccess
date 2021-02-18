@@ -103,6 +103,7 @@
                                     <div class="dff-tab current" id="tab-3">
                                         <form method="POST" action="{{ route('register') }}">
                                             @csrf
+                                            <input type="hidden" name="profession" value="customer">
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
