@@ -18,6 +18,11 @@ class Post extends Model
     {
         return $this->belongsToMany(Tag::class, 'post_tags');
     }
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    
     public function getCreatedAtAttribute($timestamp) {
         return Carbon::parse($timestamp)->format('M d, Y');
     }

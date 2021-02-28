@@ -65,7 +65,103 @@
                 </ul>
             </div>
         </div>
-        <!--post-bar end-->
+        <div class="epi-sec">
+            <ul class="descp">
+                <li><img src="/images/icon8.png" alt=""><span>{{$post->user->userInfo->profession}}</span></li>
+                <li><img src="/images/icon9.png" alt=""><span>Updated @ {{$post->getUpdatedAtAttribute($post->updated_at)}}</span></li>
+            </ul>
+            <ul class="bk-links">
+                <li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
+            </ul>
+        </div>
+        <div class="job_descp">
+            <h3>{{$post->title}}</h3>
+            <p>{{$post->body}}</p>
+            <ul class="skill-tags">
+                @foreach($post->tags as $tag)
+                <li><a href="#" title="">{{$tag->name}}</a></li>
+                @endforeach
+            </ul>
+        </div>
+        <div class="job-status-bar">
+            <ul class="like-com">
+                <li>
+                    <a href="#" class="com"><i class="fa fa-heart"></i> Like</a>
+                </li>
+                <li><a href="#" class="com"><i class="fa fa-comment-alt"></i> Comment 15</a></li>
+            </ul>
+        </div>
+        <div class="comment-section">
+            {{-- <a href="#" class="plus-ic">
+                <i class="la la-plus"></i>
+            </a> --}}
+            <div class="comment-sec">
+                <ul>
+                    <li>
+                        <div class="comment-list">
+                            {{-- <div class="bg-img">
+                                <img src="images/resources/bg-img1.png" alt="">
+                            </div> --}}
+                            <div class="comment">
+                                <h3>John Doe</h3>
+                                <span><img src="images/clock.png" alt=""> 3 min ago</span>
+                                <p>Lorem ipsum dolor sit amet, </p>
+                                <a href="#" title="" class="active"><i class="fa fa-reply-all"></i>Reply</a>
+                            </div>
+                        </div>
+                        <!--comment-list end-->
+                        <ul>
+                            <li>
+                                <div class="comment-list">
+                                    <div class="bg-img">
+                                        <img src="images/resources/bg-img2.png" alt="">
+                                    </div>
+                                    <div class="comment">
+                                        <h3>John Doe</h3>
+                                        <span><img src="images/clock.png" alt=""> 3 min ago</span>
+                                        <p>Hi John </p>
+                                        <a href="#" title=""><i class="fa fa-reply-all"></i>Reply</a>
+                                    </div>
+                                </div>
+                                <!--comment-list end-->
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="comment-list">
+                            <div class="bg-img">
+                                <img src="images/resources/bg-img3.png" alt="">
+                            </div>
+                            <div class="comment">
+                                <h3>John Doe</h3>
+                                <span><img src="images/clock.png" alt=""> 3 min ago</span>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at.</p>
+                                <a href="#" title=""><i class="fa fa-reply-all"></i>Reply</a>
+                            </div>
+                        </div>
+                        <!--comment-list end-->
+                    </li>
+                </ul>
+            </div>
+            <!--comment-sec end-->
+            <div class="post-comment">
+                <div class="cm_img">
+                    <img src="{{ asset(Auth::user()->userInfo->display_picture ? 'storage/'. Auth::user()->userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}" alt="">
+                </div>
+                <div class="comment_box">
+                    <form action="{{ route('comment.store')}}" method="POST" id="commentForm">
+                        @csrf
+                        <input type="hidden" class="post_id" name="post_id" value="{{$post->id}}">
+                        <input type="text" class="comment" name="comment" placeholder="Post a comment">
+                        <button type="button" onclick="buttonClick(event)">Send</button>
+                    </form>
+                </div>
+            </div>
+            <!--post-comment end-->
+        </div>
+    </div>
+    <!--post-bar end-->
+    
     @endforeach
     <div class="posty">
         <div class="post-bar no-margin">
@@ -207,3 +303,38 @@
     <!--process-comm end-->
 </div>
 <!--posts-section end-->
+@section('postscomment')
+<script>
+        function buttonClick(event){
+            let post_id = $(event.target).siblings('input.post_id').get(0).value;
+            let comment = $(event.target).siblings('input.comment').get(0).value;
+            let csrfToken = $(event.target).siblings().get(0).value;
+            // const post_id = $('#post_id');
+            // console.log(post_id); 
+        }
+//    document.addEventListener("DOMContentLoaded", e => {
+//         post_comment.addEventListener("click", e => {
+//             e.preventDefault();
+//             const post_id = parseInt(post_comment.getAttribute("post_id"));
+//             const comment = post_comment.getAttribute("comment");
+//             console.log(post_id);
+//             (function($){
+//                 $.ajax({
+//                     url: `http://127.0.0.1:8000/comment.store`,
+//                     method: "POST",
+//                     data: {
+//                         _token: "{{ csrf_token() }}",
+//                         post_id: post_id
+//                         comment: comment
+//                     },
+//                     success: _r => {
+//                         }
+//                         // console.log(_r);
+//                         // response = JSON.parse(_r);
+//                     }
+//                 })
+//             })(jQuery);
+//         })
+//     })
+</script>
+@endsection

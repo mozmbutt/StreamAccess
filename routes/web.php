@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RequestController;
@@ -77,6 +78,7 @@ Route::resource('post', PostController::class);
 Route::resource('worker', WorkerController::class);
 Route::get('workerDelete/{id}', [WorkerController::class , 'delete']);
 
+Route::resource('comment', CommentController::class);
 //saving firebase token
 Route::prefix('api')->group(function () {
     Route::post('/save-user-token',[RegisteredUserController::class,'saveUserFirebaseToken']);
