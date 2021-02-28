@@ -43,6 +43,7 @@
 	<script type="text/javascript" src="{{asset('js/select2.min.js')}}"></script>
 	
 	@yield('script')
+	@yield('postscomment')
 </body>
 
 </html>
