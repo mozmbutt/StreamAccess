@@ -11,6 +11,7 @@ importScripts('https://www.gstatic.com/firebasejs/8.2.9/firebase-messaging.js');
 firebase.initializeApp({
     apiKey: "AIzaSyCcJPaEusZg6XqOXU-StDlqJQrE83gCUrE",
     authDomain: "streamaccess-73022.firebaseapp.com",
+    databaseURL: "https://streamaccess-73022-default-rtdb.firebaseio.com",
     projectId: "streamaccess-73022",
     storageBucket: "streamaccess-73022.appspot.com",
     messagingSenderId: "188738858058",
