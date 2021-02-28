@@ -21,6 +21,7 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-datepicker.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/jquery.range.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/select2.min.css')}}">
+	@yield('style')
 </head>
 
 <body oncontextmenu="return false;">
