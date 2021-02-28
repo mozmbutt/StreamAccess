@@ -52,6 +52,7 @@
 	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-analytics.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-messaging.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
 	<script>
 	// Your web app's Firebase configuration
 	// For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -78,6 +79,7 @@
 	</script>
 	
 	@yield('script')
+	@yield('chatboxscript')
 </body>
 
 </html>

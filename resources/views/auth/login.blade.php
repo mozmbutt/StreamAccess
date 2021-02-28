@@ -351,7 +351,7 @@
 		.then(function (response) {
 			console.log('Token Saved');
 		})
-		.catch(function (error) {
+		.(function (error) {
 			console.log(error);
 		});
 	}
