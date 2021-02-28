@@ -51,6 +51,7 @@
 		https://firebase.google.com/docs/web/setup#available-libraries -->
 	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-analytics.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-messaging.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
 	<script>
 	// Your web app's Firebase configuration
 	// For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -68,6 +69,7 @@
 	firebase.initializeApp(firebaseConfig);
 	firebase.analytics();
 	const messaging = firebase.messaging();
+	var database = firebase.database();
 
 	messaging.onMessage((payload) => {
 		console.log('Message received. ', payload);
