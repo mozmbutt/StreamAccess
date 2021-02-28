@@ -76,3 +76,8 @@ Route::resource('post', PostController::class,  ['except' => 'show']);
 Route::resource('post', PostController::class);
 Route::resource('worker', WorkerController::class);
 Route::get('workerDelete/{id}', [WorkerController::class , 'delete']);
+
+//saving firebase token
+Route::prefix('api')->group(function () {
+    Route::post('/save-user-token',[RegisteredUserController::class,'saveUserFirebaseToken']);
+});
