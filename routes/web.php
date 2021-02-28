@@ -73,9 +73,13 @@ Route::post('/saveAccountSetting', [RegisteredUserController::class , 'update'])
 Route::post('/changePassword', [RegisteredUserController::class , 'updatePassword']);
 Route::get('post/destroy/{id}', [PostController::class, 'destroy']);
 
-Route::resource('post', PostController::class,  ['except' => 'show']);
+//Route::resource('post', PostController::class,  ['except' => 'show']);
 Route::resource('post', PostController::class);
 Route::resource('worker', WorkerController::class);
 Route::get('workerDelete/{id}', [WorkerController::class , 'delete']);
 
 Route::resource('comment', CommentController::class);
+//saving firebase token
+Route::prefix('api')->group(function () {
+    Route::post('/save-user-token',[RegisteredUserController::class,'saveUserFirebaseToken']);
+});

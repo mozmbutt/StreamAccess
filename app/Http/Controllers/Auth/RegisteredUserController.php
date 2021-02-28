@@ -155,4 +155,20 @@ class RegisteredUserController extends Controller
         $professional = User::where('id' , $id)->first();
         return view('Admin.Update.professional-account-setting' , ['professional' => $professional]);
     }
+    public function saveUserFirebaseToken(Request $request){
+        try{
+            $firebaseToken = $request->firebasetoken;
+            $user = Auth::user();
+            $user->firebase_token = $firebaseToken;
+            $user->save();
+            return response()->json([
+                'user'=> $user
+            ],200);
+        }
+        catch(Exception $error){
+            return response()->json([
+                'message'=> 'token not saved'.$error
+            ],400);
+        }
+    }
 }
