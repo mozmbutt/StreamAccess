@@ -42,6 +42,37 @@
 	<script type="text/javascript" src="{{asset('js/jquery.range-min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/bootstrap-datepicker.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/select2.min.js')}}"></script>
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+		https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-messaging.js"></script>
+	<script>
+	// Your web app's Firebase configuration
+	// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+	var firebaseConfig = {
+		apiKey: "AIzaSyCcJPaEusZg6XqOXU-StDlqJQrE83gCUrE",
+		authDomain: "streamaccess-73022.firebaseapp.com",
+		projectId: "streamaccess-73022",
+		storageBucket: "streamaccess-73022.appspot.com",
+		messagingSenderId: "188738858058",
+		appId: "1:188738858058:web:9fd23e10236a75fb9d0ab3",
+		measurementId: "G-4WC3GMTYHW"
+	};
+	// Initialize Firebase
+	firebase.initializeApp(firebaseConfig);
+	firebase.analytics();
+	const messaging = firebase.messaging();
+
+	messaging.onMessage((payload) => {
+		console.log('Message received. ', payload);
+		// ...
+	});
+	</script>
 	
 	@yield('script')
 </body>

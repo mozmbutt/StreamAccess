@@ -103,6 +103,7 @@
                                     <div class="dff-tab current" id="tab-3">
                                         <form method="POST" action="{{ route('register') }}">
                                             @csrf
+                                            <input type="hidden" name="profession" value="customer">
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
@@ -302,6 +303,59 @@
     <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/slick.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+		https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-messaging.js"></script>
+	<script>
+	// Your web app's Firebase configuration
+	// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+	var firebaseConfig = {
+		apiKey: "AIzaSyCcJPaEusZg6XqOXU-StDlqJQrE83gCUrE",
+		authDomain: "streamaccess-73022.firebaseapp.com",
+		projectId: "streamaccess-73022",
+		storageBucket: "streamaccess-73022.appspot.com",
+		messagingSenderId: "188738858058",
+		appId: "1:188738858058:web:9fd23e10236a75fb9d0ab3",
+		measurementId: "G-4WC3GMTYHW"
+	};
+	// Initialize Firebase
+	firebase.initializeApp(firebaseConfig);
+	firebase.analytics();
+	const messaging = firebase.messaging();
+	//getting the token of firebase
+	messaging.requestPermission()
+	.then(function(){
+		console.log('Have Permission');
+		return messaging.getToken(); 
+	})
+	.then(function(token){
+		//saving token to user
+		console.log(token);
+		saveUserToken(token);
+	})
+	.catch(function(err){
+		console.log('Permission not granted',err)
+	});
+
+	function saveUserToken(token){
+		axios.post('/api/save-user-token', {
+			firebasetoken: token
+		})
+		.then(function (response) {
+			console.log('Token Saved');
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+	}
+	</script>
+
     <script>
         $(document).ready(function() {
             $('.doc-input').change(function() {

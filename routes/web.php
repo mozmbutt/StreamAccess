@@ -5,6 +5,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\WorkerController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Models\Worker;
 use Illuminate\Support\Facades\Auth;
@@ -46,13 +47,12 @@ Route::get('/addUser', function () {
     return view('Admin.Create.user');
 });
 
-Route::get('/viewAdmin', function () {
-    return view('Admin.Read.admin');
-});
-Route::get('/professional', function () {
-    $professionals = User::all()->where('role' , 'professional');
-    return view('Admin.Read.professional' , ['professionals' => $professionals]);
-});
+Route::get('/professionals', [UserController::class , 'viewProfessional']); 
+Route::get('/clients', [UserController::class , 'viewClient']); 
+Route::get('/admins', [UserController::class , 'viewAdmin']); 
+
+Route::get('/deleteAdmin/{id}', [UserController::class , 'deleteAdmin']); 
+
 Route::get('/viewClient', function () {
     return view('Admin.Read.client');
 });
@@ -76,3 +76,8 @@ Route::get('post/destroy/{id}', [PostController::class, 'destroy']);
 Route::resource('post', PostController::class);
 Route::resource('worker', WorkerController::class);
 Route::get('workerDelete/{id}', [WorkerController::class , 'delete']);
+
+//saving firebase token
+Route::prefix('api')->group(function () {
+    Route::post('/save-user-token',[RegisteredUserController::class,'saveUserFirebaseToken']);
+});

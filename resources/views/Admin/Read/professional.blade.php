@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
-{{-- {{dd($professionals)}} --}}
+
     <head>
         <meta charset="utf-8" />
-        <title>Workers | Stream Access</title>
+        <title>Professionals | Stream Access</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Stream Access - A Click Away" name="description" />
         <meta content="Themesbrand" name="author" />
