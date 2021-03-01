@@ -22,6 +22,7 @@
                                 alt="">{{ $post->getCreatedAtAttribute($post->created_at) }}</span>
                     </div>
                 </div>
+                
                 <div class="ed-opts">
                     <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
                     <ul class="ed-options">
@@ -67,33 +68,23 @@
             <div class="comment-section">
                 <div class="comment-sec">
                     <ul>
+                        @foreach ($post->comment as $comments)
+                        {{-- {{dd($comments->user)}} --}}
                         <li>
                             <div class="comment-list">
                                 {{-- <div class="bg-img">
-                                    <img src="images/resources/bg-img1.png" alt="">
+                                    <img src="{{ asset($comments->user->userInfo->display_picture ? 'storage/'. $comments->user->userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}" alt="">
                                 </div> --}}
                                 <div class="comment">
-                                    <h3>John Doe</h3>
-                                    <span><img src="images/clock.png" alt=""> 3 min ago</span>
-                                    <p>Lorem ipsum dolor sit amet, </p>
+                                    <h3>{{$comments->user->name}}</h3>
+                                    <span><img src="images/clock.png" alt="">{{$comments->created_at->format('d-m-y')}}</span>
+                                    <p>{{$comments->comment}}</p>
                                 </div>
                             </div>
                             <!--comment-list end-->
                         </li>
-                        {{-- <li>
-                            <div class="comment-list">
-                                <div class="bg-img">
-                                    <img src="images/resources/bg-img3.png" alt="">
-                                </div>
-                                <div class="comment">
-                                    <h3>John Doe</h3>
-                                    <span><img src="images/clock.png" alt=""> 3 min ago</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at.</p>
-                                    <a href="#" title=""><i class="fa fa-reply-all"></i>Reply</a>
-                                </div>
-                            </div>
-                            <!--comment-list end-->
-                        </li> --}}
+                        @endforeach
+                        
                     </ul>
                 </div>
                 <!--comment-sec end-->

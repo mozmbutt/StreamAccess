@@ -19,9 +19,8 @@ class PageController extends Controller
             $userIds = UserInfo::select('user_id')
                 ->where('profession', Auth::user()->userInfo->profession)
                 ->get();
-            $comments = Comment::all();
             $posts = Post::wherein('user_id', $userIds)->orderByDesc('created_at')->get();
-            return view('index', ['tags' => $tags, 'posts' => $posts, 'comments' => $comments]);
+            return view('index', ['tags' => $tags, 'posts' => $posts]);
         } else {
             return view('forum');
         }
