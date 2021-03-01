@@ -45,7 +45,11 @@ class CommentController extends Controller
         $comment->user_id = Auth::user()->id;
         $comment->save();
             
-        return redirect()->back();
+        return response()->json([
+            'comment' => $comment->comment,
+            'user' => Auth::user()->name,
+            'timestamp' => date_format($comment->created_at,'d-m-Y')
+        ],200);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\UserInfo;
@@ -18,8 +19,9 @@ class PageController extends Controller
             $userIds = UserInfo::select('user_id')
                 ->where('profession', Auth::user()->userInfo->profession)
                 ->get();
+            $comments = Comment::all();
             $posts = Post::wherein('user_id', $userIds)->orderByDesc('created_at')->get();
-            return view('index', ['tags' => $tags, 'posts' => $posts]);
+            return view('index', ['tags' => $tags, 'posts' => $posts, 'comments' => $comments]);
         } else {
             return view('forum');
         }
