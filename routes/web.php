@@ -82,4 +82,5 @@ Route::resource('comment', CommentController::class);
 //saving firebase token
 Route::prefix('api')->group(function () {
     Route::post('/save-user-token',[RegisteredUserController::class,'saveUserFirebaseToken']);
+    Route::get('/get-all-users',[RegisteredUserController::class,'getAllUsers']);
 });

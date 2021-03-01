@@ -22,6 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('css/jquery.range.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/select2.min.css')}}">
 	@yield('style')
+	@yield('chatboxstyle')
 </head>
 
 <body oncontextmenu="return false;">
