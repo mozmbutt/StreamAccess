@@ -171,4 +171,10 @@ class RegisteredUserController extends Controller
             ],400);
         }
     }
+    public function getAllUsers(Request $request){
+        $users = User::where('id', '!=', auth()->id())->get();
+        return response()->json([
+            'users' => $users
+        ]);
+    }
 }
