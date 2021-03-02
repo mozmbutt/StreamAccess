@@ -36,17 +36,22 @@
                                         Posted by <a href="#">{{ \App\Models\User::find($thread->user_id)->name }}</a>
                                         @if (Auth::user())
                                             @if (Auth::user()->id === $thread->user_id)
-                                                <div class="epi-sec">
+                                                <div class="epi-sec ">
                                                     <ul class="bk-links">
-                                                        <li> <a {{-- href="{{ route('thread.edit', ['thread' => $thread]) }}" --}}><i class="la la-edit"></i></a></li>
-                                                        <li><a href="#" title=""><i class="la la-trash"></i></a></li>
-                                                        {{-- <form method="POST" action="{{ route('thread.destroy', ['thread' => $thread]) }}">
-                                                            @method('DELETE')
-                                                            @csrf
-                                                            <button type="submit">
-                                                                <i class="la la-trash"></i>
-                                                            </button>
-                                                        </form> --}}
+                                                        <li> <a href="{{ route('thread.edit', ['thread' => $thread]) }}"><i
+                                                                    class="la la-edit"></i></a></li>
+                                                        {{-- <li><a href="{{ route('thread.destroy', ['thread' => $thread]) }}"
+                                                                title=""><i class="la la-trash"></i></a></li> --}}
+                                                        <li>
+                                                            <form method="POST"
+                                                                action="{{ route('thread.destroy', ['thread' => $thread]) }}">
+                                                                @method('DELETE')
+                                                                @csrf
+                                                                <button type="submit">
+                                                                    <i class="la la-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             @endif
@@ -83,7 +88,7 @@
                             </div>
                             <!--forum-questions end-->
                         @empty
-                            <p>There are no threads in this category yet. <a href='/ask'>Create
+                            <p>There are no threads in this category yet. <a href='{{ route('thread.create') }}'>Create
                                     one!</a>
                             </p>
                         @endforelse

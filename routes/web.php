@@ -96,9 +96,11 @@ Route::resource('/channel', ChannelController::class);
 
 Route::get('/ask', [ThreadController::class, 'create']);
 
-Route::post('/channelAdded', [ThreadController::class, 'store']);
-Route::post('/threadAdded', [ThreadController::class, 'store']);
+Route::post('/channelAdded', [ChannelController::class, 'store']);
 
 Route::get('/forum', [ThreadController::class, 'index']);
 
 Route::get('/replies', [ReplyController::class, 'replies']);
+
+Route::resource('thread', ThreadController::class);
+

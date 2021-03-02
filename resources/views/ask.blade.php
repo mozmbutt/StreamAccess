@@ -19,7 +19,7 @@
     </section>
 
     <!<section class="forum-page">
-        <form method="POST" action="/threadAdded">
+        <form method="POST" action="{{ route('thread.store') }}">
             @csrf
 
             <!-- Channel -->

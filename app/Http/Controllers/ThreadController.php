@@ -107,7 +107,7 @@ class ThreadController extends Controller
         $thread->body = Arr::get($request, 'body');
         $thread->save();
         $threads = Thread::where('user_id', Auth::user()->id)->get();
-        return view('Thread.thread', ['threads' => $threads]);
+        return view('forum', ['threads' => $threads]);
     }
 
     /**
@@ -118,8 +118,8 @@ class ThreadController extends Controller
      */
     public function destroy(Thread $thread)
     {
-        $thread->forceDelete();
+        $thread->delete();
         $threads = Thread::where('user_id', Auth::user()->id)->get();
-        return view('Thread.thread', ['threads' => $threads]);
+        return view('forum', ['threads' => $threads]);
     }
 }
