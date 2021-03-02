@@ -174,8 +174,10 @@ class RegisteredUserController extends Controller
     }
     public function getAllUsers(Request $request){
         $users = User::where('id', '!=', auth()->id())->get();
+        $user = Auth::user();
         return response()->json([
-            'users' => $users
+            'users' => $users,
+            'currentUser' => $user,
         ]);
     }
 }
