@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\UserInfo;
 use App\Providers\RouteServiceProvider;
 use App\Rules\MatchOldPassword;
+use Exception;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
