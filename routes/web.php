@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\ThreadController;
 use App\Http\Controllers\WorkerController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
@@ -27,30 +30,30 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-Route::get('/', [PageController::class , 'return_page'])->middleware(['lastUserActivity']);;
+Route::get('/', [PageController::class, 'return_page'])->middleware(['lastUserActivity']);;
 
 
 Route::get('/admin', function () {
     return view('Admin.index');
 })->middleware(['role:admin']);
 
-Route::get('/404', function(){
+Route::get('/404', function () {
     return view('layouts.errors.404');
 });
-Route::get('/jobs', function(){
+Route::get('/jobs', function () {
     return view('jobs');
 });
 Route::get('/addUser', function () {
     return view('Admin.Create.user');
 });
 
-Route::get('/professionals', [UserController::class , 'viewProfessional']); 
-Route::get('/clients', [UserController::class , 'viewClient']); 
-Route::get('/admins', [UserController::class , 'viewAdmin']); 
+Route::get('/professionals', [UserController::class, 'viewProfessional']);
+Route::get('/clients', [UserController::class, 'viewClient']);
+Route::get('/admins', [UserController::class, 'viewAdmin']);
 
-Route::get('/deleteAdmin/{id}', [UserController::class , 'deleteAdmin']); 
+Route::get('/deleteAdmin/{id}', [UserController::class, 'deleteAdmin']);
 
 Route::get('/viewClient', function () {
     return view('Admin.Read.client');
@@ -61,41 +64,41 @@ Route::get('/profile-account-setting', function () {
 Route::get('/profile-setting', function () {
     return view('Admin.Update.profile-account-setting');
 });
-Route::get('/professional-profile-setting/{id}', [RegisteredUserController::class , 'pofessionalProfileSetting']);   
+Route::get('/professional-profile-setting/{id}', [RegisteredUserController::class, 'pofessionalProfileSetting']);
 
-Route::get('/viewPendingAccounts', [RequestController::class , 'index']);
+Route::get('/viewPendingAccounts', [RequestController::class, 'index']);
 
-Route::get('/professionalApprove/{id}', [RequestController::class , 'approve']);
-Route::get('/professionalDecline/{id}', [RequestController::class , 'decline']);
-Route::post('/saveAccountSetting', [RegisteredUserController::class , 'update']);
-Route::post('/changePassword', [RegisteredUserController::class , 'updatePassword']);
+Route::get('/professionalApprove/{id}', [RequestController::class, 'approve']);
+Route::get('/professionalDecline/{id}', [RequestController::class, 'decline']);
+Route::post('/saveAccountSetting', [RegisteredUserController::class, 'update']);
+Route::post('/changePassword', [RegisteredUserController::class, 'updatePassword']);
 Route::get('post/destroy/{id}', [PostController::class, 'destroy']);
 
 //Route::resource('post', PostController::class,  ['except' => 'show']);
 Route::resource('post', PostController::class);
 Route::resource('worker', WorkerController::class);
-Route::get('workerDelete/{id}', [WorkerController::class , 'delete']);
+Route::get('workerDelete/{id}', [WorkerController::class, 'delete']);
 
 Route::resource('comment', CommentController::class);
 //saving firebase token
 Route::prefix('api')->group(function () {
-    Route::post('/save-user-token',[RegisteredUserController::class,'saveUserFirebaseToken']);
-    Route::get('/get-all-users',[RegisteredUserController::class,'getAllUsers']);
+    Route::post('/save-user-token', [RegisteredUserController::class, 'saveUserFirebaseToken']);
+    Route::get('/get-all-users', [RegisteredUserController::class, 'getAllUsers']);
 });
 
 Route::get('/addChannel', function () {
     return view('Channel.create');
 });
 
-Route::get('/allChannel', 'App\Http\Controllers\ChannelController@index');
-Route::get('/manageChannels', 'App\Http\Controllers\ChannelController@manage');
-Route::resource('/channel', 'App\Http\Controllers\ChannelController');
+Route::get('/allChannel',  [ChannelController::class, 'index']);
+Route::get('/manageChannels', [ChannelController::class, 'manage']);
+Route::resource('/channel', ChannelController::class);
 
-Route::get('/ask', 'App\Http\Controllers\ThreadController@create');
+Route::get('/ask', [ThreadController::class, 'create']);
 
-Route::post('/channelAdded', 'App\Http\Controllers\ThreadController@store');
-Route::post('/threadAdded', 'App\Http\Controllers\ThreadController@store');
+Route::post('/channelAdded', [ThreadController::class, 'store']);
+Route::post('/threadAdded', [ThreadController::class, 'store']);
 
-Route::get('/forum', 'App\Http\Controllers\ThreadController@index');
+Route::get('/forum', [ThreadController::class, 'index']);
 
-Route::get('/replies', 'App\Http\Controllers\ReplyController@replies');
+Route::get('/replies', [ReplyController::class, 'replies']);

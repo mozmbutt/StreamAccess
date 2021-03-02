@@ -23,14 +23,14 @@ class ThreadController extends Controller
         $popular = isset($_GET['popular']) ? $_GET['popular'] : null;
         $unanswered = isset($_GET['unanswered']) ? $_GET['unanswered'] : null;
 
-        if(isset($by)) {
+        if (isset($by)) {
             $threads = Thread::where('user_id', auth()->id())->get();
-        }elseif (isset($popular)) {
+        } elseif (isset($popular)) {
             $threads = Thread::all()->sortByDesc('replies_count');
-        }elseif ($unanswered) {
-            $threads = Thread::where('replies_count' , 0)->get();
+        } elseif ($unanswered) {
+            $threads = Thread::where('replies_count', 0)->get();
         }
-        return view('forum', compact('threads'));
+        return view('forum', ['threads' => $threads]);
     }
 
     /**
@@ -42,8 +42,8 @@ class ThreadController extends Controller
     {
         $channels = Channel::all();
         if (Auth::user()) {
-            return view('ask' , compact('channels'));
-        }else{
+            return view('ask', ['channels' => $channels]);
+        } else {
             return view('auth.login');
         }
     }
@@ -61,15 +61,15 @@ class ThreadController extends Controller
             'title' => 'required',
             'body' => 'required'
         ]);
-        
+
         $thread = new Thread();
         $thread->user_id = Auth::user()->id;
-        $thread->channel_id = Arr::get($thread_data , 'channel_id');
-        $thread->title = Arr::get($thread_data , 'title');
-        $thread->body = Arr::get($thread_data , 'body');
+        $thread->channel_id = Arr::get($thread_data, 'channel_id');
+        $thread->title = Arr::get($thread_data, 'title');
+        $thread->body = Arr::get($thread_data, 'body');
         $thread->save();
-        $threads = Thread::where('user_id' , Auth::user()->id )->get();
-        return view('forum' , compact('threads'));
+        $threads = Thread::where('user_id', Auth::user()->id)->get();
+        return view('forum', ['threads' => $threads]);
     }
 
     /**
@@ -91,7 +91,7 @@ class ThreadController extends Controller
      */
     public function edit(Thread $thread)
     {
-        return view('Thread.update' , compact('thread'));
+        return view('Thread.update', ['thread' => $thread]);
     }
 
     /**
@@ -103,11 +103,11 @@ class ThreadController extends Controller
      */
     public function update(Request $request, Thread $thread)
     {
-        $thread->title = Arr::get($request , 'title');
-        $thread->body = Arr::get($request , 'body');
+        $thread->title = Arr::get($request, 'title');
+        $thread->body = Arr::get($request, 'body');
         $thread->save();
-        $threads = Thread::where('user_id' , Auth::user()->id )->get();
-        return view('Thread.thread' , compact('threads'));
+        $threads = Thread::where('user_id', Auth::user()->id)->get();
+        return view('Thread.thread', ['threads' => $threads]);
     }
 
     /**
@@ -119,7 +119,7 @@ class ThreadController extends Controller
     public function destroy(Thread $thread)
     {
         $thread->forceDelete();
-        $threads = Thread::where('user_id' , Auth::user()->id )->get();
-        return view('Thread.thread' , compact('threads'));
+        $threads = Thread::where('user_id', Auth::user()->id)->get();
+        return view('Thread.thread', ['threads' => $threads]);
     }
 }

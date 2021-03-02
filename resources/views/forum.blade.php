@@ -83,7 +83,7 @@
                             </div>
                             <!--forum-questions end-->
                         @empty
-                            <p>There are no threads in this category yet. <a href='{{ route('thread.create') }}'>Create
+                            <p>There are no threads in this category yet. <a href='/ask'>Create
                                     one!</a>
                             </p>
                         @endforelse
