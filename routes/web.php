@@ -24,9 +24,7 @@ require __DIR__.'/auth.php';
 
 Route::get('/', [PageController::class , 'return_page']);
 
-Route::get('/forum', function () {
-    return view('forum');
-});
+
 Route::get('/admin', function () {
     return view('Admin.index');
 })->middleware(['role:admin']);
@@ -57,3 +55,20 @@ Route::get('/viewPendingAccounts', [RequestController::class , 'index']);
 Route::get('/viewWorker', function () {
     return view('Admin.Read.worker');
 });
+
+Route::get('/addChannel', function () {
+    return view('Channel.create');
+});
+
+Route::get('/allChannel', 'App\Http\Controllers\ChannelController@index');
+Route::get('/manageChannels', 'App\Http\Controllers\ChannelController@manage');
+Route::resource('/channel', 'App\Http\Controllers\ChannelController');
+
+Route::get('/ask', 'App\Http\Controllers\ThreadController@create');
+
+Route::post('/channelAdded', 'App\Http\Controllers\ThreadController@store');
+Route::post('/threadAdded', 'App\Http\Controllers\ThreadController@store');
+
+Route::get('/forum', 'App\Http\Controllers\ThreadController@index');
+
+Route::get('/replies', 'App\Http\Controllers\ReplyController@replies');

@@ -49,15 +49,18 @@
                     </ul>
                 </li>
 
-                <li class="menu-title">Quries</li>
+                <li class="menu-title">Channels</li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-question-mark"></i>
-                        <span>Quiries</span>
+                        <span>Channels</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="#">Unanswered</a></li>
-                        <li><a href="#">Answered</a></li>
+                        <li><a href="/allChannel">All Channels</a></li>
+                        <li><a href="/addChannel">Add New Channel</a></li>
+                        <li><a href="/manageChannels">Manage Channels</a></li>
+                      {{--   <li><a href="#">Answered</a></li>
+                        <li><a href="#">Unanswered</a></li> --}}
                     </ul>
                 </li>
 
