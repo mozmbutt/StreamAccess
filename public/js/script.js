@@ -15,6 +15,31 @@ $(window).on("load", function() {
         $(".wrapper").removeClass("overlay");
         return false;
     });
+    $(".post-project>div>form>div>div>ul>li> a").on("click", function(){
+        $(".post-popup.pst-pj").removeClass("active");
+        $(".wrapper").removeClass("overlay");
+        return false;
+    });
+
+
+    
+    //  ============= Edit POST PROJECT POPUP FUNCTION =========
+
+    $(".edit_post_project").on("click", function(){
+        $(".edit-post-popup.pst-pj").addClass("active");
+        $(".wrapper").addClass("overlay");
+        return false;
+    });
+    $(".edit-post-project > a").on("click", function(){
+        $(".edit-post-popup.pst-pj").removeClass("active");
+        $(".wrapper").removeClass("overlay");
+        return false;
+    });
+    $(".edit-post-project>div>form>div>div>ul>li> a").on("click", function(){
+        $(".edit-post-popup.pst-pj").removeClass("active");
+        $(".wrapper").removeClass("overlay");
+        return false;
+    });
 
     //  ============= POST JOB POPUP FUNCTION =========
 
@@ -206,6 +231,8 @@ $(window).on("load", function() {
         $(this).next(".ed-options").toggleClass("active");
         return false;
     });
+
+
 
 
     // ============== Menu Script =============

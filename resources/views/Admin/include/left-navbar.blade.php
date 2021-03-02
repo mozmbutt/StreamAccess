@@ -21,9 +21,9 @@
                         <span>View Users</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ url('viewAdmin') }}">Admins</a></li>
-                        <li><a href="{{ url('viewProfessional') }}">Professionals</a></li>
-                        <li><a href="{{ url('viewClient') }}">Clients</a></li>
+                        <li><a href="{{ url('admins') }}">Admins</a></li>
+                        <li><a href="{{ url('professionals') }}">Professionals</a></li>
+                        <li><a href="{{ url('clients') }}">Clients</a></li>
                     </ul>
                 </li>
                 <li>
@@ -44,8 +44,8 @@
                         <span>Local Worker</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ url('addWorker') }}">Add New</a></li>
-                        <li><a href="{{ url('viewWorker') }}">View All</a></li>
+                        <li><a href="{{ route('worker.create')  }}">Add New</a></li>
+                        <li><a href="{{ route('worker.index') }}">View All</a></li>
                     </ul>
                 </li>
 

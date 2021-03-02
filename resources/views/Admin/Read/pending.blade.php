@@ -96,10 +96,10 @@
                                                     <td>
                                                         <ul class="list-inline font-size-20 contact-links mb-0">
                                                             <li class="list-inline-item px-2">
-                                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Approve"><i class="bx bx-check-double"></i></a>
+                                                                <a href="/professionalApprove/{{$info->user->id}}" data-toggle="tooltip" data-placement="top" title="Approve"><i class="bx bx-check-double"></i></a>
                                                             </li>
                                                             <li class="list-inline-item px-2">
-                                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Dicline"><i class="bx bx-trash-alt"></i></a>
+                                                                <a href="/professionalDecline/{{$info->user->id}}" data-toggle="tooltip" data-placement="top" title="Dicline"><i class="bx bx-trash-alt"></i></a>
                                                             </li>
                                                             <li class="list-inline-item px-2">
                                                                 <a href="#" data-id="{{ $info->user_id ? $info->user_id : '' }}" data-name="{{ $info->first_name ? $info->first_name : '' }}" data-matric="{{$info->education->metric}}" data-inter="{{$info->education->intermediate}}" data-bacholors="{{$info->education->bachelors}}" data-masters="{{$info->education->masters ? $info->education->masters : ''}}" data-phd="{{$info->education->phd}}" data-toggle="modal" data-target="#requestModal" data-placement="top" title="View Details">

@@ -2,13 +2,13 @@
             <div class="user-profile">
                 <div class="username-dt">
                     <div class="usr-pic">
-                        <img src="images/dp.png" alt="">
+                        <img src="{{ asset(Auth::user()->userInfo->display_picture ? 'storage/'. Auth::user()->userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}" alt="">
                     </div>
                 </div>
                 <!--username-dt end-->
                 <div class="user-specs">
-                    <h3>Moazzam Butt</h3>
-                    <span>Laravel Developer | Fiverr</span>
+                    <h3>{{Auth::user()->userInfo->first_name}}</h3>
+                    <span>{{Auth::user()->userInfo->profession}}</span>
                 </div>
             </div>
             <!--user-profile end-->

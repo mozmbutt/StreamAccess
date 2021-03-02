@@ -1,7 +1,14 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\WorkerController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
+use App\Models\Worker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +29,7 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/', [PageController::class , 'return_page']);
+Route::get('/', [PageController::class , 'return_page'])->middleware(['lastUserActivity']);;
 
 
 Route::get('/admin', function () {
@@ -38,22 +45,42 @@ Route::get('/jobs', function(){
 Route::get('/addUser', function () {
     return view('Admin.Create.user');
 });
-Route::get('/addWorker', function () {
-    return view('Admin.Create.worker');
-});
-Route::get('/viewAdmin', function () {
-    return view('Admin.Read.admin');
-});
-Route::get('/viewProfessional', function () {
-    return view('Admin.Read.professional');
-});
+
+Route::get('/professionals', [UserController::class , 'viewProfessional']); 
+Route::get('/clients', [UserController::class , 'viewClient']); 
+Route::get('/admins', [UserController::class , 'viewAdmin']); 
+
+Route::get('/deleteAdmin/{id}', [UserController::class , 'deleteAdmin']); 
+
 Route::get('/viewClient', function () {
     return view('Admin.Read.client');
 });
+Route::get('/profile-account-setting', function () {
+    return view('layouts.AccountSettings.profile-account-setting');
+});
+Route::get('/profile-setting', function () {
+    return view('Admin.Update.profile-account-setting');
+});
+Route::get('/professional-profile-setting/{id}', [RegisteredUserController::class , 'pofessionalProfileSetting']);   
+
 Route::get('/viewPendingAccounts', [RequestController::class , 'index']);
 
-Route::get('/viewWorker', function () {
-    return view('Admin.Read.worker');
+Route::get('/professionalApprove/{id}', [RequestController::class , 'approve']);
+Route::get('/professionalDecline/{id}', [RequestController::class , 'decline']);
+Route::post('/saveAccountSetting', [RegisteredUserController::class , 'update']);
+Route::post('/changePassword', [RegisteredUserController::class , 'updatePassword']);
+Route::get('post/destroy/{id}', [PostController::class, 'destroy']);
+
+//Route::resource('post', PostController::class,  ['except' => 'show']);
+Route::resource('post', PostController::class);
+Route::resource('worker', WorkerController::class);
+Route::get('workerDelete/{id}', [WorkerController::class , 'delete']);
+
+Route::resource('comment', CommentController::class);
+//saving firebase token
+Route::prefix('api')->group(function () {
+    Route::post('/save-user-token',[RegisteredUserController::class,'saveUserFirebaseToken']);
+    Route::get('/get-all-users',[RegisteredUserController::class,'getAllUsers']);
 });
 
 Route::get('/addChannel', function () {

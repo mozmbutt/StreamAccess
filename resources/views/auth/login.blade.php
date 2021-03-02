@@ -103,6 +103,7 @@
                                     <div class="dff-tab current" id="tab-3">
                                         <form method="POST" action="{{ route('register') }}">
                                             @csrf
+                                            <input type="hidden" name="profession" value="customer">
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
@@ -145,7 +146,7 @@
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="flex items-center justify-end mt-4">
                                                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                                                         {{ __('Already registered?') }}
@@ -177,6 +178,21 @@
                                                     <div class="sn-field">
                                                         <input id="lastname" type="text" name="lastname" required autofocus placeholder="Last Name">
                                                         <i class="la la-user"></i>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <select required name="profession" class="form-control">
+                                                            <option>Select Profession</option>
+                                                            <option value="Geek">Geek</option>
+                                                            <option value="Doctor">Doctor</option>
+                                                            <option value="Laywer">Laywer</option>
+                                                            <option value="Islamic Scholor">Islamic Scholor</option>
+                                                            <option value="Engineer">Engineer</option>
+                                                            <option value="Business">Business</option>
+                                                            <option value="Architect">Architect</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
@@ -235,7 +251,7 @@
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input class="pt-2 doc-input" id="masters" type="file" required name="masters">
+                                                        <input class="pt-2 doc-input" id="masters" type="file" name="masters">
                                                         <i class="la la-file-photo-o">
                                                             <span class="doc-icon-color ml-1">
                                                                 masters
@@ -245,7 +261,7 @@
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input class="pt-2 doc-input" id="phd" type="file" required name="phd">
+                                                        <input class="pt-2 doc-input" id="phd" type="file" name="phd">
                                                         <i class="la la-file-photo-o">
                                                             <span class="doc-icon-color ml-1">
                                                                 phd
@@ -253,7 +269,7 @@
                                                         </i>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="flex items-center justify-end mt-4">
                                                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                                                         {{ __('Already registered?') }}
@@ -275,7 +291,7 @@
                 <!--signin-pop end-->
             </div>
             <!--signin-popup end-->
-            
+
         </div>
         <!--sign-in-page end-->
 
@@ -287,12 +303,67 @@
     <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/slick.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
-<script>
-    $(document).ready(function (){
-        $('.doc-input').change(function (){
-            $(this).siblings('i').addClass('text-success');
-        });
-    })
-</script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+		https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-messaging.js"></script>
+	<script>
+	// Your web app's Firebase configuration
+	// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+	var firebaseConfig = {
+    apiKey: "AIzaSyCcJPaEusZg6XqOXU-StDlqJQrE83gCUrE",
+    authDomain: "streamaccess-73022.firebaseapp.com",
+    databaseURL: "https://streamaccess-73022-default-rtdb.firebaseio.com",
+    projectId: "streamaccess-73022",
+    storageBucket: "streamaccess-73022.appspot.com",
+    messagingSenderId: "188738858058",
+    appId: "1:188738858058:web:9fd23e10236a75fb9d0ab3",
+    measurementId: "G-4WC3GMTYHW"
+  };
+	// Initialize Firebase
+	firebase.initializeApp(firebaseConfig);
+	firebase.analytics();
+	const messaging = firebase.messaging();
+	//getting the token of firebase
+	messaging.requestPermission()
+	.then(function(){
+		console.log('Have Permission');
+		return messaging.getToken(); 
+	})
+	.then(function(token){
+		//saving token to user
+		console.log(token);
+		saveUserToken(token);
+	})
+	.catch(function(err){
+		console.log('Permission not granted',err)
+	});
+
+	function saveUserToken(token){
+		axios.post('/api/save-user-token', {
+			firebasetoken: token
+		})
+		.then(function (response) {
+			console.log('Token Saved');
+		})
+		.(function (error) {
+			console.log(error);
+		});
+	}
+	</script>
+
+    <script>
+        $(document).ready(function() {
+            $('.doc-input').change(function() {
+                $(this).siblings('i').addClass('text-success');
+            });
+        })
+    </script>
 </body>
+
 </html>

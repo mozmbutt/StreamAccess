@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Education;
 use App\Models\PendingRequest;
+use App\Models\User;
 use App\Models\UserInfo;
 use Illuminate\Http\Request;
 
@@ -17,11 +18,21 @@ class RequestController extends Controller
     public function index()
     {
         $pendingRequest = PendingRequest::select('user_id')->get();
-        //$allRequests = Education::whereIn('user_info_id' , $pendingRequest->pluck('user_id')->all())->get();
         $userInfo = UserInfo::whereIn('user_id' , $pendingRequest->pluck('user_id')->all())->get();
         return view('Admin.Read.pending' , ['infos'=> $userInfo]);
     }
-
+    
+    public function approve($id){
+        PendingRequest::where('user_id' , $id)->delete();
+        User::find($id)->update(array('role' => 'professional'));
+        return redirect('/viewPendingAccounts');
+    }
+    public function decline($id){
+        PendingRequest::where('user_id' , $id)->delete();
+        $userToDecline=UserInfo::where('user_id' , $id)->first();
+        Education::where('user_info_id' , $userToDecline->id)->delete();
+        return redirect('/viewPendingAccounts');
+    }
     /**
      * Show the form for creating a new resource.
      *

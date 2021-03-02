@@ -35,7 +35,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="avatar-md profile-user-wid mb-4">
-                                    <img src="{{ asset('images/dp.png') }}" alt=""
+                                    <img src="{{ asset(Auth::user()->userInfo->display_picture ? 'storage/'. Auth::user()->userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}" alt=""
                                         class="img-thumbnail rounded-circle mt-4">
                                 </div>
                                 <h5 class="font-size-15 text-truncate">{{Auth::user()->name}}</h5>

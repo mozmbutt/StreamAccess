@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="header-data">
 			<div class="logo">
-				<a href="/" title=""><img src="images/test-logo.png" alt=""></a>
+				<a href="/" title=""><img src="/images/test-logo.png" alt=""></a>
 			</div>
 			<!--logo end-->
 			<div class="search-bar">
@@ -17,13 +17,13 @@
 				<ul>
 					<li>
 						<a href="/" title="">
-							<span><img src="images/icon1.png" alt=""></span>
+							<span><img src="/images/icon1.png" alt=""></span>
 							Home
 						</a>
 					</li>
 					<li>
 						<a href="{{ url('forum') }}" title="">
-							<span><img src="images/icon2.png" alt=""></span>
+							<span><img src="/images/icon2.png" alt=""></span>
 							Forum
 						</a>
 
@@ -36,7 +36,7 @@
 					</li> -->
 					<li>
 						<a href="profiles.html" title="">
-							<span><img src="images/icon4.png" alt=""></span>
+							<span><img src="/images/icon4.png" alt=""></span>
 							Profiles
 						</a>
 						<ul>
@@ -46,13 +46,13 @@
 					</li>
 					<li>
 						<a href="{{ url('jobs') }}" title="">
-							<span><img src="images/icon5.png" alt=""></span>
+							<span><img src="/images/icon5.png" alt=""></span>
 							Jobs
 						</a>
 					</li>
 					<li>
 						<a href="#" title="" class="not-box-openm">
-							<span><img src="images/icon6.png" alt=""></span>
+							<span><img src="/images/icon6.png" alt=""></span>
 							Messages
 						</a>
 						<div class="notification-box msg" id="message">
@@ -63,7 +63,7 @@
 							<div class="nott-list">
 								<div class="notfication-details">
 									<div class="noty-user-img">
-										<img src="images/resources/ny-img1.png" alt="">
+										<img src="/images/resources/ny-img1.png" alt="">
 									</div>
 									<div class="notification-info">
 										<h3><a href="messages.html" title="">Jassica William</a> </h3>
@@ -74,7 +74,7 @@
 								</div>
 								<div class="notfication-details">
 									<div class="noty-user-img">
-										<img src="images/resources/ny-img2.png" alt="">
+										<img src="/images/resources/ny-img2.png" alt="">
 									</div>
 									<div class="notification-info">
 										<h3><a href="messages.html" title="">Jassica William</a></h3>
@@ -85,7 +85,7 @@
 								</div>
 								<div class="notfication-details">
 									<div class="noty-user-img">
-										<img src="images/resources/ny-img3.png" alt="">
+										<img src="/images/resources/ny-img3.png" alt="">
 									</div>
 									<div class="notification-info">
 										<h3><a href="messages.html" title="">Jassica William</a></h3>
@@ -104,7 +104,7 @@
 					</li>
 					<li>
 						<a href="#" title="" class="not-box-open">
-							<span><img src="images/icon7.png" alt=""></span>
+							<span><img src="/images/icon7.png" alt=""></span>
 							Notification
 						</a>
 						<div class="notification-box noti" id="notification">
@@ -115,7 +115,7 @@
 							<div class="nott-list">
 								<div class="notfication-details">
 									<div class="noty-user-img">
-										<img src="images/resources/ny-img1.png" alt="">
+										<img src="/images/resources/ny-img1.png" alt="">
 									</div>
 									<div class="notification-info">
 										<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
@@ -125,7 +125,7 @@
 								</div>
 								<div class="notfication-details">
 									<div class="noty-user-img">
-										<img src="images/resources/ny-img2.png" alt="">
+										<img src="/images/resources/ny-img2.png" alt="">
 									</div>
 									<div class="notification-info">
 										<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
@@ -135,7 +135,7 @@
 								</div>
 								<div class="notfication-details">
 									<div class="noty-user-img">
-										<img src="images/resources/ny-img3.png" alt="">
+										<img src="/images/resources/ny-img3.png" alt="">
 									</div>
 									<div class="notification-info">
 										<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
@@ -145,7 +145,7 @@
 								</div>
 								<div class="notfication-details">
 									<div class="noty-user-img">
-										<img src="images/resources/ny-img2.png" alt="">
+										<img src="/images/resources/ny-img2.png" alt="">
 									</div>
 									<div class="notification-info">
 										<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
@@ -169,40 +169,36 @@
 			</div>
 			<!--menu-btn end-->
 			<div class="user-account">
-				<div class="user-info">
-					<img src="images/resources/user.png" alt="">
-					<a href="#" title="">John</a>
+				<div class="user-info d-flex">
+				<img width="30" height="30" src="{{ asset(Auth::user()->userInfo->display_picture ? 'storage/'. Auth::user()->userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}" alt="">
+
+					<a href="#" class="text-truncate" title="">{{Auth::user()->userInfo->first_name}}</a>
 					<i class="la la-sort-down"></i>
 				</div>
 				<div class="user-account-settingss" id="users">
-					<h3>Online Status</h3>
+					<h3>{{Auth::user()->userInfo->first_name. " " . Auth::user()->userInfo->last_name}}</h3>
 					<ul class="on-off-status">
 						<li>
 							<div class="fgt-sec">
-								<input type="radio" name="cc" id="c5">
+								<input type="radio" name="cc" id="c5" checked>
 								<label for="c5">
 									<span></span>
 								</label>
+								@if(Cache::has('user-is-online-' . Auth::user()->id))
 								<small>Online</small>
-							</div>
-						</li>
-						<li>
-							<div class="fgt-sec">
-								<input type="radio" name="cc" id="c6">
-								<label for="c6">
-									<span></span>
-								</label>
+								@else
 								<small>Offline</small>
+								@endif
 							</div>
 						</li>
 					</ul>
 					<h3>Setting</h3>
 					<ul class="us-links">
-						<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
+						<li><a href="{{url('profile-account-setting')}}" title="">Account Setting</a></li>
 						<li><a href="#" title="">Privacy</a></li>
 						<li><a href="#" title="">Faqs</a></li>
 						<li><a href="#" title="">Terms & Conditions</a></li>
-						<li><a href="{{ url('admin') }}" title="">Admin</a></li>
+						<!-- <li><a href="{{ url('admin') }}" title="">Admin</a></li> -->
 					</ul>
 					<h3 class="tc">
 						<form method="POST" action="{{ route('logout') }}">

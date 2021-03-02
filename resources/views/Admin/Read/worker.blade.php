@@ -65,268 +65,50 @@
                         <!-- end page title -->
 
                         <div class="row">
+                            @foreach ($workers as $worker)
                             <div class="col-xl-3 col-sm-6">
                                 <div class="card text-center">
                                     <div class="card-body">
                                         <div class="avatar-sm mx-auto mb-4">
                                             <span class="avatar-title rounded-circle bg-soft-primary text-primary font-size-16">
-                                                D
+                                                W
                                             </span>
                                         </div>
-                                        <h5 class="font-size-15"><a href="#" class="text-dark">David McHenry</a></h5>
-                                        <p class="text-muted">UI/UX Designer</p>
-
-                                        <div>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">Photoshop</a>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">illustrator</a>
-                                        </div>
-                                    </div>
+                                        <h5 class="font-size-15">{{$worker->first_name}}</h5>
+                                        <p class="text-muted">{{$worker->skill}}</p>
+                                    </div>  
                                     <div class="card-footer bg-transparent border-top">
                                         <div class="contact-links d-flex font-size-20">
                                             <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><i class="bx bx-message-square-dots"></i></a>
+                                                <a href="#" 
+                                                    data-id="{{ $worker->id ? $worker->id : '' }}"
+                                                    data-firstname="{{ $worker->first_name ? $worker->first_name : '' }}"
+                                                    data-secondname="{{ $worker->second_name ? $worker->second_name : '' }}"
+                                                    data-skill="{{ $worker->skill ? $worker->skill : '' }}"
+                                                    data-gender="{{ $worker->gender ? $worker->gender : '' }}"
+                                                    data-phone="{{ $worker->phone_no ? $worker->phone_no : '' }}"
+                                                    data-cnic="{{ $worker->cnic_no ? $worker->cnic_no : '' }}"
+                                                    data-address="{{ $worker->address ? $worker->address : '' }}"
+                                                    data-toggle="modal" 
+                                                    data-target="#workerModal" 
+                                                    data-placement="top" 
+                                                    title="View Details">
+                                                    <i class="bx bx-show"></i></a>
                                             </div>
                                             <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Projects"><i class="bx bx-pie-chart-alt"></i></a>
+                                                <a href="{{ route('worker.edit', ['worker'=>$worker->id]) }}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="bx bx-edit-alt"></i></a>
                                             </div>
                                             <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Profile"><i class="bx bx-user-circle"></i></a>
+                                                <a href="/workerDelete/{{$worker->id}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="bx bx-user-x"></i></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-sm-6">
-                                <div class="card text-center">
-                                    <div class="card-body">
-                                        <div class="mb-4">
-                                            <img class="rounded-circle avatar-sm" src="{{ asset('images/dp.png') }}" alt="">
-                                        </div>
-                                        <h5 class="font-size-15"><a href="#" class="text-dark">Frank Kirk</a></h5>
-                                        <p class="text-muted">Frontend Developer</p>
-
-                                        <div>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">Html</a>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">Css</a>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">2 + more</a>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-transparent border-top">
-                                        <div class="d-flex font-size-20 contact-links">
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><i class="bx bx-message-square-dots"></i></a>
-                                            </div>
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Projects"><i class="bx bx-pie-chart-alt"></i></a>
-                                            </div>
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Profile"><i class="bx bx-user-circle"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-sm-6">
-                                <div class="card text-center">
-                                    <div class="card-body">
-                                        <div class="mb-4">
-                                            <img class="rounded-circle avatar-sm" src="{{ asset('images/dp.png') }}" alt="">
-                                        </div>
-                                        <h5 class="font-size-15"><a href="#" class="text-dark">Rafael Morales</a></h5>
-                                        <p class="text-muted">Backend Developer</p>
-
-                                        <div>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">Php</a>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">Java</a>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">Python</a>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-transparent border-top">
-                                        <div class="d-flex font-size-20 contact-links">
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><i class="bx bx-message-square-dots"></i></a>
-                                            </div>
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Projects"><i class="bx bx-pie-chart-alt"></i></a>
-                                            </div>
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Profile"><i class="bx bx-user-circle"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-sm-6">
-                                <div class="card text-center">
-                                    <div class="card-body">
-                                        <div class="avatar-sm mx-auto mb-4">
-                                            <span class="avatar-title rounded-circle bg-soft-success text-success font-size-16">
-                                                M
-                                            </span>
-                                        </div>
-                                        <h5 class="font-size-15"><a href="#" class="text-dark">Mark Ellison</a></h5>
-                                        <p class="text-muted">Full Stack Developer</p>
-
-                                        <div>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">Ruby</a>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">Php</a>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">2 + more</a>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-transparent border-top">
-                                        <div class="d-flex font-size-20 contact-links">
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><i class="bx bx-message-square-dots"></i></a>
-                                            </div>
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Projects"><i class="bx bx-pie-chart-alt"></i></a>
-                                            </div>
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Profile"><i class="bx bx-user-circle"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+                            
                         </div>
                         <!-- end row -->
-                        
-                        <div class="row">
-                            <div class="col-xl-3 col-sm-6">
-                                <div class="card text-center">
-                                    <div class="card-body">
-                                        <div class="avatar-sm mx-auto mb-4">
-                                            <span class="avatar-title rounded-circle bg-soft-primary text-primary font-size-16">
-                                                D
-                                            </span>
-                                        </div>
-                                        <h5 class="font-size-15"><a href="#" class="text-dark">David McHenry</a></h5>
-                                        <p class="text-muted">UI/UX Designer</p>
-
-                                        <div>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">Photoshop</a>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">illustrator</a>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-transparent border-top">
-                                        <div class="contact-links d-flex font-size-20">
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><i class="bx bx-message-square-dots"></i></a>
-                                            </div>
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Projects"><i class="bx bx-pie-chart-alt"></i></a>
-                                            </div>
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Profile"><i class="bx bx-user-circle"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-sm-6">
-                                <div class="card text-center">
-                                    <div class="card-body">
-                                        <div class="mb-4">
-                                            <img class="rounded-circle avatar-sm" src="{{ asset('images/dp.png') }}" alt="">
-                                        </div>
-                                        <h5 class="font-size-15"><a href="#" class="text-dark">Frank Kirk</a></h5>
-                                        <p class="text-muted">Frontend Developer</p>
-
-                                        <div>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">Html</a>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">Css</a>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">2 + more</a>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-transparent border-top">
-                                        <div class="d-flex font-size-20 contact-links">
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><i class="bx bx-message-square-dots"></i></a>
-                                            </div>
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Projects"><i class="bx bx-pie-chart-alt"></i></a>
-                                            </div>
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Profile"><i class="bx bx-user-circle"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-sm-6">
-                                <div class="card text-center">
-                                    <div class="card-body">
-                                        <div class="mb-4">
-                                            <img class="rounded-circle avatar-sm" src="{{ asset('images/dp.png') }}" alt="">
-                                        </div>
-                                        <h5 class="font-size-15"><a href="#" class="text-dark">Rafael Morales</a></h5>
-                                        <p class="text-muted">Backend Developer</p>
-
-                                        <div>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">Php</a>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">Java</a>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">Python</a>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-transparent border-top">
-                                        <div class="d-flex font-size-20 contact-links">
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><i class="bx bx-message-square-dots"></i></a>
-                                            </div>
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Projects"><i class="bx bx-pie-chart-alt"></i></a>
-                                            </div>
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Profile"><i class="bx bx-user-circle"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-sm-6">
-                                <div class="card text-center">
-                                    <div class="card-body">
-                                        <div class="avatar-sm mx-auto mb-4">
-                                            <span class="avatar-title rounded-circle bg-soft-success text-success font-size-16">
-                                                M
-                                            </span>
-                                        </div>
-                                        <h5 class="font-size-15"><a href="#" class="text-dark">Mark Ellison</a></h5>
-                                        <p class="text-muted">Full Stack Developer</p>
-
-                                        <div>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">Ruby</a>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">Php</a>
-                                            <a href="#" class="badge badge-primary font-size-11 m-1">2 + more</a>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer bg-transparent border-top">
-                                        <div class="d-flex font-size-20 contact-links">
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><i class="bx bx-message-square-dots"></i></a>
-                                            </div>
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Projects"><i class="bx bx-pie-chart-alt"></i></a>
-                                            </div>
-                                            <div class="flex-fill">
-                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Profile"><i class="bx bx-user-circle"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end row -->
-
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="text-center my-3">
-                                    <a href="javascript:void(0);" class="text-success"><i class="bx bx-hourglass bx-spin mr-2"></i> Load more </a>
-                                </div>
-                            </div> <!-- end col-->
-                        </div>
-                        <!-- end row -->
-
                     </div> <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->
@@ -337,10 +119,90 @@
                 </footer>
             </div>
             <!-- end main content-->
-
         </div>
         <!-- END layout-wrapper -->
-
+    <!-- Modal -->
+    <div class="modal fade" id="workerModal" tabindex="-1" role="dialog" aria-labelledby="workerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="workerModalLabel">Worker Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-2">User id: <span id="id" class="text-primary"></span></p>
+                    <p class="mb-2">First Name: <span id="firstname" class="text-primary"></span></p>
+                    <p class="mb-4">Second Name: <span id="secondname" class="text-primary"></span></p>
+                    <div class="table-responsive">
+                        <table class="table table-centered table-nowrap">
+                            <thead>
+                                <tr>
+                                    <th scope="col">More Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <h5 class="text-truncate font-size-14">Skill</h5>
+                                        </div>
+                                    </td>
+                                    <th scope="row">
+                                        <div>
+                                            <p class="mb-2" id="skill"></p>
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <h5 class="text-truncate font-size-14">Phone Number</h5>
+                                        </div>
+                                    </td>
+                                    <th scope="row">
+                                        <div>
+                                            <p class="mb-2" id="phone"></p>
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <h5 class="text-truncate font-size-14">CNIC Number
+                                            </h5>
+                                        </div>
+                                    </td>
+                                    <th scope="row">
+                                        <div>
+                                            <p class="mb-2" id="cnic"></p>
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <h5 class="text-truncate font-size-14">Address
+                                            </h5>
+                                        </div>
+                                    </td>
+                                    <th scope="row">
+                                        <div>
+                                            <p class="mb-2" id="address"></p>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
         <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/metisMenu.min.js') }}"></script>
@@ -354,3 +216,30 @@
 
     </body>
 </html>
+<script>
+    $(document).ready(function() {
+        $('#workerModal').on('show.bs.modal', function(e) {
+            var link = $(e.relatedTarget);
+            let modal = $(this);
+            
+            let id = link.data("id");
+            let firstname = link.data("firstname");
+            let secondname = link.data("secondname");
+            let gender = link.data("gender");
+            let skill = link.data("skill");
+            let phone = link.data("phone");
+            let cnic = link.data("cnic");
+            let address = link.data("address");
+            
+            modal.find("#id").html(id);
+            modal.find("#firstname").html(firstname);
+            modal.find("#secondname").html(secondname);
+            modal.find("#skill").html(skill);
+            modal.find("#gender").html(gender);
+            modal.find("#phone").html(phone);
+            modal.find("#cnic").html(cnic);
+            modal.find("#address").html(address);
+        });
+    });
+
+</script>
