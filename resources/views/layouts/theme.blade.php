@@ -82,6 +82,7 @@
 	@yield('script')
 	@yield('chatboxscript')
 	@yield('postscomment')
+	@yield('follow')
 </body>
 
 </html>

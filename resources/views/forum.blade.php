@@ -33,7 +33,7 @@
                                         <h3>{{ $thread->title }}</h3>
                                         <span class="quest-posted-time"><i class="fa fa-clock-o"></i>3 min
                                             ago</span>
-                                        Posted by <a href="#">{{ \App\Models\User::find($thread->user_id)->name }}</a>
+                                        Posted by <a href="#">{{User::find($thread->user_id)->name }}</a>
                                         @if (Auth::user())
                                             @if (Auth::user()->id === $thread->user_id)
                                                 <div class="epi-sec">

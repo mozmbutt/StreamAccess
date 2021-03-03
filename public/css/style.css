@@ -1090,6 +1090,7 @@ main {
     line-height: 30px;
     font-weight: 400;
     border-radius: 8px;
+    text-align: center;
 }
 .post-st ul li a:hover,
 .post-st ul li a.active {
@@ -1756,14 +1757,14 @@ main {
 }
 .cm_img {
     float: left;
-    width: 40px;
-    margin-right: 10px;
+    width: 35px;
+    margin-right: 5px;
 }
 .comment_box {
     float: none;
 }
 .comment_box input {
-    width: 372px;
+    width: 340px;
     height: 40px;
     border: 1px solid #e5e5e5;
     background-color: #efefef;

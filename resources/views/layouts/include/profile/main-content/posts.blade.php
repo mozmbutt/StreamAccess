@@ -8,34 +8,33 @@
     </style>
 @endsection
 <div class="posts-section">
-    @include('layouts.include.main-content.top-profiles')
+    {{-- @include('layouts.include.main-content.top-profiles') --}}
     @foreach ($posts as $post)
         <div class="post-bar">
             <div class="post_topbar">
                 <div class="usy-dt">
                     <img width="50" height="50"
-                        src="{{ asset($post->user->userInfo->display_picture ? 'storage/' . $post->user->userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}"
+                        src="{{ asset($userInfo->display_picture ? 'storage/' . $userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}"
                         alt="">
                     <div class="usy-name">
-                        <a href="/profile/{{ $post->user->id }}" title="">
-                            <h3>{{ $post->user->userInfo->first_name . ' ' . $post->user->userInfo->last_name }}</h3>
-                        </a>
+                        <h3>{{ $userInfo->first_name . ' ' . $userInfo->last_name }}</h3>
                         <span><img src="images/clock.png"
                                 alt="">{{ $post->getCreatedAtAttribute($post->created_at) }}</span>
                     </div>
                 </div>
-
-                <div class="ed-opts">
-                    <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-                    <ul class="ed-options">
-                        <li><a href="{{ route('post.edit', $post) }}" class="" title="">Edit Post</a></li>
-                        <li><a href="{{ url('post/destroy/' . $post->id) }}" title="">Delete</a></li>
-                    </ul>
-                </div>
+                @if ($user->id == Auth::user()->id)
+                    <div class="ed-opts">
+                        <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+                        <ul class="ed-options">
+                            <li><a href="{{ route('post.edit', $post) }}" class="" title="">Edit Post</a></li>
+                            <li><a href="{{ url('post/destroy/' . $post->id) }}" title="">Delete</a></li>
+                        </ul>
+                    </div>
+                @endif
             </div>
             <div class="epi-sec">
                 <ul class="descp">
-                    <li><img src="/images/icon8.png" alt=""><span>{{ $post->user->userInfo->profession }}</span></li>
+                    <li><img src="/images/icon8.png" alt=""><span>{{ $userInfo->profession }}</span></li>
                     <li><img src="/images/icon9.png" alt=""><span>Updated @
                             {{ $post->getUpdatedAtAttribute($post->updated_at) }}</span></li>
                 </ul>
@@ -64,9 +63,7 @@
                     <li>
                         <a href="#" class="com"><i class="fa fa-heart"></i> Like</a>
                     </li>
-                    <li><a class="com" data-toggle="collapse" href="#collapseExample" role="button"
-                            aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-comment-alt"></i>
-                            Comment 15</a></li>
+                    <li><a class="com" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-comment-alt"></i> Comment 15</a></li>
                 </ul>
             </div>
             <div class="comment-section collapse" id="collapseExample">
@@ -82,16 +79,17 @@
                                     <div class="comment">
                                         <div class="row">
                                             <h3>{{ $comments->user->name }}</h3>
-                                            <span class="ml-3 mt-1"><img src="/images/clock.png"
+                                            <span class="ml-3 mt-1"><img src="/images/clock.png" 
                                                     alt="">{{ $comments->created_at->format('d-m-y') }}</span>
                                         </div>
-
+                                        
                                         <p>{{ $comments->comment }}</p>
                                     </div>
                                 </div>
                                 <!--comment-list end-->
                             </li>
                         @endforeach
+
                     </ul>
                 </div>
                 <!--comment-sec end-->
@@ -157,14 +155,14 @@
 
         function embedComment(user, created_at, comment) {
             return `<li>
-                                    <div class="comment-list">
-                                        <div class="comment">
-                                            <h3>${user}</h3>
-                                            <span><img src="images/clock.png" alt=""> ${created_at}</span>
-                                            <p>${comment}</p>
-                                        </div>
-                                    </div>
-                                </li>`;
+                        <div class="comment-list">
+                            <div class="comment">
+                                <h3>${user}</h3>
+                                <span><img src="images/clock.png" alt=""> ${created_at}</span>
+                                <p>${comment}</p>
+                            </div>
+                        </div>
+                    </li>`;
         }
         //    document.addEventListener("DOMContentLoaded", e => {
         //         post_comment.addEventListener("click", e => {

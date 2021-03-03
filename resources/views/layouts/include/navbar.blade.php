@@ -35,13 +35,12 @@
 						</a>
 					</li> -->
 					<li>
-						<a href="profiles.html" title="">
+						<a href="/profile/{{Auth::user()->id}}" title="">
 							<span><img src="/images/icon4.png" alt=""></span>
 							Profiles
 						</a>
 						<ul>
-							<li><a href="user-profile.html" title="">User Profile</a></li>
-							<li><a href="my-profile-feed.html" title="">my-profile-feed</a></li>
+							<li><a href="/profile/{{Auth::user()->id}}" title="">User Profile</a></li>
 						</ul>
 					</li>
 					<li>

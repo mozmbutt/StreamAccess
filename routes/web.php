@@ -5,6 +5,7 @@ use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ThreadController;
@@ -100,5 +101,8 @@ Route::post('/channelAdded', [ThreadController::class, 'store']);
 Route::post('/threadAdded', [ThreadController::class, 'store']);
 
 Route::get('/forum', [ThreadController::class, 'index']);
+Route::get('/profile/{id}', [ProfileController::class, 'index']);
 
 Route::get('/replies', [ReplyController::class, 'replies']);
+Route::get('/follow/{id}', [ProfileController::class, 'follow']);
+
