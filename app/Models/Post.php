@@ -22,6 +22,10 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    public function postLike()
+    {
+        return $this->hasMany(Postlike::class);
+    }
     
     public function getCreatedAtAttribute($timestamp) {
         return Carbon::parse($timestamp)->format('M d, Y');

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Follow;
 use App\Models\Post;
+use App\Models\Postlike;
 use App\Models\Tag;
 use App\Models\Thread;
 use App\Models\UserInfo;
@@ -21,11 +23,12 @@ class PageController extends Controller
                 ->where('profession', Auth::user()->userInfo->profession)
                 ->get();
             $posts = Post::wherein('user_id', $userIds)->orderByDesc('created_at')->get();
-            return view('index', ['tags' => $tags, 'posts' => $posts]);
+            $followingCount = count(Follow::where('follower_id', Auth::user()->id)->get());
+            $followerCount = count(Follow::where('following_id', Auth::user()->id)->get());
+            return view('index', ['tags' => $tags, 'posts' => $posts, 'followingCount' => $followingCount, 'followerCount' => $followerCount]);
         } else {
             $threads = Thread::all();
-            return view('forum',['threads' => $threads]);
+            return view('forum', ['threads' => $threads]);
         }
     }
-
 }

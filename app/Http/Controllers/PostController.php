@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Postlike;
 use App\Models\PostTag;
 use App\Models\Tag;
 use Carbon\Carbon;
@@ -148,5 +149,18 @@ class PostController extends Controller
         Post::find($post_id)->delete();
         
         return redirect('/');
+    }
+    public function likes($user_id,$post_id){
+        $postLike = Postlike::where('user_id',$user_id)->where('post_id',$post_id)->first();
+        if ($postLike) {
+            $postLike->delete();
+            return response()->json(['msg' => ' Like'], 200);
+        } else {
+            $postLike = new Postlike();
+            $postLike->user_id = Auth::user()->id;
+            $postLike->post_id = $post_id;
+            $postLike->save();
+            return response()->json(['msg' => ' Liked'], 200);
+        }
     }
 }

@@ -8,19 +8,22 @@
         </div>
         <!--username-dt end-->
         <div class="user-specs">
-            <h3>{{ Auth::user()->userInfo->first_name }}</h3>
+            <a href="/profile/{{ Auth::user()->id }}">
+                <h3>{{ Auth::user()->userInfo->first_name }}</h3>
+
+            </a>
             <span>{{ Auth::user()->userInfo->profession }}</span>
         </div>
     </div>
     <!--user-profile end-->
     <ul class="user-fw-status">
         <li>
-            <h4>Following</h4>
-            <span>2</span>
+            <h4><a href="">Following</a></h4>
+            <span>{{ $followingCount }}</span>
         </li>
         <li>
-            <h4>Followers</h4>
-            <span>5M</span>
+            <h4> <a href="">Followers</a> </h4>
+            <span>{{ $followerCount }}</span>
         </li>
         <li>
             <a href="http://www.gambolthemes.net/workwise-new/my-profile.html" title="">View Profile</a>

@@ -62,11 +62,36 @@
             <div class="job-status-bar">
                 <ul class="like-com">
                     <li>
-                        <a href="#" class="com"><i class="fa fa-heart"></i> Like</a>
+                        <a href="javascript:void(0);" id="like{{ $post->id }}" class="com" @if ($post->postLike->first())  @foreach ($post->postLike as $likes)
+                            @if ($likes->user_id == Auth::user()->id)
+                                class="com btn btn-danger"
+                                @break
+                            @else
+                                class="com btn btn-default" @endif
+                            @endforeach
+                        @else
+                            Like
+                            @endif onclick="liked(event)"
+                            data-postId="{{ $post->id }}" data-userId="{{ Auth::user()->id }}"><i
+                                class="fa fa-heart"></i>
+                            @if ($post->postLike->first())
+                                @foreach ($post->postLike as $likes)
+                                    @if ($likes->user_id == Auth::user()->id)
+                                        Liked
+                                        @break
+                                    @else
+                                        Like
+                                    @endif
+                                @endforeach
+                            @else
+                                Like
+                            @endif
+
+                        </a>
                     </li>
                     <li><a class="com" data-toggle="collapse" href="#collapseExample" role="button"
                             aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-comment-alt"></i>
-                            Comment 15</a></li>
+                            Comments</a></li>
                 </ul>
             </div>
             <div class="comment-section collapse" id="collapseExample">
@@ -157,39 +182,36 @@
 
         function embedComment(user, created_at, comment) {
             return `<li>
-                                    <div class="comment-list">
-                                        <div class="comment">
-                                            <h3>${user}</h3>
-                                            <span><img src="images/clock.png" alt=""> ${created_at}</span>
-                                            <p>${comment}</p>
-                                        </div>
-                                    </div>
-                                </li>`;
+                        <div class="comment-list">
+                            <div class="comment">
+                                <h3>${user}</h3>
+                                <span><img src="images/clock.png" alt=""> ${created_at}</span>
+                                <p>${comment}</p>
+                            </div>
+                        </div>
+                    </li>`;
         }
-        //    document.addEventListener("DOMContentLoaded", e => {
-        //         post_comment.addEventListener("click", e => {
-        //             e.preventDefault();
-        //             const post_id = parseInt(post_comment.getAttribute("post_id"));
-        //             const comment = post_comment.getAttribute("comment");
-        //             console.log(post_id);
-        //             (function($){
-        //                 $.ajax({
-        //                     url: `http://127.0.0.1:8000/comment.store`,
-        //                     method: "POST",
-        //                     data: {
-        //                         _token: "{{ csrf_token() }}",
-        //                         post_id: post_id
-        //                         comment: comment
-        //                     },
-        //                     success: _r => {
-        //                         }
-        //                         // console.log(_r);
-        //                         // response = JSON.parse(_r);
-        //                     }
-        //                 })
-        //             })(jQuery);
-        //         })
-        //     })
+
+    </script>
+@endsection
+@section('like')
+    <script>
+        function liked(event) {
+            var like = $(event.target);
+            $(like).toggleClass('btn-default btn-danger');
+            $(like).children('i').addClass('fa fa-heart');
+
+            //$(this).text($(this).text() == 'Follow' ? 'Following' : 'Follow');
+            var user_id = $(like).attr('data-userId');
+            var post_id = $(like).attr('data-postId');
+            axios.get(`/like/${user_id}/${post_id}`)
+                .then(response => {
+                    $(like).text(response.data.msg);
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
 
     </script>
 @endsection

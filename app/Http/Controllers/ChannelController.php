@@ -16,7 +16,7 @@ class ChannelController extends Controller
     public function index()
     {
         $channels = Channel::all();
-        return view('Channel.index' , compact('channels'));
+        return view('Admin.Read.channel' , ['channels' => $channels]);
     }
 
     public function manage()
@@ -32,7 +32,8 @@ class ChannelController extends Controller
      */
     public function create()
     {
-        return view('Channel.create');
+
+        return view('Admin.Create.channel');
     }
 
     /**
@@ -43,17 +44,18 @@ class ChannelController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         //$channel_data = $request->all();
-        $this->validate($request, [
-            'title' => 'required',
-            'slug' => 'required'
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255'
         ]);
         
         $channel = new Channel();
-        $channel->name = $request->title;
+        $channel->name = $request->name;
         $channel->slug = $request->slug;
         $channel->save();
-        return redirect('/admin');
+        return $this->index();
     }
 
     /**
@@ -75,7 +77,8 @@ class ChannelController extends Controller
      */
     public function edit(Channel $channel)
     {
-        return view('Channel.update' , compact('channel'));
+        $channel_to_update = Channel::where('id' , $channel->id)->first();
+        return view('Admin.Update.channel' , ['channel'=> $channel_to_update]);
     }
 
     /**
@@ -87,10 +90,16 @@ class ChannelController extends Controller
      */
     public function update(Request $request, Channel $channel)
     {
-        $channel->name = Arr::get($request , 'title');
-        $channel->slug = Arr::get($request , 'slug');
-        $channel->save();
-        return redirect('/manageChannels');
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+        ]);
+        
+        $channel->name = $request->name;
+        $channel->slug = $request->slug;
+
+        $channel->update();
+        return redirect("channel");
     }
 
     /**
@@ -101,7 +110,13 @@ class ChannelController extends Controller
      */
     public function destroy(Channel $channel)
     {
+        //
+    }
+
+    public function delete($id)
+    {
+        $channel = Channel::findOrFail($id);
         $channel->delete();
-        return redirect('/channel/manage');
+        return redirect("channel");
     }
 }

@@ -20,12 +20,14 @@ class ProfileController extends Controller
             $userInfo = UserInfo::where('user_id', $user->id)->first();
             $tags = Tag::all();
             $posts = Post::where('user_id', $user_id)->orderByDesc('created_at')->get();
-            if (Follow::where('following_id', $user_id)->first()) {
+            $followingCount = count(Follow::where('follower_id', Auth::user()->id)->get());
+            $followerCount = count(Follow::where('following_id', Auth::user()->id)->get());
+            if (Follow::where('following_id', $user_id)->where('follower_id', Auth::user()->id)->first()) {
                 $text = "Following";
             } else {
                 $text = "Follow";
             }
-            return view('profile', ['user' => $user, 'userInfo' => $userInfo, 'tags' => $tags, 'posts' => $posts, 'text' => $text]);
+            return view('profile', ['user' => $user, 'userInfo' => $userInfo, 'tags' => $tags, 'posts' => $posts, 'text' => $text, 'followingCount' => $followingCount, 'followerCount' => $followerCount]);
         }
     }
 

@@ -17,7 +17,9 @@
                         src="{{ asset($userInfo->display_picture ? 'storage/' . $userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}"
                         alt="">
                     <div class="usy-name">
-                        <h3>{{ $userInfo->first_name . ' ' . $userInfo->last_name }}</h3>
+                        <a href="">
+                            <h3>{{ $userInfo->first_name . ' ' . $userInfo->last_name }}</h3>
+                        </a>
                         <span><img src="images/clock.png"
                                 alt="">{{ $post->getCreatedAtAttribute($post->created_at) }}</span>
                     </div>
@@ -63,7 +65,9 @@
                     <li>
                         <a href="#" class="com"><i class="fa fa-heart"></i> Like</a>
                     </li>
-                    <li><a class="com" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-comment-alt"></i> Comment 15</a></li>
+                    <li><a class="com" data-toggle="collapse" href="#collapseExample" role="button"
+                            aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-comment-alt"></i>
+                            Comments</a></li>
                 </ul>
             </div>
             <div class="comment-section collapse" id="collapseExample">
@@ -79,10 +83,10 @@
                                     <div class="comment">
                                         <div class="row">
                                             <h3>{{ $comments->user->name }}</h3>
-                                            <span class="ml-3 mt-1"><img src="/images/clock.png" 
+                                            <span class="ml-3 mt-1"><img src="/images/clock.png"
                                                     alt="">{{ $comments->created_at->format('d-m-y') }}</span>
                                         </div>
-                                        
+
                                         <p>{{ $comments->comment }}</p>
                                     </div>
                                 </div>
@@ -155,14 +159,14 @@
 
         function embedComment(user, created_at, comment) {
             return `<li>
-                        <div class="comment-list">
-                            <div class="comment">
-                                <h3>${user}</h3>
-                                <span><img src="images/clock.png" alt=""> ${created_at}</span>
-                                <p>${comment}</p>
-                            </div>
-                        </div>
-                    </li>`;
+                                    <div class="comment-list">
+                                        <div class="comment">
+                                            <h3>${user}</h3>
+                                            <span><img src="images/clock.png" alt=""> ${created_at}</span>
+                                            <p>${comment}</p>
+                                        </div>
+                                    </div>
+                                </li>`;
         }
         //    document.addEventListener("DOMContentLoaded", e => {
         //         post_comment.addEventListener("click", e => {

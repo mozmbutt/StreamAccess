@@ -66,6 +66,7 @@ Route::get('/profile-setting', function () {
     return view('Admin.Update.profile-account-setting');
 });
 Route::get('/professional-profile-setting/{id}', [RegisteredUserController::class, 'pofessionalProfileSetting']);
+Route::get('/profile/{id}', [ProfileController::class, 'index']);
 
 Route::get('/viewPendingAccounts', [RequestController::class, 'index']);
 
@@ -87,23 +88,29 @@ Route::prefix('api')->group(function () {
     Route::get('/get-all-users', [RegisteredUserController::class, 'getAllUsers']);
 });
 
-Route::get('/addChannel', function () {
-    return view('Channel.create');
-});
+//following followers
+Route::get('/follow/{id}', [ProfileController::class, 'follow']);
+Route::get('/like/{user_id}/{post_id}', [PostController::class, 'likes']);
 
-Route::get('/allChannel',  [ChannelController::class, 'index']);
-Route::get('/manageChannels', [ChannelController::class, 'manage']);
+//forum
+Route::get('/forum', [ThreadController::class, 'index']);
+
+//channel routes
+// Route::get('/addChannel', function () {
+//     return view('Admin.Create.channel');
+// });
 Route::resource('/channel', ChannelController::class);
+Route::get('channelDelete/{id}', [ChannelController::class, 'delete']);
+
+// Route::get('/allChannel',  [ChannelController::class, 'index']);
+// Route::get('/manageChannels', [ChannelController::class, 'manage']);
 
 Route::get('/ask', [ThreadController::class, 'create']);
 
-Route::post('/channelAdded', [ChannelController::class, 'store']);
+// Route::post('/channelAdded', [ChannelController::class, 'store']);
 
-Route::get('/forum', [ThreadController::class, 'index']);
-Route::get('/profile/{id}', [ProfileController::class, 'index']);
 
 Route::get('/replies', [ReplyController::class, 'replies']);
-Route::get('/follow/{id}', [ProfileController::class, 'follow']);
 
 Route::resource('thread', ThreadController::class);
 
