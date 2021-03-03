@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -113,4 +114,5 @@ Route::get('/ask', [ThreadController::class, 'create']);
 Route::get('/replies', [ReplyController::class, 'replies']);
 
 Route::resource('thread', ThreadController::class);
+Route::get('/followings',[FollowController::class,'followingIndex']);
 

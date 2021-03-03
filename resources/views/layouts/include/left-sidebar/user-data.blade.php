@@ -18,11 +18,11 @@
     <!--user-profile end-->
     <ul class="user-fw-status">
         <li>
-            <h4><a href="">Following</a></h4>
+            <h4><a href="/followings">Following</a></h4>
             <span>{{ $followingCount }}</span>
         </li>
         <li>
-            <h4> <a href="">Followers</a> </h4>
+            <h4> <a href="/followers">Followers</a> </h4>
             <span>{{ $followerCount }}</span>
         </li>
         <li>
