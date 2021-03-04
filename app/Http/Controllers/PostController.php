@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follow;
 use App\Models\Post;
 use App\Models\Postlike;
 use App\Models\PostTag;
@@ -94,11 +95,12 @@ class PostController extends Controller
     {
         $postTags = PostTag::select('tag_id')->where('post_id', $post->id)->get();
         $tags = Tag::find($postTags);
-        
 
-        Log::info($tags);
+        $followingCount = count(Follow::where('follower_id', Auth::user()->id)->get());
+        $followerCount = count(Follow::where('following_id', Auth::user()->id)->get());
 
-        return view('layouts.include.edit-post', ['post' => $post, 'tags' => $tags]);
+
+        return view('layouts.include.edit-post', ['post' => $post, 'tags' => $tags, 'followingCount' => $followingCount, 'followerCount' => $followerCount]);
     }
 
     /**
@@ -145,13 +147,14 @@ class PostController extends Controller
      */
     public function destroy($post_id)
     {
-        PostTag::where('post_id' , $post_id)->delete();
+        PostTag::where('post_id', $post_id)->delete();
         Post::find($post_id)->delete();
-        
+
         return redirect('/');
     }
-    public function likes($user_id,$post_id){
-        $postLike = Postlike::where('user_id',$user_id)->where('post_id',$post_id)->first();
+    public function likes($user_id, $post_id)
+    {
+        $postLike = Postlike::where('user_id', $user_id)->where('post_id', $post_id)->first();
         if ($postLike) {
             $postLike->delete();
             return response()->json(['msg' => ' Like'], 200);

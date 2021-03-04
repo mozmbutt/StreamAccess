@@ -20,23 +20,23 @@ class ReplyController extends Controller
     {
         //
     }
-    public function replies(Request $request)
-    {
-        $thread_id = Arr::get($request , 'thread_id');
-        $thread = Thread::find($thread_id);
-        $replies = Reply::where('thread_id' , $thread_id)->get();
-        foreach($replies as $reply) {
-            $reply->likes = unserialize($reply->reacts);
-        }
-        return view('Reply.replies' , compact('thread' , 'replies'));
-    }
+    // public function replies(Request $request)
+    // {
+    //     $thread_id = $request->thread_id;
+    //     $thread = Thread::find($thread_id);
+    //     $replies = Reply::where('thread_id', $thread_id)->get();
+    //     foreach ($replies as $reply) {
+    //         $reply->likes = unserialize($reply->reacts);
+    //     }
+    //     return view('Reply.replies', compact('thread', 'replies'));
+    // }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($thread_id)
     {
         //
     }
@@ -49,16 +49,19 @@ class ReplyController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'reply' => 'required|string|max:255',
+        ]);
         $reply = new Reply();
         $reply->user_id = Auth::user()->id;
-        $reply->thread_id = Arr::get($request , 'thread_id');
-        $reply->body = Arr::get($request , 'body');
+        $reply->thread_id = $request->thread_id;
+        $reply->body = $request->reply;
         $reply->save();
-        $thread = Thread::find(Arr::get($request , 'thread_id'));
-        $replies_count = Reply::where('thread_id' , $thread->id)->count();
-        $thread->replies_count = $replies_count;
-        $thread->save();
-        return redirect()->back();
+        return response()->json([
+            'reply' => $reply->body,
+            'user' => Auth::user()->name,
+            'timestamp' => date_format($reply->created_at,'d-m-Y')
+        ],200);
     }
 
     /**
@@ -80,7 +83,7 @@ class ReplyController extends Controller
      */
     public function edit(Reply $reply)
     {
-        return view('Reply.edit', compact('reply'));
+        // return view('Reply.edit', compact('reply'));
     }
 
     /**
@@ -92,12 +95,12 @@ class ReplyController extends Controller
      */
     public function update(Request $request, Reply $reply)
     {
-        $reply->body = Arr::get($request , 'body');
-        $reply->save();
-        $thread_id = $reply->thread_id;
-        $thread = Thread::find($thread_id);
-        $replies = Reply::where('thread_id' , $thread_id)->get();
-        return view('Reply.reply' , compact('thread' , 'replies'));
+        // $reply->body = $request->body;
+        // $reply->save();
+        // $thread_id = $reply->thread_id;
+        // $thread = Thread::find($thread_id);
+        // $replies = Reply::where('thread_id', $thread_id)->get();
+        // return view('Reply.reply', compact('thread', 'replies'));
     }
 
     /**
@@ -108,30 +111,30 @@ class ReplyController extends Controller
      */
     public function destroy(Reply $reply)
     {
-        $reply->forceDelete();
-        $thread_id = $reply->thread_id;
-        $thread = Thread::find($thread_id);
-        $replies = Reply::where('thread_id' , $thread_id)->get();
-        return view('Reply.reply' , compact('thread' , 'replies'));
+        // $reply->delete();
+        // $thread_id = $reply->thread_id;
+        // $thread = Thread::find($thread_id);
+        // $replies = Reply::where('thread_id', $thread_id)->get();
+        // return view('Reply.reply', compact('thread', 'replies'));
     }
 
-    public function like($reply_id)
-    {
-        $reply = Reply::where("id", (int) $reply_id)->first();
-        $status = (bool) request()->status;
-        $reacts = unserialize($reply->reacts);
+    // public function like($reply_id)
+    // {
+    //     $reply = Reply::where("id", (int) $reply_id)->first();
+    //     $status = (bool) request()->status;
+    //     $reacts = unserialize($reply->reacts);
 
-        if(!$status) {
-            // Like
-            $reacts[$reply_id][] = Auth::user()->id;
-            $reply->reacts = serialize($reacts);
-            $reply->save();
-        } else {
-            // Unlike
-            unset($reacts[$reply->id][array_search(Auth::user()->id, $reacts[$reply->id])]);
-            $reply->reacts = serialize($reacts);
-            $reply->save();
-        }
-        echo json_encode($reply);
-    }
+    //     if (!$status) {
+    //         // Like
+    //         $reacts[$reply_id][] = Auth::user()->id;
+    //         $reply->reacts = serialize($reacts);
+    //         $reply->save();
+    //     } else {
+    //         // Unlike
+    //         unset($reacts[$reply->id][array_search(Auth::user()->id, $reacts[$reply->id])]);
+    //         $reply->reacts = serialize($reacts);
+    //         $reply->save();
+    //     }
+    //     echo json_encode($reply);
+    // }
 }

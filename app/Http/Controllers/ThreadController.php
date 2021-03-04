@@ -19,18 +19,18 @@ class ThreadController extends Controller
     public function index()
     {
         $threads = Thread::all();
-        $by = isset($_GET['by']) ? $_GET['by'] : null;
+        // $by = isset($_GET['by']) ? $_GET['by'] : null;
         $popular = isset($_GET['popular']) ? $_GET['popular'] : null;
         $unanswered = isset($_GET['unanswered']) ? $_GET['unanswered'] : null;
 
-        if (isset($by)) {
-            $threads = Thread::where('user_id', auth()->id())->get();
-        } elseif (isset($popular)) {
+        if (isset($popular)) {
             $threads = Thread::all()->sortByDesc('replies_count');
         } elseif ($unanswered) {
             $threads = Thread::where('replies_count', 0)->get();
         }
-        return view('forum', ['threads' => $threads]);
+        $channels = Channel::all();
+        
+        return view('forum', ['threads' => $threads , 'channels' => $channels]);
     }
 
     /**
@@ -42,7 +42,7 @@ class ThreadController extends Controller
     {
         $channels = Channel::all();
         if (Auth::user()) {
-            return view('ask', ['channels' => $channels]);
+            return view('Thread.ask', ['channels' => $channels]);
         } else {
             return view('auth.login');
         }
@@ -56,20 +56,20 @@ class ThreadController extends Controller
      */
     public function store(Request $request)
     {
-        $thread_data = $request->all();
-        $this->validate($request, [
+        $request->validate($request, [
             'title' => 'required',
             'body' => 'required'
         ]);
 
         $thread = new Thread();
         $thread->user_id = Auth::user()->id;
-        $thread->channel_id = Arr::get($thread_data, 'channel_id');
-        $thread->title = Arr::get($thread_data, 'title');
-        $thread->body = Arr::get($thread_data, 'body');
+        $thread->channel_id = $request->channel_id;
+        $thread->title = $request->title;
+        $thread->body =$request->body;
         $thread->save();
+
         $threads = Thread::where('user_id', Auth::user()->id)->get();
-        return view('forum', ['threads' => $threads]);
+        return view('thread.index');
     }
 
     /**

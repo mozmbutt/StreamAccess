@@ -111,8 +111,11 @@ Route::get('/ask', [ThreadController::class, 'create']);
 // Route::post('/channelAdded', [ChannelController::class, 'store']);
 
 
+// Route::resource('reply', [ReplyController::class]);
 Route::get('/replies', [ReplyController::class, 'replies']);
 
-Route::resource('thread', ThreadController::class);
-Route::get('/followings',[FollowController::class,'followingIndex']);
 
+
+Route::resource('thread', ThreadController::class);
+Route::get('/followings', [FollowController::class, 'followingIndex']);
+Route::post('/reply/store', [ReplyController::class, 'store']);

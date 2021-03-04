@@ -84,6 +84,7 @@
 	@yield('postscomment')
 	@yield('follow')
 	@yield('like')
+	@yield('threadsreply')
 </body>
 
 </html>

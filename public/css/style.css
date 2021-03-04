@@ -1763,7 +1763,7 @@ main {
 .comment_box {
     float: none;
 }
-.comment_box input {
+.comment_box input  {
     width: 340px;
     height: 40px;
     border: 1px solid #e5e5e5;
@@ -1774,6 +1774,9 @@ main {
     font-weight: 600;
     line-height: 40px;
     resize: none;
+}
+#reply_box input{
+    width: 84%;
 }
 .comment_box form button {
     float: right;
@@ -5219,9 +5222,13 @@ a:hover {
 }
 .usr_quest > h3 {
     color: #000000;
-    font-size: 17px;
+    font-size: 30px;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
+}
+.usr_quest > h5 {
+    font-size: 12pt;
+    margin-bottom: 8px;
 }
 .forum-post-view .usr_quest > h3 {
     margin-bottom: 10px;
@@ -5262,6 +5269,16 @@ a:hover {
     margin-right: 10px;
 }
 .quest-tags li a {
+    display: inline-block;
+    color: #ffffff;
+    background-color: #53d690;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    padding: 7px 25px;
+}.quest-tags li form button {
     display: inline-block;
     color: #ffffff;
     background-color: #53d690;

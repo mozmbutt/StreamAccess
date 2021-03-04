@@ -5,7 +5,7 @@
             <div class="forum-links">
                 <ul>
                     <li><a href="/forum" title="">Latest</a></li>
-                    <li class="active"><a href="/ask" title="">Ask</a></li>
+                    <li class="active"><a href="{{ route('thread.create') }}" title="">Ask</a></li>
                     <li><a href="#" title="">Treading</a></li>
                     <li><a href="#" title="">Popular This Week</a></li>
                     <li><a href="#" title="">Popular of Month</a></li>

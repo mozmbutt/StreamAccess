@@ -4,11 +4,10 @@
         <div class="container">
             <div class="forum-links">
                 <ul>
-                    <li class="active"><a href="#" title="">Latest</a></li>
-                    <li><a href="/ask" title="">Ask</a></li>
-                    <li><a href="#" title="">Treading</a></li>
-                    <li><a href="#" title="">Popular This Week</a></li>
-                    <li><a href="#" title="">Popular of Month</a></li>
+                    <li><a href="{{ route('thread.create') }}" title="">Ask</a></li>
+                    <li class="active"><a href="{{ route('thread.index') }}" title="">All</a></li>
+                    <li><a href="{{ route('thread.index') }}?unanswered=1" title="">Unanswered</a></li>
+                    <li><a href="{{ route('thread.index') }}?popular=1" title="">Popular</a></li>
                 </ul>
             </div>
             <!--forum-links end-->
@@ -27,62 +26,81 @@
                             <div class="forum-questions">
                                 <div class="usr-question">
                                     <div class="usr_img">
-                                        <img src="images/resources/usrr-img1.png" alt="">
+                                        <img src="images/logo-light.png" alt="">
                                     </div>
                                     <div class="usr_quest">
                                         <h3>{{ $thread->title }}</h3>
-                                        <span class="quest-posted-time"><i class="fa fa-clock-o"></i>3 min
-                                            ago</span>
-                                        Posted by <a href="#">{{User::find($thread->user_id)->name }}</a>
+                                        <h5>{{ $thread->body }}</h5>
+                                        <ul class="react-links">
+                                            <li><a title="" data-toggle="collapse" href="#collapsereply" role="button"
+                                                    aria-expanded="false" aria-controls="collapsereply"><i
+                                                        class="fas fa-heart"></i>
+                                                    {{ Str::plural('reply', $thread->replies_count) }} </a></li>
+                                            <li><i class="fas fa-user"></i> <span>Posted By: </span><a
+                                                    href="/profile/{{ $thread->user_id }}"
+                                                    title="">{{ $thread->user->name }}</a></li>
+                                            {{-- <li><a href="#" title=""><i class="fas fa-eye"></i> Views  50</a></li> --}}
+                                        </ul>
                                         @if (Auth::user())
                                             @if (Auth::user()->id === $thread->user_id)
                                                 <div class="epi-sec ">
-                                                    <ul class="bk-links">
-                                                        <li> <a href="{{ route('thread.edit', ['thread' => $thread]) }}"><i
-                                                                    class="la la-edit"></i></a></li>
-                                                        {{-- <li><a href="{{ route('thread.destroy', ['thread' => $thread]) }}"
-                                                                title=""><i class="la la-trash"></i></a></li> --}}
+                                                    <ul class="quest-tags">
+                                                        <li><a href="{{ route('thread.edit', ['thread' => $thread]) }}"
+                                                                title="">Edit</a></li>
                                                         <li>
                                                             <form method="POST"
                                                                 action="{{ route('thread.destroy', ['thread' => $thread]) }}">
                                                                 @method('DELETE')
                                                                 @csrf
-                                                                <button type="submit">
-                                                                    <i class="la la-trash"></i>
+                                                                <button class="" type="submit">Delete
                                                                 </button>
                                                             </form>
                                                         </li>
+                                                        {{-- <li><a href="{{ url('/reply/create',['thread_id'=>$thread->id]) }}" title="">Reply</a></li> --}}
                                                     </ul>
                                                 </div>
                                             @endif
-                                            <div class='body mt-2'>
-                                                <p>{{ $thread->body }}</p>
-                                            </div>
-                                            <div>
-                                                <strong>
-                                                    <a href='#'>{{ $thread->replies_count }}
-                                                        {{ Str::plural('reply', $thread->replies_count) }}</a>
-                                                </strong>
-                                            </div>
-                                            <form method="GET" action="{{ url('/replies') }}">
-                                                @csrf
-                                                <input type="hidden" name="thread_id" value="{{ $thread->id }}">
-                                                <button class="reply-st" type="submit">
-                                                    Add Reply
-                                                </button>
-                                            </form>
-                                        @else
-                                            <a href='/login'>Log In</a>
                                         @endif
-                                        {{-- <ul class="react-links">
-                                        <li><a href="#" title=""><i class="fas fa-heart"></i> Vote 150</a></li>
-                                        <li><a href="#" title=""><i class="fas fa-comment-alt"></i> Comments 15</a></li>
-                                        <li><a href="#" title=""><i class="fas fa-eye"></i> Views 50</a></li>
-                                    </ul> --}}
-
                                     </div>
                                     <!--usr_quest end-->
-
+                                    <span class="quest-posted-time"><i
+                                            class="fa fa-calendar"></i>{{ $thread->created_at->format('d-m-y') }}</span>
+                                </div>
+                                <div class="comment-section collapse" id="collapsereply">
+                                    <div class="comment_sec">
+                                        <ul>
+                                            @foreach ($thread->reply as $replies)
+                                                <li>
+                                                    <div class="comment-list">
+                                                        <div class="comment">
+                                                            <div class="row">
+                                                                <h3>{{ $replies->body }}</h3>
+                                                                <span class="ml-3 mt-1"><img src="/images/clock.png"
+                                                                        alt="">{{ $replies->created_at->format('d-m-y') }}</span>
+                                                            </div>
+                                                            <p><i class="fas fa-user"></i> <span>Posted By: </span><a
+                                                                href="/profile/{{ $replies->user_id }}"
+                                                                title="">{{ $replies->user->name }}</a></p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    <div class="post-comment">
+                                        <div class="cm_img">
+                                            <img src="{{ asset(Auth::user()->userInfo->display_picture ? 'storage/' . Auth::user()->userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}"
+                                                alt="">
+                                        </div>
+                                        <div class="comment_box" id="reply_box">
+                                            <form action="{{ url('/reply/store') }}" method="POST" id="commentForm">
+                                                @csrf
+                                                <input type="hidden" class="thread_id" name="thread_id" value="{{ $thread->id }}">
+                                                <input type="text" class="reply " name="reply" placeholder="Post a reply">
+                                                <button type="button" onclick="buttonClick(event)">Reply</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--usr-question end-->
                             </div>
@@ -97,58 +115,24 @@
                         <div class="widget widget-user">
                             <h3 class="title-wd">Channels</h3>
                             <ul>
-                                <li>
-                                    <div class="usr-msg-details">
-                                        <div class="usr-ms-img">
-                                            <img src="images/resources/m-img1.png" alt="">
+                                @foreach ($channels as $channel)
+                                    <li>
+                                        <div class="usr-msg-details">
+                                            <div class="usr-ms-img">
+                                                <img src="images/logo-light.png" alt="">
+                                            </div>
+                                            <div class="usr-mg-info">
+                                                <a href="">
+                                                    <h3>{{ $channel->name }}</h3>
+                                                </a>
+                                                <p>{{ $channel->slug }}</p>
+                                            </div>
+                                            <!--usr-mg-info end-->
                                         </div>
-                                        <div class="usr-mg-info">
-                                            <h3>Jessica William</h3>
-                                            <p>Graphic Designer </p>
-                                        </div>
-                                        <!--usr-mg-info end-->
-                                    </div>
-                                    <span><img src="images/price1.png" alt="">1185</span>
-                                </li>
-                                <li>
-                                    <div class="usr-msg-details">
-                                        <div class="usr-ms-img">
-                                            <img src="images/resources/m-img2.png" alt="">
-                                        </div>
-                                        <div class="usr-mg-info">
-                                            <h3>John Doe</h3>
-                                            <p>PHP Developer</p>
-                                        </div>
-                                        <!--usr-mg-info end-->
-                                    </div>
-                                    <span><img src="images/price2.png" alt="">1165</span>
-                                </li>
-                                <li>
-                                    <div class="usr-msg-details">
-                                        <div class="usr-ms-img">
-                                            <img src="images/resources/m-img3.png" alt="">
-                                        </div>
-                                        <div class="usr-mg-info">
-                                            <h3>Poonam</h3>
-                                            <p>Wordpress Developer </p>
-                                        </div>
-                                        <!--usr-mg-info end-->
-                                    </div>
-                                    <span><img src="images/price3.png" alt="">1120</span>
-                                </li>
-                                <li>
-                                    <div class="usr-msg-details">
-                                        <div class="usr-ms-img">
-                                            <img src="images/resources/m-img4.png" alt="">
-                                        </div>
-                                        <div class="usr-mg-info">
-                                            <h3>Bill Gates</h3>
-                                            <p>C & C++ Developer </p>
-                                        </div>
-                                        <!--usr-mg-info end-->
-                                    </div>
-                                    <span><img src="images/price4.png" alt="">1009</span>
-                                </li>
+                                        <span><img src="images/price1.png" alt="">1185</span>
+                                    </li>
+                                @endforeach
+
                             </ul>
                         </div>
                         <!--widget-user end-->
@@ -177,4 +161,46 @@
         </div>
         <!--overview-edit end-->
     </div>
+@endsection
+@section('threadsreply')
+    <script>
+        function buttonClick(event) {
+            let thread_id = $(event.target).siblings('input.thread_id').get(0).value;
+            let reply = $(event.target).siblings('input.reply').get(0);
+            let csrfToken = $(event.target).siblings().get(0).value;
+
+            const data = {
+                _token: csrfToken,
+                thread_id: thread_id,
+                reply: reply.value
+            }
+            axios.post(`/reply/store`, data)
+                .then((response) => {
+                    let reply_thread = $(reply).get(0);
+                    
+                    reply_thread.value = '';
+                    let comment_sec = $(reply_thread).parent().parent().parent().siblings().get(0);
+                    $($(comment_sec).find('ul').get(0)).append(embedreply(response.data.user, response.data.timestamp,
+                        response.data.reply));
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            // const post_id = $('#post_id');
+            // console.log(post_id); 
+        }
+
+        function embedreply(user, created_at, reply) {
+            return `<li>
+                        <div class="comment-list">
+                            <div class="comment">
+                                <h3>${reply}</h3>
+                                <span><img src="images/clock.png" alt=""> ${created_at}</span>
+                                <p>${user}</p>
+                            </div>
+                        </div>
+                    </li>`;
+        }
+
+    </script>
 @endsection

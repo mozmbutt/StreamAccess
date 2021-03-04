@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Channel;
 use App\Models\Comment;
 use App\Models\Follow;
 use App\Models\Post;
@@ -27,8 +28,10 @@ class PageController extends Controller
             $followerCount = count(Follow::where('following_id', Auth::user()->id)->get());
             return view('index', ['tags' => $tags, 'posts' => $posts, 'followingCount' => $followingCount, 'followerCount' => $followerCount]);
         } else {
-            $threads = Thread::all();
-            return view('forum', ['threads' => $threads]);
+            return redirect('thread');
+            // $threads = Thread::all();
+            // $channels = Channel::all();
+            // return view('forum', ['threads' => $threads]);
         }
     }
 }

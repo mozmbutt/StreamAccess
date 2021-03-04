@@ -24,7 +24,7 @@
                                 alt="">{{ $post->getCreatedAtAttribute($post->created_at) }}</span>
                     </div>
                 </div>
-
+                @if ($post->user->id == Auth::user()->id)
                 <div class="ed-opts">
                     <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
                     <ul class="ed-options">
@@ -32,6 +32,7 @@
                         <li><a href="{{ url('post/destroy/' . $post->id) }}" title="">Delete</a></li>
                     </ul>
                 </div>
+                @endif
             </div>
             <div class="epi-sec">
                 <ul class="descp">
