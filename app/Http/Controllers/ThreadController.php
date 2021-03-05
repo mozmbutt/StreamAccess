@@ -32,6 +32,14 @@ class ThreadController extends Controller
         
         return view('forum', ['threads' => $threads , 'channels' => $channels]);
     }
+    public function filter($channel_id)
+    {
+        $threads = Thread::where('channel_id',$channel_id)->get();
+        $channels = Channel::all();
+        
+        return view('forum', ['threads' => $threads , 'channels' => $channels]);
+
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -105,7 +113,7 @@ class ThreadController extends Controller
         $thread->body = Arr::get($request, 'body');
         $thread->save();
         $threads = Thread::where('user_id', Auth::user()->id)->get();
-        return view('forum', ['threads' => $threads]);
+        return redirect('/forum');
     }
 
     /**

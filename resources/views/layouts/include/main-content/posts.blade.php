@@ -25,13 +25,13 @@
                     </div>
                 </div>
                 @if ($post->user->id == Auth::user()->id)
-                <div class="ed-opts">
-                    <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-                    <ul class="ed-options">
-                        <li><a href="{{ route('post.edit', $post) }}" class="" title="">Edit Post</a></li>
-                        <li><a href="{{ url('post/destroy/' . $post->id) }}" title="">Delete</a></li>
-                    </ul>
-                </div>
+                    <div class="ed-opts">
+                        <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+                        <ul class="ed-options">
+                            <li><a href="{{ route('post.edit', $post) }}" class="" title="">Edit Post</a></li>
+                            <li><a href="{{ url('post/destroy/' . $post->id) }}" title="">Delete</a></li>
+                        </ul>
+                    </div>
                 @endif
             </div>
             <div class="epi-sec">
@@ -90,21 +90,19 @@
 
                         </a>
                     </li>
-                    <li><a class="com" data-toggle="collapse" href="#collapseExample" role="button"
+                    <li><a class="com" data-toggle="collapse" href="#collapsecomment{{ $post->id }}" role="button"
                             aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-comment-alt"></i>
                             Comments</a></li>
                 </ul>
             </div>
-            <div class="comment-section collapse" id="collapseExample">
+            <div class="comment-section collapse" id="collapsecomment{{ $post->id }}">
                 <div class="comment-sec">
                     <ul>
                         @foreach ($post->comment as $comments)
                             {{-- {{dd($comments->user)}} --}}
                             <li>
                                 <div class="comment-list">
-                                    {{-- <div class="bg-img">
-                                    <img src="{{ asset($comments->user->userInfo->display_picture ? 'storage/'. $comments->user->userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}" alt="">
-                                </div> --}}
+
                                     <div class="comment">
                                         <div class="row">
                                             <h3>{{ $comments->user->name }}</h3>
@@ -116,6 +114,15 @@
                                     </div>
                                 </div>
                                 <!--comment-list end-->
+                            </li>
+                            <li>
+                                <div class="comment-list">
+                                    <div class="comment">
+                                        <h3>${user}</h3>
+                                        <span><img src="images/clock.png" alt=""> ${created_at}</span>
+                                        <p>${comment}</p>
+                                    </div>
+                                </div>
                             </li>
                         @endforeach
                     </ul>
@@ -171,6 +178,7 @@
                     let comment_post = $(comment).get(0);
                     comment_post.value = '';
                     let comment_sec = $(comment_post).parent().parent().parent().siblings().get(0);
+                    console.log(comment_sec);
                     $($(comment_sec).find('ul').get(0)).append(embedComment(response.data.user, response.data.timestamp,
                         response.data.comment));
                 })
@@ -183,19 +191,19 @@
 
         function embedComment(user, created_at, comment) {
             return `<li>
-                        <div class="comment-list">
-                            <div class="comment">
-                                <h3>${user}</h3>
-                                <span><img src="images/clock.png" alt=""> ${created_at}</span>
-                                <p>${comment}</p>
+                            <div class="comment-list">
+                                <div class="comment">
+                                    <h3>${user}</h3>
+                                    <span><img src="images/clock.png" alt=""> ${created_at}</span>
+                                    <p>${comment}</p>
+                                </div>
                             </div>
-                        </div>
-                    </li>`;
+                        </li>`;
         }
 
     </script>
 @endsection
-@section('like')
+@section('post-like')
     <script>
         function liked(event) {
             var like = $(event.target);
@@ -205,7 +213,7 @@
             //$(this).text($(this).text() == 'Follow' ? 'Following' : 'Follow');
             var user_id = $(like).attr('data-userId');
             var post_id = $(like).attr('data-postId');
-            axios.get(`/like/${user_id}/${post_id}`)
+            axios.get(`/postlike/${user_id}/${post_id}`)
                 .then(response => {
                     $(like).text(response.data.msg);
                 })

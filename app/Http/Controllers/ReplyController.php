@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reply;
+use App\Models\ReplyLike;
 use App\Models\Thread;
 use COM;
 use Illuminate\Http\Request;
@@ -57,9 +58,16 @@ class ReplyController extends Controller
         $reply->thread_id = $request->thread_id;
         $reply->body = $request->reply;
         $reply->save();
+
+        $thread = Thread::find($request->thread_id);
+        $replyies_count = $thread->reply_count;
+        $replyies_count++;
+        $thread->save();
         return response()->json([
             'reply' => $reply->body,
             'user' => Auth::user()->name,
+            'auth_user_id' => Auth::user()->id,
+            'reply_user_id' => $reply->user_id,
             'timestamp' => date_format($reply->created_at,'d-m-Y')
         ],200);
     }
@@ -116,6 +124,24 @@ class ReplyController extends Controller
         // $thread = Thread::find($thread_id);
         // $replies = Reply::where('thread_id', $thread_id)->get();
         // return view('Reply.reply', compact('thread', 'replies'));
+    }
+    public function delete($id){
+        Reply::find($id)->delete();
+        return redirect('/forum');
+    }
+    public function likes($user_id, $reply_id)
+    {
+        $replyLike = ReplyLike::where('user_id', $user_id)->where('reply_id', $reply_id)->first();
+        if ($replyLike) {
+            $replyLike->delete();
+            return response()->json(['msg' => ' Like'], 200);
+        } else {
+            $replyLike = new ReplyLike();
+            $replyLike->user_id = Auth::user()->id;
+            $replyLike->reply_id = $reply_id;
+            $replyLike->save();
+            return response()->json(['msg' => ' Liked'], 200);
+        }
     }
 
     // public function like($reply_id)
