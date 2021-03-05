@@ -10,10 +10,7 @@
                     <li><a href="{{ route('thread.index') }}?popular=1" title="">Popular</a></li>
                 </ul>
             </div>
-            <!--forum-links end-->
-            <div class="forum-links-btn">
-                <a href="#" title=""><i class="fa fa-bars"></i></a>
-            </div>
+            
         </div>
     </section>
 
@@ -144,30 +141,15 @@
 
                             </ul>
                         </div>
-                        <!--widget-user end-->
-                        
                     </div>
                 </div>
             </div>
             <!--forum-questions-sec end-->
         </div>
     </section>
-    <!--forum-page end-->
-    <div class="overview-box" id="question-box">
-        <div class="overview-edit">
-            <h3>Ask a Question</h3>
-            <form>
-                <input type="text" name="question" placeholder="Type Question Here">
-                <input type="text" name="tags" placeholder="Tags">
-                <textarea placeholder="Description"></textarea>
-                <button type="submit" class="save">Submit</button>
-                <button type="submit" class="cancel">Cancel</button>
-            </form>
-            <a href="#" title="" class="close-box"><i class="la la-close"></i></a>
-        </div>
-        <!--overview-edit end-->
-    </div>
+
 @endsection
+
 @section('threadsreply')
 <script>
     function buttonClick(event) {

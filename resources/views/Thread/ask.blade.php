@@ -4,101 +4,108 @@
         <div class="container">
             <div class="forum-links">
                 <ul>
-                    <li><a href="/forum" title="">Latest</a></li>
                     <li class="active"><a href="{{ route('thread.create') }}" title="">Ask</a></li>
-                    <li><a href="#" title="">Treading</a></li>
-                    <li><a href="#" title="">Popular This Week</a></li>
-                    <li><a href="#" title="">Popular of Month</a></li>
+                    <li><a href="{{ route('thread.index') }}" title="">All</a></li>
+                    <li><a href="{{ route('thread.index') }}?unanswered=1" title="">Unanswered</a></li>
+                    <li><a href="{{ route('thread.index') }}?popular=1" title="">Popular</a></li>
                 </ul>
-            </div>
-            <!--forum-links end-->
-            <div class="forum-links-btn">
-                <a href="#" title=""><i class="fa fa-bars"></i></a>
             </div>
         </div>
     </section>
 
-    <!<section class="forum-page">
-        <form method="POST" action="{{ route('thread.store') }}">
-            @csrf
+    <section class="forum-page">
+        <div class="container">
+            <div class="forum-questions-sec">
+                <div class="row">
+                    <div class="col-lg-8 card ">
+                        <div class="card-header mt-2">
+                            Ask you question ...
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" action="{{ route('thread.store') }}">
+                                @csrf
+                    
+                                <!-- Channel -->
+                                <div>
+                                    {{-- <label for='channel_id'>Choose a Channel:</label> --}}
+                                    <select name='channel_id' id='channel_id' class='form-control mt-2' required>
+                                        <option value=''>Choose Channel</option>
+                                        @foreach ($channels as $channel)
+                                            <!-- associate channel id and remember selected channel -->
+                                            <option value="{{ $channel->id }} {{ old('channel_id') == $channel->id ? 'selected' : '' }}">
+                                                {{ $channel->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                    
+                                <!-- Title -->
+                                <div class="mt-2">
+                                    {{-- <label for='title'>Title:</label> --}}
+                                    <input type='text' class='form-control' name='title' placeholder="Title of query ..." value="{{ old('title') }}" required>
+                                </div>
+                    
+                                <!-- Body -->
+                                <div class="mt-2">
+                                    {{-- <label for='body'>Body:</label> --}}
+                                    <textarea name='body' id='body' class='form-control' placeholder="Type your query ..." rows='8' required>{{ old('body') }}</textarea>
+                                </div>
+                    
+                                <!-- Submit -->
+                                <div class="mt-2 card">
+                                    <button type='submit' class='btn btn-primary'>Publish</button>
+                                </div>
+                    
+                                @if (count($errors))
+                                    <ul class='alert alert-danger'>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                    
+                            </form>
+                        </div>
+                      
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="widget widget-user">
+                            <h3 class="title-wd">Channels</h3>
+                            <ul>
+                                @foreach ($channels as $channel)
+                                    <li>
+                                        <div class="usr-msg-details">
+                                            <div class="usr-ms-img">
+                                                <img src="{{ asset('images/logo-light.png') }}  " alt="">
+                                            </div>
+                                            <div class="usr-mg-info">
+                                                <a href="">
+                                                    <h3>{{ $channel->name }}</h3>
+                                                </a>
+                                                <p>{{ $channel->slug }}</p>
+                                            </div>
+                                            <!--usr-mg-info end-->
+                                        </div>
+                                        <span><img src="{{ asset('images/price1.png') }}" alt="">1185</span>
+                                    </li>
+                                @endforeach
 
-            <!-- Channel -->
-            <div>
-                <label for='channel_id'>Choose a Channel:</label>
-                <select name='channel_id' id='channel_id' class='form-control' required>
-                    <option value=''>Choose one</option>
-                    @foreach ($channels as $channel)
-                        <!-- associate channel id and remember selected channel -->
-                        <option value="{{ $channel->id }} {{ old('channel_id') == $channel->id ? 'selected' : '' }}">
-                            {{ $channel->name }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-            <!-- Title -->
-            <div>
-                <label for='title'>Title:</label>
-                <input type='text' class='form-control' name='title' value="{{ old('title') }}" required>
-            </div>
-
-            <!-- Body -->
-            <div class="mt-4">
-                <label for='body'>Body:</label>
-                <textarea name='body' id='body' class='form-control' rows='8' required>{{ old('body') }}</textarea>
-            </div>
-
-            <!-- Submit -->
-            <div class="mt-4">
-                <button type='submit' class='btn btn-primary'>Publish</button>
-            </div>
-
-            @if (count($errors))
-                <ul class='alert alert-danger'>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            @endif
-
-        </form>
-        </section>
-        <!--forum-page end-->
-
-        <footer>
-            <div class="footy-sec mn" style="position:static; bottom:0px;">
-                <div class="container">
-                    <ul>
-                        <li><a href="help-center.html" title="">Help Center</a></li>
-                        <li><a href="about.html" title="">About</a></li>
-                        <li><a href="#" title="">Privacy Policy</a></li>
-                        <li><a href="#" title="">Community Guidelines</a></li>
-                        <li><a href="#" title="">Cookies Policy</a></li>
-                        <li><a href="#" title="">Career</a></li>
-                        <li><a href="forum.html" title="">Forum</a></li>
-                        <li><a href="#" title="">Language</a></li>
-                        <li><a href="#" title="">Copyright Policy</a></li>
-                    </ul>
-                    <p><img src="images/copy-icon2.png" alt="">Copyright 2019</p>
-                    <img class="fl-rgt" src="images/logo2.png" alt="">
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </footer>
-
-
-        <div class="overview-box" id="question-box">
-            <div class="overview-edit">
-                <h3>Ask a Question</h3>
-                <form>
-                    <input type="text" name="question" placeholder="Type Question Here">
-                    <input type="text" name="tags" placeholder="Tags">
-                    <textarea placeholder="Description"></textarea>
-                    <button type="submit" class="save">Submit</button>
-                    <button type="submit" class="cancel">Cancel</button>
-                </form>
-                <a href="#" title="" class="close-box"><i class="la la-close"></i></a>
-            </div>
-            <!--overview-edit end-->
+            <!--forum-questions-sec end-->
         </div>
-        <!--overview-box end-->
-    @endsection
+    </section>
+
+    <footer>
+        <div class="footy-sec mn" style="position:static; bottom:0px;">
+            <div class="container">
+                <p><img src="images/copy-icon2.png" alt="">Copyright 2019 - Stream Access</p>
+                <img class="fl-rgt" src="images/logo2.png" alt="">
+            </div>
+        </div>
+    </footer>
+
+@endsection
