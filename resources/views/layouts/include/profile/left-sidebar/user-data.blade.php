@@ -22,6 +22,15 @@
                         </li>
                     </ul>
                 </div>
+            @else
+            <div class="button">
+                <ul>
+                    <li><a id="gopro"
+                            class="mt-2 btn btn-primary"
+                            href="/gopro" data-item="{{ $user->id }}">Go Pro</a>
+                    </li>
+                </ul>
+            </div>
             @endif
         </div>
     </div>

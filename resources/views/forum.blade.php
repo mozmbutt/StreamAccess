@@ -69,33 +69,42 @@
                                 <div class="comment-section collapse" id="collapsereply">
                                     <div class="comment_sec">
                                         <ul>
-                                            @foreach ($thread->reply as $replies)
-                                                <li>
-                                                    <div class="comment-list">
-                                                        <div class="comment">
-                                                            <div class="row">
-                                                                <h3>{{ $replies->body }}</h3>
-                                                                <span class="ml-3 mt-1"><img src="/images/clock.png"
-                                                                        alt="">{{ $replies->created_at->format('d-m-y') }}</span>
+                                            @if ($thread->reply)
+                                                @foreach ($thread->reply as $replies)
+                                                    <li>
+                                                        <div class="comment-list">
+                                                            <div class="comment">
+                                                                <div class="row">
+                                                                    <h3>{{ $replies->body }}</h3>
+                                                                    <span class="ml-5"><img src="/images/clock.png"
+                                                                            alt="">{{ $replies->created_at->format('d-m-y') }}</span>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <i class="fas fa-user"></i> Posted By:<a
+                                                                        href="/profile/{{ $replies->user_id }}"
+                                                                        title=""><span
+                                                                            class="mt-1">{{ $replies->user->name }}</span></a></span>
+                                                                </div>
+
                                                             </div>
-                                                            <p><i class="fas fa-user"></i> <span>Posted By: </span><a
-                                                                href="/profile/{{ $replies->user_id }}"
-                                                                title="">{{ $replies->user->name }}</a></p>
+
                                                         </div>
-                                                    </div>
-                                                </li>
-                                            @endforeach
+                                                    </li>
+                                                @endforeach
+                                            @endif
+
                                         </ul>
                                     </div>
                                     <div class="post-comment">
-                                        <div class="cm_img">
+                                        {{-- <div class="cm_img">
                                             <img src="{{ asset(Auth::user()->userInfo->display_picture ? 'storage/' . Auth::user()->userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}"
                                                 alt="">
-                                        </div>
+                                        </div> --}}
                                         <div class="comment_box" id="reply_box">
                                             <form action="{{ url('/reply/store') }}" method="POST" id="commentForm">
                                                 @csrf
-                                                <input type="hidden" class="thread_id" name="thread_id" value="{{ $thread->id }}">
+                                                <input type="hidden" class="thread_id" name="thread_id"
+                                                    value="{{ $thread->id }}">
                                                 <input type="text" class="reply " name="reply" placeholder="Post a reply">
                                                 <button type="button" onclick="buttonClick(event)">Reply</button>
                                             </form>
@@ -136,10 +145,7 @@
                             </ul>
                         </div>
                         <!--widget-user end-->
-                        <div class="widget widget-adver">
-                            <img src="images/resources/adver-img.png" alt="">
-                        </div>
-                        <!--widget-adver end-->
+                        
                     </div>
                 </div>
             </div>
@@ -163,35 +169,35 @@
     </div>
 @endsection
 @section('threadsreply')
-    <script>
-        function buttonClick(event) {
-            let thread_id = $(event.target).siblings('input.thread_id').get(0).value;
-            let reply = $(event.target).siblings('input.reply').get(0);
-            let csrfToken = $(event.target).siblings().get(0).value;
+<script>
+    function buttonClick(event) {
+        let thread_id = $(event.target).siblings('input.thread_id').get(0).value;
+        let reply = $(event.target).siblings('input.reply').get(0);
+        let csrfToken = $(event.target).siblings().get(0).value;
 
-            const data = {
-                _token: csrfToken,
-                thread_id: thread_id,
-                reply: reply.value
-            }
-            axios.post(`/reply/store`, data)
-                .then((response) => {
-                    let reply_thread = $(reply).get(0);
-                    
-                    reply_thread.value = '';
-                    let comment_sec = $(reply_thread).parent().parent().parent().siblings().get(0);
-                    $($(comment_sec).find('ul').get(0)).append(embedreply(response.data.user, response.data.timestamp,
-                        response.data.reply));
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-            // const post_id = $('#post_id');
-            // console.log(post_id); 
+        const data = {
+            _token: csrfToken,
+            thread_id: thread_id,
+            reply: reply.value
         }
+        axios.post(`/reply/store`, data)
+            .then((response) => {
+                let reply_thread = $(reply).get(0);
 
-        function embedreply(user, created_at, reply) {
-            return `<li>
+                reply_thread.value = '';
+                let comment_sec = $(reply_thread).parent().parent().parent().siblings().get(0);
+                $($(comment_sec).find('ul').get(0)).append(embedreply(response.data.user, response.data.timestamp,
+                    response.data.reply));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        // const post_id = $('#post_id');
+        // console.log(post_id); 
+    }
+
+    function embedreply(user, created_at, reply) {
+        return `<li>
                         <div class="comment-list">
                             <div class="comment">
                                 <h3>${reply}</h3>
@@ -200,7 +206,7 @@
                             </div>
                         </div>
                     </li>`;
-        }
+    }
 
-    </script>
+</script>
 @endsection

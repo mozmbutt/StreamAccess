@@ -56,7 +56,7 @@ class ThreadController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate($request, [
+        $request->validate([
             'title' => 'required',
             'body' => 'required'
         ]);
@@ -67,9 +67,7 @@ class ThreadController extends Controller
         $thread->title = $request->title;
         $thread->body =$request->body;
         $thread->save();
-
-        $threads = Thread::where('user_id', Auth::user()->id)->get();
-        return view('thread.index');
+        return redirect('forum');
     }
 
     /**
@@ -120,6 +118,6 @@ class ThreadController extends Controller
     {
         $thread->delete();
         $threads = Thread::where('user_id', Auth::user()->id)->get();
-        return view('forum', ['threads' => $threads]);
+        return redirect('forum');
     }
 }

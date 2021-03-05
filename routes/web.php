@@ -119,3 +119,4 @@ Route::get('/replies', [ReplyController::class, 'replies']);
 Route::resource('thread', ThreadController::class);
 Route::get('/followings', [FollowController::class, 'followingIndex']);
 Route::post('/reply/store', [ReplyController::class, 'store']);
+Route::get('gopro',[ProfileController::class,'gopro']);

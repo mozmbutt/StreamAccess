@@ -29,6 +29,9 @@ class ProfileController extends Controller
             }
             return view('profile', ['user' => $user, 'userInfo' => $userInfo, 'tags' => $tags, 'posts' => $posts, 'text' => $text, 'followingCount' => $followingCount, 'followerCount' => $followerCount]);
         }
+        else{
+            return redirect('login');
+        }
     }
 
     public function follow($following_id)
@@ -45,4 +48,8 @@ class ProfileController extends Controller
             return response()->json(['msg' => 'Following'], 200);
         }
     }
+    public function gopro(){
+        return view('layouts.include.gopro');
+    }
+
 }

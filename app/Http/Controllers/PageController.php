@@ -29,9 +29,6 @@ class PageController extends Controller
             return view('index', ['tags' => $tags, 'posts' => $posts, 'followingCount' => $followingCount, 'followerCount' => $followerCount]);
         } else {
             return redirect('thread');
-            // $threads = Thread::all();
-            // $channels = Channel::all();
-            // return view('forum', ['threads' => $threads]);
         }
     }
 }
