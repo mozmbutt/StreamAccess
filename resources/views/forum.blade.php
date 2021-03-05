@@ -32,8 +32,8 @@
                                         <h3>{{ $thread->title }}</h3>
                                         <h5>{{ $thread->body }}</h5>
                                         <ul class="react-links">
-                                            <li><a title="" data-toggle="collapse" href="#collapsereply" role="button"
-                                                    aria-expanded="false" aria-controls="collapsereply"><i
+                                            <li><a title="" data-toggle="collapse" href="#collapsereply{{ $thread->id }}"
+                                                    role="button" aria-expanded="false" aria-controls="collapsereply"><i
                                                         class="fas fa-heart"></i>
                                                     {{ Str::plural('reply', $thread->replies_count) }} </a></li>
                                             <li><i class="fas fa-user"></i> <span>Posted By: </span><a
@@ -66,26 +66,59 @@
                                     <span class="quest-posted-time"><i
                                             class="fa fa-calendar"></i>{{ $thread->created_at->format('d-m-y') }}</span>
                                 </div>
-                                <div class="comment-section collapse" id="collapsereply">
+                                <div class="comment-section collapse" id="collapsereply{{ $thread->id }}">
                                     <div class="comment_sec">
                                         <ul>
                                             @if ($thread->reply)
-                                                @foreach ($thread->reply as $replies)
+                                                @foreach ($thread->reply as $reply)
                                                     <li>
                                                         <div class="comment-list">
                                                             <div class="comment">
                                                                 <div class="row">
-                                                                    <h3>{{ $replies->body }}</h3>
-                                                                    <span class="ml-5"><img src="/images/clock.png"
-                                                                            alt="">{{ $replies->created_at->format('d-m-y') }}</span>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <i class="fas fa-user"></i> Posted By:<a
-                                                                        href="/profile/{{ $replies->user_id }}"
-                                                                        title=""><span
-                                                                            class="mt-1">{{ $replies->user->name }}</span></a></span>
-                                                                </div>
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <div class="col-lg-11">
+                                                                            <h3>{{ $reply->body }}</h3>
+                                                                        </div>
+                                                                        <div class="col-lg-1">
+                                                                            @if (Auth::check())
+                                                                                @if ($reply->user->id == Auth::user()->id)
+                                                                                    <div class="ed-opts">
+                                                                                        <a href="#" title=""
+                                                                                            class="ed-opts-open"><i
+                                                                                                class="la la-ellipsis-v"></i></a>
+                                                                                        <ul class="ed-options">
+                                                                                            <li><a href="" class=""
+                                                                                                    title="">Edit
+                                                                                                    reply</a></li>
+                                                                                            <li>
+                                                                                                <form method="POST"
+                                                                                                    action="{{ url('/reply/delete', ['id' => $reply->id]) }}">
+                                                                                                    @csrf
+                                                                                                    <button type="submit">
+                                                                                                        Delete
+                                                                                                    </button>
+                                                                                                </form>
+                                                                                                {{-- <a href="" title="">Delete</a> --}}
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                @endif
+                                                                            @endif
 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row col-lg-12 d-flex align-items-center">
+
+                                                                    <p class="mr-1">Replied By:</p><a
+                                                                        href="/profile/{{ $reply->user_id }}" title=""><span
+                                                                            class="mt-1">{{ $reply->user->name }}</span></a>
+
+                                                                </div>
+                                                                <div class="row col-lg-12">
+                                                                    <span class=""><img src="/images/clock.png"
+                                                                            alt="">{{ $reply->created_at->format('d-m-y') }}</span>
+                                                                </div>
                                                             </div>
 
                                                         </div>
@@ -95,21 +128,25 @@
 
                                         </ul>
                                     </div>
-                                    <div class="post-comment">
-                                        {{-- <div class="cm_img">
+                                    @if (Auth::check())
+                                        <div class="post-comment">
+                                            {{-- <div class="cm_img">
                                             <img src="{{ asset(Auth::user()->userInfo->display_picture ? 'storage/' . Auth::user()->userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}"
                                                 alt="">
                                         </div> --}}
-                                        <div class="comment_box" id="reply_box">
-                                            <form action="{{ url('/reply/store') }}" method="POST" id="commentForm">
-                                                @csrf
-                                                <input type="hidden" class="thread_id" name="thread_id"
-                                                    value="{{ $thread->id }}">
-                                                <input type="text" class="reply " name="reply" placeholder="Post a reply">
-                                                <button type="button" onclick="buttonClick(event)">Reply</button>
-                                            </form>
+                                            <div class="comment_box" id="reply_box">
+                                                <form action="{{ url('/reply/store') }}" method="POST" id="commentForm">
+                                                    @csrf
+                                                    <input type="hidden" class="thread_id" name="thread_id"
+                                                        value="{{ $thread->id }}">
+                                                    <input type="text" class="reply " name="reply" placeholder="Post a reply">
+                                                    <button type="button" onclick="buttonClick(event)">Reply</button>
+                                                </form>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @else
+                                        <p>login to reply <a href="{{ route('login') }}">Login</a> </p>
+                                    @endif
                                 </div>
                                 <!--usr-question end-->
                             </div>
@@ -131,7 +168,7 @@
                                                 <img src="images/logo-light.png" alt="">
                                             </div>
                                             <div class="usr-mg-info">
-                                                <a href="">
+                                                <a href="{{ url('forum', ['id' =>$channel->id]) }}">
                                                     <h3>{{ $channel->name }}</h3>
                                                 </a>
                                                 <p>{{ $channel->slug }}</p>
@@ -145,7 +182,7 @@
                             </ul>
                         </div>
                         <!--widget-user end-->
-                        
+
                     </div>
                 </div>
             </div>
@@ -186,8 +223,9 @@
 
                 reply_thread.value = '';
                 let comment_sec = $(reply_thread).parent().parent().parent().siblings().get(0);
+                console.log(response.data.reply_user_id);
                 $($(comment_sec).find('ul').get(0)).append(embedreply(response.data.user, response.data.timestamp,
-                    response.data.reply));
+                    response.data.reply, response.data.reply_user_id, response.data.auth_user_id));
             })
             .catch((error) => {
                 console.log(error);
@@ -196,16 +234,43 @@
         // console.log(post_id); 
     }
 
-    function embedreply(user, created_at, reply) {
+    function embedreply(user, created_at, reply, reply_user_id, auth_user_id) {
         return `<li>
-                        <div class="comment-list">
-                            <div class="comment">
-                                <h3>${reply}</h3>
-                                <span><img src="images/clock.png" alt=""> ${created_at}</span>
-                                <p>${user}</p>
-                            </div>
-                        </div>
-                    </li>`;
+                                <div class="comment-list">
+                                    <div class="comment">
+                                        <div class="row">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="col-lg-11">
+                                                    <h3>${reply}</h3>
+                                                </div>
+                                                <div class="col-lg-1">
+                                                    @if (`
+        $ {
+            reply_user_id
+        } == $ {
+            auth_user_id
+        }
+        `)
+                                                        <div class="ed-opts">
+                                                            <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+                                                            <ul class="ed-options">
+                                                                <li><a href="" class="" title="">Edit reply</a></li>
+                                                                <li><a href="" title="">Delete</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row col-lg-12 d-flex align-items-center">
+                                            <p class="mr-1">Replied By:</p><a href="/profile/${reply_user_id}"><span class="mt-1">${user}</span></a>
+                                        </div>
+                                        <div class="row col-lg-12">
+                                            <span><img src="/images/clock.png" alt=""> ${created_at}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>`;
     }
 
 </script>

@@ -28,7 +28,7 @@ class PageController extends Controller
             $followerCount = count(Follow::where('following_id', Auth::user()->id)->get());
             return view('index', ['tags' => $tags, 'posts' => $posts, 'followingCount' => $followingCount, 'followerCount' => $followerCount]);
         } else {
-            return redirect('thread');
+            return redirect('forum');
         }
     }
 }

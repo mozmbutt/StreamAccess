@@ -91,7 +91,8 @@ Route::prefix('api')->group(function () {
 
 //following followers
 Route::get('/follow/{id}', [ProfileController::class, 'follow']);
-Route::get('/like/{user_id}/{post_id}', [PostController::class, 'likes']);
+Route::get('/postlike/{user_id}/{post_id}', [PostController::class, 'likes']);
+Route::get('/replylike/{user_id}/{reply_id}', [ReplyController::class, 'likes']);
 
 //forum
 Route::get('/forum', [ThreadController::class, 'index']);
@@ -114,9 +115,10 @@ Route::get('/ask', [ThreadController::class, 'create']);
 // Route::resource('reply', [ReplyController::class]);
 Route::get('/replies', [ReplyController::class, 'replies']);
 
-
+Route::get('/forum/{id}',[ThreadController::class,'filter']);
 
 Route::resource('thread', ThreadController::class);
 Route::get('/followings', [FollowController::class, 'followingIndex']);
 Route::post('/reply/store', [ReplyController::class, 'store']);
+Route::post('/reply/delete/{id}', [ReplyController::class, 'delete']);
 Route::get('gopro',[ProfileController::class,'gopro']);
