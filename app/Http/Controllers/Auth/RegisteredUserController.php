@@ -72,6 +72,7 @@ class RegisteredUserController extends Controller
         $userInfo->first_name = $request->firstname;
         $userInfo->last_name = $request->lastname;
         $userInfo->profession = $request->profession;
+        $userInfo->address = $request->address;
         $userInfo->save();
 
         if ($request->role == 'professional') {

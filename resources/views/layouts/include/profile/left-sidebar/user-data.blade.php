@@ -23,14 +23,16 @@
                     </ul>
                 </div>
             @else
-            <div class="button">
-                <ul>
-                    <li><a id="gopro"
-                            class="mt-2 btn btn-primary"
-                            href="/gopro" data-item="{{ $user->id }}">Go Pro</a>
-                    </li>
-                </ul>
-            </div>
+                @if (Auth::user()->role == 'customer')
+                    <div class="button">
+                        <ul>
+                            <li><a id="gopro"
+                                    class="mt-2 btn btn-primary"
+                                    href="/gopro" data-item="{{ $user->id }}">Go Pro</a>
+                            </li>
+                        </ul>
+                    </div>
+                @endif
             @endif
         </div>
     </div>

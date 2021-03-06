@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -81,6 +82,11 @@ Route::get('post/destroy/{id}', [PostController::class, 'destroy']);
 Route::resource('post', PostController::class);
 Route::resource('worker', WorkerController::class);
 Route::get('workerDelete/{id}', [WorkerController::class, 'delete']);
+Route::get('all-workers', [WorkerController::class, 'allWorkers']);
+
+Route::get('professionls/{profession}', [ProfileController::class, 'professionsProfile']);
+Route::get('/all-professionls', [ProfileController::class, 'allProfessionals']);
+
 
 Route::resource('comment', CommentController::class);
 //saving firebase token
@@ -122,3 +128,11 @@ Route::get('/followings', [FollowController::class, 'followingIndex']);
 Route::post('/reply/store', [ReplyController::class, 'store']);
 Route::post('/reply/delete/{id}', [ReplyController::class, 'delete']);
 Route::get('gopro',[ProfileController::class,'gopro']);
+
+//job controlling routes
+Route::resource('job', JobController::class);
+Route::get('job/edit/{id}', [JobController::class, 'edit_job']);
+Route::post('job/update/{id}', [JobController::class, 'update_job']);
+Route::get('job/delete/{id}', [JobController::class, 'delete_job']);
+// Route::post('job/filter', [JobController::class, 'filter_job']);
+

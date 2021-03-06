@@ -1,6 +1,6 @@
 <div class="widget widget-jobs">
     <div class="sd-title">
-        <h3>Top Jobs</h3>
+        <h3>Jobs for you</h3>
         <i class="la la-ellipsis-v"></i>
     </div>
     <div class="jobs-list">

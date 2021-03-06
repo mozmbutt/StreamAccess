@@ -1,6 +1,6 @@
 <div class="widget suggestions full-width">
     <div class="sd-title">
-        <h3>Most Viewed People</h3>
+        <h3>People of your profession</h3>
         <i class="la la-ellipsis-v"></i>
     </div>
     <!--sd-title end-->

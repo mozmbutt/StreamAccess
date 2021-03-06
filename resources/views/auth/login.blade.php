@@ -187,7 +187,7 @@
                                                             <option>Select Profession</option>
                                                             <option value="Geek">Geek</option>
                                                             <option value="Doctor">Doctor</option>
-                                                            <option value="Laywer">Laywer</option>
+                                                            <option value="Lawyer">Lawyer</option>
                                                             <option value="Islamic Scholor">Islamic Scholor</option>
                                                             <option value="Engineer">Engineer</option>
                                                             <option value="Business">Business</option>
@@ -219,6 +219,7 @@
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
                                                         <input class="pt-2 doc-input" id="metric" type="file" required name="metric">
@@ -269,6 +270,8 @@
                                                         </i>
                                                     </div>
                                                 </div>
+                                                <input type="hidden" name="address" id="address">
+                                                <button id="prof-get-loc">GET MY CURRENT LOCATION</button>
 
                                                 <div class="flex items-center justify-end mt-4">
                                                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
@@ -362,6 +365,12 @@
             $('.doc-input').change(function() {
                 $(this).siblings('i').addClass('text-success');
             });
+            $("#prof-get-loc").on("click", e => {
+                e.preventDefault();
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    $("#address").val(`${position.coords.latitude},${position.coords.longitude}`);
+                });
+            })
         })
     </script>
 </body>

@@ -79,7 +79,7 @@
                                                             <option value="">Select Slug</option>
                                                             <option value="Geek">Geek</option>
                                                             <option value="Doctor">Doctor</option>
-                                                            <option value="Laywer">Laywer</option>
+                                                            <option value="Lawyer">Lawyer</option>
                                                             <option value="Islamic Scholor">Islamic Scholor</option>
                                                             <option value="Engineer">Engineer</option>
                                                             <option value="Business">Business</option>

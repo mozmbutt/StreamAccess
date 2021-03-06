@@ -1,6 +1,6 @@
 <div class="suggestions full-width">
             <div class="sd-title">
-                <h3>Suggestions</h3>
+                <h3>Followings</h3>
                 <i class="la la-ellipsis-v"></i>
             </div>
             <!--sd-title end-->

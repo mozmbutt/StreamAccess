@@ -92,8 +92,9 @@
                                     <div class="cp-field">
                                         <!-- <h5>Address</h5> -->
                                         <div class="cpp-fiel">
-                                            <input type="text" placeholder="Enter Street Address" name="address" value="{{Auth::user()->userInfo->address}}">
+                                            <input type="text" placeholder="Enter Street Address" name="address" id="address" value="{{Auth::user()->userInfo->address}}">
                                             <i class="fa fa-map-marker"></i>
+                                            <button class="cpp-fiel" id="prof-get-loc">GET MY CURRENT LOCATION</button>
                                         </div>
                                     </div>
                                     <div class="save-stngs pd2">
@@ -299,6 +300,12 @@
         $('.doc-input').change(function() {
             $(this).siblings('i').addClass('text-success');
         });
+        $("#prof-get-loc").on("click", e => {
+            e.preventDefault();
+            navigator.geolocation.getCurrentPosition(function(position) {
+                $("#address").val(`${position.coords.latitude},${position.coords.longitude}`);
+            });
+        })
     })
 </script>
 @endsection

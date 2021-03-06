@@ -1,5 +1,13 @@
 @extends('layouts.theme')
 @section('main-content')
+{{-- {{dd($jobs)}} --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style>
+    .filter-fields[type="radio"] {
+        display: inline-block !important;
+    }
+</style>
 <main>
     <div class="main-section">
         <div class="container">
@@ -18,97 +26,58 @@
                                         <h3>Skills</h3>
                                         <a href="#" title="">Clear</a>
                                     </div>
-                                    <form>
-                                        <input type="text" name="search-skills" placeholder="Search skills">
-                                    </form>
-                                </div>
-                                <div class="filter-dd">
-                                    <div class="filter-ttl">
-                                        <h3>Availabilty</h3>
-                                        <a href="#" title="">Clear</a>
-                                    </div>
-                                    <ul class="avail-checks">
-                                        <li>
-                                            <input type="radio" name="cc" id="c1">
-                                            <label for="c1">
-                                                <span></span>
-                                            </label>
-                                            <small>Hourly</small>
-                                        </li>
-                                        <li>
-                                            <input type="radio" name="cc" id="c2">
-                                            <label for="c2">
-                                                <span></span>
-                                            </label>
-                                            <small>Part Time</small>
-                                        </li>
-                                        <li>
-                                            <input type="radio" name="cc" id="c3">
-                                            <label for="c3">
-                                                <span></span>
-                                            </label>
-                                            <small>Full Time</small>
-                                        </li>
-                                    </ul>
+                                    <input type="text" name="search-skills" placeholder="Search skills" class="filter-fields" id="filter-skill">
                                 </div>
                                 <div class="filter-dd">
                                     <div class="filter-ttl">
                                         <h3>Job Type</h3>
                                         <a href="#" title="">Clear</a>
                                     </div>
-                                    <form class="job-tp">
-                                        <select>
-                                            <option>Select a job type</option>
-                                            <option>Select a job type</option>
-                                            <option>Select a job type</option>
-                                            <option>Select a job type</option>
-                                        </select>
-                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                    </form>
-                                </div>
-                                <div class="filter-dd">
-                                    <div class="filter-ttl">
-                                        <h3>Pay Rate / Hr ($)</h3>
-                                        <a href="#" title="">Clear</a>
-                                    </div>
-                                    <!-- <div class="rg-slider">
-                                        <input class="rn-slider slider-input" type="hidden" value="5,50" />
-                                    </div>
-                                    <div class="rg-limit">
-                                        <h4>1</h4>
-                                        <h4>100+</h4>
-                                    </div>S
-                                    rg-limit end -->
+                                    <ul class="avail-checks">
+                                        <li>
+                                            <label for="filter-job-type-part">
+                                                <input type="radio" name="cc" id="filter-job-type-part" class="filter-fields filter-type">
+                                                Part Time 
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label for="filter-job-type-full">
+                                                <input type="radio" name="cc" id="filter-job-type-full" class="filter-fields filter-type">
+                                                Full Time
+                                            </label>
+                                        </li>
+                                    </ul>
                                 </div>
                                 <div class="filter-dd">
                                     <div class="filter-ttl">
                                         <h3>Experience Level</h3>
                                         <a href="#" title="">Clear</a>
                                     </div>
-                                    <form class="job-tp">
-                                        <select>
-                                            <option>Select a experience level</option>
-                                            <option>3 years</option>
-                                            <option>4 years</option>
-                                            <option>5 years</option>
-                                        </select>
-                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                    </form>
+                                    <select class="filter-fields" id="filter-exp">
+                                        <option value="">Select a experience level</option>
+                                        <option value="2">2 years</option>
+                                        <option value="3">3 years</option>
+                                        <option value="4">4 years</option>
+                                    </select>
+                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                 </div>
                                 <div class="filter-dd">
                                     <div class="filter-ttl">
-                                        <h3>Countries</h3>
+                                        <h3>Categories</h3>
                                         <a href="#" title="">Clear</a>
                                     </div>
-                                    <form class="job-tp">
-                                        <select>
-                                            <option>Select a country</option>
-                                            <option>United Kingdom</option>
-                                            <option>United States</option>
-                                            <option>Russia</option>
-                                        </select>
-                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                    </form>
+                                    <select class="filter-fields" id="filter-cat">
+                                        <option value="">Select Profession</option>
+                                        <option value="Geek">Geek</option>
+                                        <option value="Doctor">Doctor</option>
+                                        <option value="Lawyer">Lawyer</option>
+                                        <option value="Islamic Scholor">Islamic Scholor</option>
+                                        <option value="Engineer">Engineer</option>
+                                        <option value="Business">Business</option>
+                                        <option value="Architect">Architect</option>
+                                    </select>
+                                    <input type="hidden" id="logged_in_user_id" value="{{ Auth::user()->id }}">
+                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
@@ -117,248 +86,46 @@
                     <div class="col-lg-6">
                         <div class="main-ws-sec">
                             <div class="posts-section">
-                                <div class="post-bar">
-                                    <div class="post_topbar">
-                                        <div class="usy-dt">
-                                            <img src="images/resources/us-pic.png" alt="">
-                                            <div class="usy-name">
-                                                <h3>John Doe</h3>
-                                                <span><img src="images/clock.png" alt="">3 min ago</span>
-                                            </div>
-                                        </div>
-                                        <div class="ed-opts">
-                                            <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-                                            <ul class="ed-options">
-                                                <li><a href="#" title="">Edit Post</a></li>
-                                                <li><a href="#" title="">Unsaved</a></li>
-                                                <li><a href="#" title="">Unbid</a></li>
-                                                <li><a href="#" title="">Close</a></li>
-                                                <li><a href="#" title="">Hide</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="epi-sec">
-                                        <ul class="descp">
-                                            <li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
-                                            <li><img src="images/icon9.png" alt=""><span>India</span></li>
-                                        </ul>
-                                        <ul class="bk-links">
-                                            <li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-                                            <li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="job_descp">
-                                        <h3>Senior Wordpress Developer</h3>
-                                        <ul class="job-dt">
-                                            <li><a href="#" title="">Full Time</a></li>
-                                            <li><span>$30 / hr</span></li>
-                                        </ul>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna sit amet... <a href="#" title="">view more</a></p>
-                                        <ul class="skill-tags">
-                                            <li><a href="#" title="">HTML</a></li>
-                                            <li><a href="#" title="">PHP</a></li>
-                                            <li><a href="#" title="">CSS</a></li>
-                                            <li><a href="#" title="">Javascript</a></li>
-                                            <li><a href="#" title="">Wordpress</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="job-status-bar">
-                                        <ul class="like-com">
-                                            <li>
-                                                <a href="#" class="active"><i class="fas fa-heart"></i> Like</a>
-                                                <img src="images/liked-img.png" alt="">
-                                                <span>25</span>
-                                            </li>
-                                            <li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comments 15</a></li>
-                                        </ul>
-                                        <a href="#"><i class="fas fa-eye"></i>Views 50</a>
-                                    </div>
-                                </div>
-                                <!--post-bar end-->
-                                <div class="post-bar">
-                                    <div class="post_topbar">
-                                        <div class="usy-dt">
-                                            <img src="images/resources/us-pic.png" alt="">
-                                            <div class="usy-name">
-                                                <h3>John Doe</h3>
-                                                <span><img src="images/clock.png" alt="">3 min ago</span>
-                                            </div>
-                                        </div>
-                                        <div class="ed-opts">
-                                            <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-                                            <ul class="ed-options">
-                                                <li><a href="#" title="">Edit Post</a></li>
-                                                <li><a href="#" title="">Unsaved</a></li>
-                                                <li><a href="#" title="">Unbid</a></li>
-                                                <li><a href="#" title="">Close</a></li>
-                                                <li><a href="#" title="">Hide</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="epi-sec">
-                                        <ul class="descp">
-                                            <li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
-                                            <li><img src="images/icon9.png" alt=""><span>India</span></li>
-                                        </ul>
-                                        <ul class="bk-links">
-                                            <li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-                                            <li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="job_descp">
-                                        <h3>Senior Wordpress Developer</h3>
-                                        <ul class="job-dt">
-                                            <li><a href="#" title="">Full Time</a></li>
-                                            <li><span>$30 / hr</span></li>
-                                        </ul>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna sit amet... <a href="#" title="">view more</a></p>
-                                        <ul class="skill-tags">
-                                            <li><a href="#" title="">HTML</a></li>
-                                            <li><a href="#" title="">PHP</a></li>
-                                            <li><a href="#" title="">CSS</a></li>
-                                            <li><a href="#" title="">Javascript</a></li>
-                                            <li><a href="#" title="">Wordpress</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="job-status-bar">
-                                        <ul class="like-com">
-                                            <li>
-                                                <a href="#" class="active"><i class="fas fa-heart"></i> Like</a>
-                                                <img src="images/liked-img.png" alt="">
-                                                <span>25</span>
-                                            </li>
-                                            <li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comments 15</a></li>
-                                        </ul>
-                                        <a href="#"><i class="fas fa-eye"></i>Views 50</a>
-                                    </div>
-                                </div>
-                                <!--post-bar end-->
-                                <div class="post-bar">
-                                    <div class="post_topbar">
-                                        <div class="usy-dt">
-                                            <img src="images/resources/us-pic.png" alt="">
-                                            <div class="usy-name">
-                                                <h3>John Doe</h3>
-                                                <span><img src="images/clock.png" alt="">3 min ago</span>
-                                            </div>
-                                        </div>
-                                        <div class="ed-opts">
-                                            <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-                                            <ul class="ed-options">
-                                                <li><a href="#" title="">Edit Post</a></li>
-                                                <li><a href="#" title="">Unsaved</a></li>
-                                                <li><a href="#" title="">Unbid</a></li>
-                                                <li><a href="#" title="">Close</a></li>
-                                                <li><a href="#" title="">Hide</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="epi-sec">
-                                        <ul class="descp">
-                                            <li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
-                                            <li><img src="images/icon9.png" alt=""><span>India</span></li>
-                                        </ul>
-                                        <ul class="bk-links">
-                                            <li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-                                            <li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="job_descp">
-                                        <h3>Senior Wordpress Developer</h3>
-                                        <ul class="job-dt">
-                                            <li><a href="#" title="">Full Time</a></li>
-                                            <li><span>$30 / hr</span></li>
-                                        </ul>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna sit amet... <a href="#" title="">view more</a></p>
-                                        <ul class="skill-tags">
-                                            <li><a href="#" title="">HTML</a></li>
-                                            <li><a href="#" title="">PHP</a></li>
-                                            <li><a href="#" title="">CSS</a></li>
-                                            <li><a href="#" title="">Javascript</a></li>
-                                            <li><a href="#" title="">Wordpress</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="job-status-bar">
-                                        <ul class="like-com">
-                                            <li>
-                                                <a href="#" class="active"><i class="fas fa-heart"></i> Like</a>
-                                                <img src="images/liked-img.png" alt="">
-                                                <span>25</span>
-                                            </li>
-                                            <li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comments 15</a></li>
-                                        </ul>
-                                        <a href="#"><i class="fas fa-eye"></i>Views 50</a>
-                                    </div>
-                                </div>
-                                <div class="posty">
-                                    <div class="post-bar no-margin">
+                                @foreach ($jobs as $job)
+                                    <div class="post-bar">
                                         <div class="post_topbar">
                                             <div class="usy-dt">
-                                                <img src="images/resources/us-pc2.png" alt="">
+                                                <img width="45px" src="storage/{{App\Models\UserInfo::where('id' , $job->user_id)->first()->display_picture}}" alt="">
                                                 <div class="usy-name">
-                                                    <h3>John Doe</h3>
-                                                    <span><img src="images/clock.png" alt="">3 min ago</span>
+                                                    <h3>{{App\Models\User::where('id' , $job->user_id)->first()->name}}</h3>
+                                                    <span><img src="images/clock.png" alt="">{{$job->created_at->format('D-M-Y')}}</span>
                                                 </div>
                                             </div>
-                                            <div class="ed-opts">
-                                                <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-                                                <ul class="ed-options">
-                                                    <li><a href="#" title="">Edit Post</a></li>
-                                                    <li><a href="#" title="">Unsaved</a></li>
-                                                    <li><a href="#" title="">Unbid</a></li>
-                                                    <li><a href="#" title="">Close</a></li>
-                                                    <li><a href="#" title="">Hide</a></li>
-                                                </ul>
-                                            </div>
+                                            @if (Auth::user()->id == $job->user_id)
+                                                <div class="ed-opts">
+                                                    <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+                                                    <ul class="ed-options">
+                                                        <li><a href="{{ url('job/edit', ['id' => $job->id]) }}" title="">Edit</a></li>
+                                                        <li><a href="{{ url('job/delete', ['id' => $job->id]) }}" title="">Delete</a></li>
+                                                    </ul>
+                                                </div>
+                                            @endif
+                                            
                                         </div>
                                         <div class="epi-sec">
                                             <ul class="descp">
-                                                <li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
-                                                <li><img src="images/icon9.png" alt=""><span>India</span></li>
-                                            </ul>
-                                            <ul class="bk-links">
-                                                <li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-                                                <li><a href="#" title=""><i class="la la-envelope"></i></a></li>
+                                                <li><img src="images/icon8.png" alt=""><span>{{$job->category}}</span></li>
                                             </ul>
                                         </div>
                                         <div class="job_descp">
-                                            <h3>Senior Wordpress Developer</h3>
+                                            <h3>{{$job->title}}</h3>
                                             <ul class="job-dt">
-                                                <li><a href="#" title="">Full Time</a></li>
-                                                <li><span>$30 / hr</span></li>
+                                                <li><a href="#" title="">{{$job->jobType}}</a></li>
+                                                <li><span>{{$job->budget}}</span></li>
                                             </ul>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna sit amet... <a href="#" title="">view more</a></p>
+                                            <p>{{$job->description}}</p>
                                             <ul class="skill-tags">
-                                                <li><a href="#" title="">HTML</a></li>
-                                                <li><a href="#" title="">PHP</a></li>
-                                                <li><a href="#" title="">CSS</a></li>
-                                                <li><a href="#" title="">Javascript</a></li>
-                                                <li><a href="#" title="">Wordpress</a></li>
+                                                <li><a href="#" title="">Required Experience: {{$job->experience}}</a></li>
                                             </ul>
                                         </div>
-                                        <div class="job-status-bar">
-                                            <ul class="like-com">
-                                                <li>
-                                                    <a href="#" class="active"><i class="fas fa-heart"></i> Like</a>
-                                                    <img src="images/liked-img.png" alt="">
-                                                    <span>25</span>
-                                                </li>
-                                                <li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comments 15</a></li>
-                                            </ul>
-                                            <a href="#"><i class="fas fa-eye"></i>Views 50</a>
-                                        </div>
                                     </div>
-                                    <!--post-bar end-->
-                                </div>
-                                <!--posty end-->
-                                <div class="process-comm">
-                                    <div class="spinner">
-                                        <div class="bounce1"></div>
-                                        <div class="bounce2"></div>
-                                        <div class="bounce3"></div>
-                                    </div>
-                                </div>
-                                <!--process-comm end-->
+                                @endforeach
+
                             </div>
                             <!--posts-section end-->
                         </div>
@@ -367,115 +134,14 @@
                     <div class="col-lg-3">
                         <div class="right-sidebar">
                             <div class="widget widget-about">
-                                <img src="images/wd-logo.png" alt="">
-                                <h3>Track Time on Workwise</h3>
+                                <img src="/images/logo-light.png" alt="" height="125"  width="100">
+                                <h3>Get Jobs on Stream Access</h3>
                                 <span>Pay only for the Hours worked</span>
                                 <div class="sign_link">
-                                    <h3><a href="sign-in.html" title="">Sign up</a></h3>
-                                    <a href="#" title="">Learn More</a>
+                                    <h3><a href="/forum" title="">Forum</a></h3>
+                                    <a href="#" title="">Local Workers</a>
                                 </div>
                             </div>
-                            <!--widget-about end-->
-                            <div class="widget widget-jobs">
-                                <div class="sd-title">
-                                    <h3>Top Jobs</h3>
-                                    <i class="la la-ellipsis-v"></i>
-                                </div>
-                                <div class="jobs-list">
-                                    <div class="job-info">
-                                        <div class="job-details">
-                                            <h3>Senior Product Designer</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                                        </div>
-                                        <div class="hr-rate">
-                                            <span>$25/hr</span>
-                                        </div>
-                                    </div>
-                                    <!--job-info end-->
-                                    <div class="job-info">
-                                        <div class="job-details">
-                                            <h3>Senior UI / UX Designer</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                                        </div>
-                                        <div class="hr-rate">
-                                            <span>$25/hr</span>
-                                        </div>
-                                    </div>
-                                    <!--job-info end-->
-                                    <div class="job-info">
-                                        <div class="job-details">
-                                            <h3>Junior Seo Designer</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                                        </div>
-                                        <div class="hr-rate">
-                                            <span>$25/hr</span>
-                                        </div>
-                                    </div>
-                                    <!--job-info end-->
-                                    <div class="job-info">
-                                        <div class="job-details">
-                                            <h3>Senior PHP Designer</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                                        </div>
-                                        <div class="hr-rate">
-                                            <span>$25/hr</span>
-                                        </div>
-                                    </div>
-                                    <!--job-info end-->
-                                    <div class="job-info">
-                                        <div class="job-details">
-                                            <h3>Senior Developer Designer</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                                        </div>
-                                        <div class="hr-rate">
-                                            <span>$25/hr</span>
-                                        </div>
-                                    </div>
-                                    <!--job-info end-->
-                                </div>
-                                <!--jobs-list end-->
-                            </div>
-                            <!--widget-jobs end-->
-                            <div class="widget widget-jobs">
-                                <div class="sd-title">
-                                    <h3>Most Viewed This Week</h3>
-                                    <i class="la la-ellipsis-v"></i>
-                                </div>
-                                <div class="jobs-list">
-                                    <div class="job-info">
-                                        <div class="job-details">
-                                            <h3>Senior Product Designer</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                                        </div>
-                                        <div class="hr-rate">
-                                            <span>$25/hr</span>
-                                        </div>
-                                    </div>
-                                    <!--job-info end-->
-                                    <div class="job-info">
-                                        <div class="job-details">
-                                            <h3>Senior UI / UX Designer</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                                        </div>
-                                        <div class="hr-rate">
-                                            <span>$25/hr</span>
-                                        </div>
-                                    </div>
-                                    <!--job-info end-->
-                                    <div class="job-info">
-                                        <div class="job-details">
-                                            <h3>Junior Seo Designer</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                                        </div>
-                                        <div class="hr-rate">
-                                            <span>$25/hr</span>
-                                        </div>
-                                    </div>
-                                    <!--job-info end-->
-                                </div>
-                                <!--jobs-list end-->
-                            </div>
-                            <!--widget-jobs end-->
                         </div>
                         <!--right-sidebar end-->
                     </div>
@@ -484,4 +150,99 @@
         </div>
     </div>
 </main>
+<script>
+    (function($) {
+        $(document).ready( () => {
+            const filterFields = $(".filter-fields");
+            filterFields.on("change", e => {
+                const skill = $('#filter-skill').val()
+                let jobType = '';
+                if($('#filter-job-type-part').is(":checked")) {
+                    jobType = "part";
+                } else if ($('#filter-job-type-full').is(":checked")) {
+                    jobType = "full";
+                } else {
+                    jobType = "";
+                }
+                const experience = $("#filter-exp").val();
+                const category = $("#filter-cat").val();
+                const loggedInUserId = $("#logged_in_user_id").val();
+                console.log(
+                    skill,
+                    jobType,
+                    experience,
+                    category
+                )
+
+                $.ajax({
+                    url: "api/job/filter",
+                    type: "GET",
+                    data: {
+                        skill,
+                        jobType,
+                        experience,
+                        category,
+                        loggedInUserId
+                    },
+                    success: res => {
+                        console.log(res);
+                        let html = "";
+                        $.each(res, (index, job) => {
+                            let authHtml = "";
+                            if( job.logged_in_user ) {
+                                authHtml += `
+                                    <div class="ed-opts">
+                                        <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+                                        <ul class="ed-options">
+                                            <li><a href="${job.edit_url}" title="">Edit</a></li>
+                                            <li><a href="{${job.delete_url}" title="">Delete</a></li>
+                                        </ul>
+                                    </div>
+                                `;
+                            }
+
+                            html += `
+                                <div class="post-bar">
+                                    <div class="post_topbar">
+                                        <div class="usy-dt">
+                                            <img width="45px" src="${job.display_picture}" alt="">
+                                            <div class="usy-name">
+                                                <h3>${job.user_name}</h3>
+                                                <span><img src="images/clock.png" alt="">${job.created_at}</span>
+                                            </div>
+                                        </div>
+                                        ${authHtml}
+                                    </div>
+                                    <div class="epi-sec">
+                                        <ul class="descp">
+                                            <li><img src="images/icon8.png" alt=""><span>${job.category}</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="job_descp">
+                                        <h3>${job.title}</h3>
+                                        <ul class="job-dt">
+                                            <li><a href="#" title="">${job.jobType}</a></li>
+                                            <li><span>${job.budget}</span></li>
+                                        </ul>
+                                        <p>{{$job->description}}</p>
+                                        <ul class="skill-tags">
+                                            <li><a href="#" title="">Required Experience: ${job.experience}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            `;
+                        })
+
+                        $(".posts-section").html(html);
+
+                    },
+                    error: err => {
+                        console.log(err);
+                    }
+                })
+
+            })
+        } )
+    })(jQuery);
+</script>
 @endsection

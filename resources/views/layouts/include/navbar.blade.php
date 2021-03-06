@@ -40,16 +40,30 @@
 							Profiles
 						</a>
 						<ul>
-							<li><a href="/profile/{{Auth::user()->id}}" title="">User Profile</a></li>
+							<li><a href="/profile/{{Auth::user()->id}}" title="">My Profile</a></li>
+							<li>
+								<a href="{{ url('/professionls', ['profession' => Auth::user()->userInfo->profession]) }}" title="">
+								All {{Auth::user()->userInfo->profession}}s
+							</a></li>
+							<li>
+								<a href="{{ url('/all-professionls')}}" title="">
+								All Professionals
+							</a></li>
 						</ul>
 					</li>
 					<li>
-						<a href="{{ url('jobs') }}" title="">
+						<a href="/all-workers" title="">
+							<span><img src="/images/icon3.png" alt=""></span>
+							Workers
+						</a>
+					</li>
+					<li>
+						<a href="{{ route('job.index') }}" title="">
 							<span><img src="/images/icon5.png" alt=""></span>
 							Jobs
 						</a>
 					</li>
-					<li>
+					{{-- <li>
 						<a href="#" title="" class="not-box-openm">
 							<span><img src="/images/icon6.png" alt=""></span>
 							Messages
@@ -100,7 +114,7 @@
 							<!--nott-list end-->
 						</div>
 						<!--notification-box end-->
-					</li>
+					</li> --}}
 					<li>
 						<a href="#" title="" class="not-box-open">
 							<span><img src="/images/icon7.png" alt=""></span>

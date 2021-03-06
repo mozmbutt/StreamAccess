@@ -52,4 +52,17 @@ class ProfileController extends Controller
         return view('layouts.include.gopro');
     }
 
+    public function professionsProfile($profession){
+        $professionals = UserInfo::where('profession' , $profession)->get();
+        return view('layouts.include.profile.profiles' , ['professionals' => $professionals , 'profession' => $profession]);
+        
+    }
+
+    public function allProfessionals(){
+        $professionals = User::where('role' , 'professional')
+        ->join('user_infos', 'user_infos.user_id', '=', 'users.id')
+        ->get();
+        return view('layouts.professionals' , ['professionals' => $professionals]);
+        
+    }
 }

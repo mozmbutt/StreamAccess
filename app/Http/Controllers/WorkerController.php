@@ -67,6 +67,12 @@ class WorkerController extends Controller
         //
     }
 
+    public function allWorkers()
+    {
+        $workers = Worker::all();
+        return view('layouts.workers' , ['workers' => $workers]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

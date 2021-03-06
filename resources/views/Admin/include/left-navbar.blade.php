@@ -58,7 +58,6 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('channel.index') }}">All Channels</a></li>
                         <li><a href="{{ route('channel.create') }}">Add New Channel</a></li>
-                        <li><a href="/manageChannels">Manage Channels</a></li>
                     </ul>
                 </li>
 
