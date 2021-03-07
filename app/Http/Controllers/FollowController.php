@@ -19,6 +19,18 @@ class FollowController extends Controller
         $users = UserInfo::wherein('user_id', $userIds)->take(5)->get();
         return view('layouts.include.profile.following', ['userInfos' => $this->getInfo(), 'followingCount' => $followingCount, 'followerCount' => $followerCount, 'userInfo' => null, 'users' => $users]);
     }
+    public function followersIndex()
+    {
+        $followingCount = count(Follow::where('follower_id', Auth::user()->id)->get());
+        $followerCount = count(Follow::where('following_id', Auth::user()->id)->get());
+        $userIds = UserInfo::select('user_id')
+            ->where('profession', Auth::user()->userInfo->profession)
+            ->get();
+            $followerIds = Follow::select('follower_id')->where('following_id', Auth::user()->id)->get();
+        $userInfos =  UserInfo::wherein('user_id', $followerIds)->get();
+        $users = UserInfo::wherein('user_id', $userIds)->take(5)->get();
+        return view('layouts.include.profile.followers', ['userInfos' => $userInfos, 'followingCount' => $followingCount, 'followerCount' => $followerCount, 'userInfo' => null, 'users' => $users]);
+    }
     public function getInfo()
     {
         $followingIds = Follow::select('following_id')->where('follower_id', Auth::user()->id)->get();

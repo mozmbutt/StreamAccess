@@ -122,7 +122,6 @@ Route::get('/replies', [ReplyController::class, 'replies']);
 Route::get('/forum/{id}',[ThreadController::class,'filter']);
 
 Route::resource('thread', ThreadController::class);
-Route::get('/followings', [FollowController::class, 'followingIndex']);
 Route::post('/reply/store', [ReplyController::class, 'store']);
 Route::post('/reply/delete/{id}', [ReplyController::class, 'delete']);
 Route::get('gopro',[ProfileController::class,'gopro']);
@@ -136,4 +135,8 @@ Route::get('job/delete/{id}', [JobController::class, 'delete_job']);
 
 //Search
 Route::post('/search/{url}',[PageController::class,'search']);
+
+Route::get('/followings', [FollowController::class, 'followingIndex']);
+Route::get('/followers', [FollowController::class, 'followersIndex']);
+
 
