@@ -9,7 +9,7 @@
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-status-tab" data-toggle="tab" href="#nav-status" role="tab" aria-controls="nav-status" aria-selected="false"><i class="fa fa-user"></i>Personal Information</a>
                             <a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="false"><i class="fa fa-lock"></i>Change Password</a>
-                            <a class="nav-item nav-link" id="nav-privcy-tab" data-toggle="tab" href="#privcy" role="tab" aria-controls="privacy" aria-selected="false"><i class="fa fa-group"></i>Requests</a>
+                            <a class="nav-item nav-link" id="nav-privcy-tab" data-toggle="tab" href="#privcy" role="tab" aria-controls="privacy" aria-selected="false"><i class="fa fa-group"></i>Followers</a>
                             <a class="nav-item nav-link" id="nav-blockking-tab" data-toggle="tab" href="#blockking" role="tab" aria-controls="blockking" aria-selected="false"><i class="fa fa-cc-diners-club"></i>Blocking</a>
                         </div>
                     </div>
@@ -154,110 +154,21 @@
 
                         <div class="tab-pane fade" id="privcy" role="tabpanel" aria-labelledby="nav-privcy-tab">
                             <div class="acc-setting">
-                                <h3>Requests</h3>
+                                <h3>Followers</h3>
                                 <div class="requests-list">
+                                    @foreach ($followers as $follower)
                                     <div class="request-details">
                                         <div class="noty-user-img">
-                                            <img src="images/resources/r-img1.png" alt="">
+                                            <img src="{{ asset($follower->display_picture ? 'storage/' . $follower->display_picture : 'images/logo-light-removebg-preview.png') }}" alt="">
                                         </div>
                                         <div class="request-info">
-                                            <h3>Jessica William</h3>
-                                            <span>Graphic Designer</span>
+                                            <a href="/profile/{{ $follower->user->id }}"><h3>{{$follower->first_name . ' ' . $follower->last_name }}</h3></a>
+                                            <span>{{$follower->profession}}</span>
                                         </div>
-                                        <div class="accept-feat">
-                                            <ul>
-                                                <li><button type="submit" class="accept-req">Accept</button></li>
-                                                <li><button type="submit" class="close-req"><i class="la la-close"></i></button></li>
-                                            </ul>
-                                        </div>
-                                        <!--accept-feat end-->
                                     </div>
                                     <!--request-detailse end-->
-                                    <div class="request-details">
-                                        <div class="noty-user-img">
-                                            <img src="images/resources/r-img2.png" alt="">
-                                        </div>
-                                        <div class="request-info">
-                                            <h3>John Doe</h3>
-                                            <span>PHP Developer</span>
-                                        </div>
-                                        <div class="accept-feat">
-                                            <ul>
-                                                <li><button type="submit" class="accept-req">Accept</button></li>
-                                                <li><button type="submit" class="close-req"><i class="la la-close"></i></button></li>
-                                            </ul>
-                                        </div>
-                                        <!--accept-feat end-->
-                                    </div>
-                                    <!--request-detailse end-->
-                                    <div class="request-details">
-                                        <div class="noty-user-img">
-                                            <img src="images/resources/r-img3.png" alt="">
-                                        </div>
-                                        <div class="request-info">
-                                            <h3>Poonam</h3>
-                                            <span>Wordpress Developer</span>
-                                        </div>
-                                        <div class="accept-feat">
-                                            <ul>
-                                                <li><button type="submit" class="accept-req">Accept</button></li>
-                                                <li><button type="submit" class="close-req"><i class="la la-close"></i></button></li>
-                                            </ul>
-                                        </div>
-                                        <!--accept-feat end-->
-                                    </div>
-                                    <!--request-detailse end-->
-                                    <div class="request-details">
-                                        <div class="noty-user-img">
-                                            <img src="images/resources/r-img4.png" alt="">
-                                        </div>
-                                        <div class="request-info">
-                                            <h3>Bill Gates</h3>
-                                            <span>C & C++ Developer</span>
-                                        </div>
-                                        <div class="accept-feat">
-                                            <ul>
-                                                <li><button type="submit" class="accept-req">Accept</button></li>
-                                                <li><button type="submit" class="close-req"><i class="la la-close"></i></button></li>
-                                            </ul>
-                                        </div>
-                                        <!--accept-feat end-->
-                                    </div>
-                                    <!--request-detailse end-->
-                                    <div class="request-details">
-                                        <div class="noty-user-img">
-                                            <img src="images/resources/r-img5.png" alt="">
-                                        </div>
-                                        <div class="request-info">
-                                            <h3>Jessica William</h3>
-                                            <span>Graphic Designer</span>
-                                        </div>
-                                        <div class="accept-feat">
-                                            <ul>
-                                                <li><button type="submit" class="accept-req">Accept</button></li>
-                                                <li><button type="submit" class="close-req"><i class="la la-close"></i></button></li>
-                                            </ul>
-                                        </div>
-                                        <!--accept-feat end-->
-                                    </div>
-                                    <!--request-detailse end-->
-                                    <div class="request-details">
-                                        <div class="noty-user-img">
-                                            <img src="images/resources/r-img6.png" alt="">
-                                        </div>
-                                        <div class="request-info">
-                                            <h3>John Doe</h3>
-                                            <span>PHP Developer</span>
-                                        </div>
-                                        <div class="accept-feat">
-                                            <ul>
-                                                <li><button type="submit" class="accept-req">Accept</button></li>
-                                                <li><button type="submit" class="close-req"><i class="la la-close"></i></button></li>
-                                            </ul>
-                                        </div>
-                                        <!--accept-feat end-->
-                                    </div>
-                                    <!--request-detailse end-->
+                                    @endforeach
+                                    
                                 </div>
                                 <!--requests-list end-->
                             </div>

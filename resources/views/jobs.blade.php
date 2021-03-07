@@ -224,7 +224,7 @@
                                             <li><a href="#" title="">${job.jobType}</a></li>
                                             <li><span>${job.budget}</span></li>
                                         </ul>
-                                        <p>{{$job->description}}</p>
+                                        <p>${job.description}</p>
                                         <ul class="skill-tags">
                                             <li><a href="#" title="">Required Experience: ${job.experience}</a></li>
                                         </ul>

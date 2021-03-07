@@ -115,15 +115,6 @@
                                 </div>
                                 <!--comment-list end-->
                             </li>
-                            <li>
-                                <div class="comment-list">
-                                    <div class="comment">
-                                        <h3>${user}</h3>
-                                        <span><img src="images/clock.png" alt=""> ${created_at}</span>
-                                        <p>${comment}</p>
-                                    </div>
-                                </div>
-                            </li>
                         @endforeach
                     </ul>
                 </div>

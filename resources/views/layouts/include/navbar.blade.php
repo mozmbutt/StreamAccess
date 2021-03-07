@@ -6,7 +6,8 @@
 			</div>
 			<!--logo end-->
 			<div class="search-bar">
-				<form>
+				<form action="{{  Request::path() != '/' ? url('/search', ['url' => Request::path()]) : url('/search', ['url' => 'profile'])}}" method="post">
+					@csrf
 					<input type="text" name="search" placeholder="Search...">
 					<button type="submit"><i class="la la-search"></i></button>
 				</form>

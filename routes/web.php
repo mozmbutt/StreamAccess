@@ -61,9 +61,7 @@ Route::get('/deleteAdmin/{id}', [UserController::class, 'deleteAdmin']);
 Route::get('/viewClient', function () {
     return view('Admin.Read.client');
 });
-Route::get('/profile-account-setting', function () {
-    return view('layouts.AccountSettings.profile-account-setting');
-});
+Route::get('/profile-account-setting', [FollowController::class, 'settingFollowings']);
 Route::get('/profile-setting', function () {
     return view('Admin.Update.profile-account-setting');
 });
@@ -135,4 +133,7 @@ Route::get('job/edit/{id}', [JobController::class, 'edit_job']);
 Route::post('job/update/{id}', [JobController::class, 'update_job']);
 Route::get('job/delete/{id}', [JobController::class, 'delete_job']);
 // Route::post('job/filter', [JobController::class, 'filter_job']);
+
+//Search
+Route::post('/search/{url}',[PageController::class,'search']);
 

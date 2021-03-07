@@ -13,6 +13,7 @@ use App\Models\UserInfo;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PageController extends Controller
 {
@@ -29,6 +30,28 @@ class PageController extends Controller
             return view('index', ['tags' => $tags, 'posts' => $posts, 'followingCount' => $followingCount, 'followerCount' => $followerCount]);
         } else {
             return redirect('forum');
+        }
+    }
+    public function search($url, Request $request)
+    {
+        Log::info($url);
+        if ($url == 'profile') {
+            if ($request->search != '') {
+                if (Auth::check()) {
+                    $tags = Tag::all();
+                    $userIds = UserInfo::select('user_id')
+                        ->where('first_name', 'LIKE', '%' . $request->search . '%')
+                        ->orWhere('last_name', 'LIKE', '%' . $request->search . '%')
+                        ->orWhere('profession', 'LIKE', '%' . $request->search . '%')
+                        ->get();
+                    $posts = Post::wherein('user_id', $userIds)->orderByDesc('created_at')->get();
+                    $followingCount = count(Follow::where('follower_id', Auth::user()->id)->get());
+                    $followerCount = count(Follow::where('following_id', Auth::user()->id)->get());
+                    return view('index', ['tags' => $tags, 'posts' => $posts, 'followingCount' => $followingCount, 'followerCount' => $followerCount]);
+                } else {
+                    return redirect('forum');
+                }
+            }
         }
     }
 }
