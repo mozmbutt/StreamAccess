@@ -10,6 +10,7 @@ use App\Models\Postlike;
 use App\Models\Tag;
 use App\Models\Thread;
 use App\Models\UserInfo;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -24,17 +25,18 @@ class PageController extends Controller
             $userIds = UserInfo::select('user_id')
                 ->where('profession', Auth::user()->userInfo->profession)
                 ->get();
+            $users = UserInfo::wherein('user_id', $userIds)->take(5)->get();
             $posts = Post::wherein('user_id', $userIds)->orderByDesc('created_at')->get();
+
             $followingCount = count(Follow::where('follower_id', Auth::user()->id)->get());
             $followerCount = count(Follow::where('following_id', Auth::user()->id)->get());
-            return view('index', ['tags' => $tags, 'posts' => $posts, 'followingCount' => $followingCount, 'followerCount' => $followerCount]);
+            return view('index', ['tags' => $tags, 'posts' => $posts, 'followingCount' => $followingCount, 'followerCount' => $followerCount, 'users' => $users]);
         } else {
             return redirect('forum');
         }
     }
     public function search($url, Request $request)
     {
-        Log::info($url);
         if ($url == 'profile') {
             if ($request->search != '') {
                 if (Auth::check()) {

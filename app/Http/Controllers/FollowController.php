@@ -13,7 +13,11 @@ class FollowController extends Controller
     {
         $followingCount = count(Follow::where('follower_id', Auth::user()->id)->get());
         $followerCount = count(Follow::where('following_id', Auth::user()->id)->get());
-        return view('layouts.include.profile.following', ['userInfos' => $this->getInfo(), 'followingCount' => $followingCount, 'followerCount' => $followerCount, 'userInfo' => null]);
+        $userIds = UserInfo::select('user_id')
+            ->where('profession', Auth::user()->userInfo->profession)
+            ->get();
+        $users = UserInfo::wherein('user_id', $userIds)->take(5)->get();
+        return view('layouts.include.profile.following', ['userInfos' => $this->getInfo(), 'followingCount' => $followingCount, 'followerCount' => $followerCount, 'userInfo' => null, 'users' => $users]);
     }
     public function getInfo()
     {

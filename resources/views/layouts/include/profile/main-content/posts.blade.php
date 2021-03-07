@@ -17,7 +17,7 @@
                         src="{{ asset($userInfo->display_picture ? 'storage/' . $userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}"
                         alt="">
                     <div class="usy-name">
-                        <a href="">
+                        <a href="/profile/{{ $post->user->id }}">
                             <h3>{{ $userInfo->first_name . ' ' . $userInfo->last_name }}</h3>
                         </a>
                         <span><img src="images/clock.png"

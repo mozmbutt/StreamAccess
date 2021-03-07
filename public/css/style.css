@@ -1708,6 +1708,8 @@ main {
 .user-profy > img {
     float: none;
     margin-bottom: 6px;
+    height: 70px;
+    width: 70px;
 }
 
 .user-profy h3 {

@@ -47,7 +47,7 @@
             <span>{{ $followerCount }}</span>
         </li>
         <li>
-            <a href="http://www.gambolthemes.net/workwise-new/my-profile.html" title="">View Profile</a>
+            <a href="/profile/{{ $user->id }}" title="">View Profile</a>
         </li>
     </ul>
 </div>
