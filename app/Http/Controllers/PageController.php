@@ -10,6 +10,7 @@ use App\Models\Postlike;
 use App\Models\Tag;
 use App\Models\Thread;
 use App\Models\UserInfo;
+use App\Models\Worker;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -53,6 +54,25 @@ class PageController extends Controller
                 } else {
                     return redirect('forum');
                 }
+            }
+            else{
+                $this->return_page();
+            }
+        }
+        elseif($url == 'all-workers'){
+            if ($request->search != '') {
+                if (Auth::check()) {
+                    $workers = Worker::where('first_name', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('second_name', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('skill', 'LIKE', '%' . $request->search . '%')
+                    ->get();
+                    return view('layouts.workers' , ['workers' => $workers]);
+                } else {
+                    return redirect('forum');
+                }
+            }
+            else{
+                return redirect('all-workers');
             }
         }
     }
