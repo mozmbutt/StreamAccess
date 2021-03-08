@@ -90,9 +90,10 @@
                                     <div class="post-bar">
                                         <div class="post_topbar">
                                             <div class="usy-dt">
-                                                <img width="45px" src="storage/{{App\Models\UserInfo::where('id' , $job->user_id)->first()->display_picture}}" alt="">
+                                                <img width="45px" src="
+                                                {{ asset($job->user->userInfo->display_picture ? 'storage/' . $job->user->userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}" alt="">
                                                 <div class="usy-name">
-                                                    <h3>{{App\Models\User::where('id' , $job->user_id)->first()->name}}</h3>
+                                                    <h3>{{$job->user->name}}</h3>
                                                     <span><img src="images/clock.png" alt="">{{$job->created_at->format('D-M-Y')}}</span>
                                                 </div>
                                             </div>

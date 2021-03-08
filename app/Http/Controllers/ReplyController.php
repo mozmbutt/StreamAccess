@@ -60,7 +60,7 @@ class ReplyController extends Controller
         $reply->save();
 
         $thread = Thread::find($request->thread_id);
-        $replyies_count = $thread->reply_count;
+        $replyies_count = $thread->replies_count;
         $replyies_count++;
         $thread->replies_count = $replyies_count;
         $thread->save();
@@ -129,9 +129,9 @@ class ReplyController extends Controller
     public function delete($id){
         $reply = Reply::find($id);
         $thread = Thread::find($reply->thread->id);
-        $replyies_count = $thread->reply_count;
-        $replyies_count--;
-        $thread->replies_count = $replyies_count;
+        $replies_count = $thread->replies_count;
+        $replies_count--;
+        $thread->replies_count = $replies_count;
         $thread->save();
         $reply->delete();
         return redirect('/forum');

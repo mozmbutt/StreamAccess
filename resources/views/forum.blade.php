@@ -235,21 +235,6 @@
                                                     <h3>${reply}</h3>
                                                 </div>
                                                 <div class="col-lg-1">
-                                                    @if (`
-        $ {
-            reply_user_id
-        } == $ {
-            auth_user_id
-        }
-        `)
-                                                        <div class="ed-opts">
-                                                            <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-                                                            <ul class="ed-options">
-                                                                <li><a href="" class="" title="">Edit reply</a></li>
-                                                                <li><a href="" title="">Delete</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
