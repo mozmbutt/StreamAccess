@@ -127,7 +127,13 @@ class ReplyController extends Controller
         // return view('Reply.reply', compact('thread', 'replies'));
     }
     public function delete($id){
-        Reply::find($id)->delete();
+        $reply = Reply::find($id);
+        $thread = Thread::find($reply->thread->id);
+        $replyies_count = $thread->reply_count;
+        $replyies_count--;
+        $thread->replies_count = $replyies_count;
+        $thread->save();
+        $reply->delete();
         return redirect('/forum');
     }
     public function likes($user_id, $reply_id)

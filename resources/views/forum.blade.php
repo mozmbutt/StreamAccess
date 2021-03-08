@@ -10,7 +10,7 @@
                     <li><a href="{{ route('thread.index') }}?popular=1" title="">Popular</a></li>
                 </ul>
             </div>
-            
+
         </div>
     </section>
 
@@ -126,24 +126,31 @@
                                         </ul>
                                     </div>
                                     @if (Auth::check())
-                                        <div class="post-comment">
-                                            {{-- <div class="cm_img">
-                                            <img src="{{ asset(Auth::user()->userInfo->display_picture ? 'storage/' . Auth::user()->userInfo->display_picture : 'images/logo-light-removebg-preview.png') }}"
-                                                alt="">
-                                        </div> --}}
-                                            <div class="comment_box" id="reply_box">
-                                                <form action="{{ url('/reply/store') }}" method="POST" id="commentForm">
-                                                    @csrf
-                                                    <input type="hidden" class="thread_id" name="thread_id"
-                                                        value="{{ $thread->id }}">
-                                                    <input type="text" class="reply " name="reply" placeholder="Post a reply">
-                                                    <button type="button" onclick="buttonClick(event)">Reply</button>
-                                                </form>
-                                            </div>
-                                        </div>
+                                        @if (Auth::user()->role == 'professional')
+                                            @if (Auth::user()->userInfo->profession == $thread->channel->slug)
+                                                <div class="post-comment">
+                                                    <div class="comment_box" id="reply_box">
+                                                        <form action="{{ url('/reply/store') }}" method="POST"
+                                                            id="commentForm">
+                                                            @csrf
+                                                            <input type="hidden" class="thread_id" name="thread_id"
+                                                                value="{{ $thread->id }}">
+                                                            <input type="text" class="reply " name="reply"
+                                                                placeholder="Post a reply">
+                                                            <button type="button" onclick="buttonClick(event)">Reply</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                @else
+                                                <p>You are not elligible to Reply </p>
+                                            @endif
+                                        @else
+                                            <p><a href="{{ url('gopro') }}">Go Pro</a> to Reply </p>
+                                        @endif
                                     @else
                                         <p>login to reply <a href="{{ route('login') }}">Login</a> </p>
                                     @endif
+
                                 </div>
                                 <!--usr-question end-->
                             </div>
@@ -165,7 +172,7 @@
                                                 <img src="images/logo-light.png" alt="">
                                             </div>
                                             <div class="usr-mg-info">
-                                                <a href="{{ url('forum', ['id' =>$channel->id]) }}">
+                                                <a href="{{ url('forum', ['id' => $channel->id]) }}">
                                                     <h3>{{ $channel->name }}</h3>
                                                 </a>
                                                 <p>{{ $channel->slug }}</p>
